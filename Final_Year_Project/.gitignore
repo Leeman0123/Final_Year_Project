@@ -8,6 +8,7 @@
 /[Bb]uild/
 /[Bb]uilds/
 /[Ll]ogs/
+/[Aa]ssets/[Ff]irebase/[Pp]lugins/x86_64/FirebaseCppApp-7_0_2.so
 /[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
