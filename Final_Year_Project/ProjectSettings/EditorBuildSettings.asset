@@ -200,4 +200,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CorgiEngine/Demos/RetroAdventure/RetroAdventureGameOver.unity
     guid: aba2daab4ea9f82428c58d957862f82d
+  - enabled: 1
+    path: Assets/Scenes/LevelSelect.unity
+    guid: 0cbf071fa1353ad49b6854a498af9a2a
+  - enabled: 1
+    path: Assets/Scenes/Level01.unity
+    guid: 109519edb533b994fa8a8ce916b2a7d5
+  - enabled: 1
+    path: Assets/Scenes/Level02.unity
+    guid: 16a246e5418e2c84c933b1468920d88c
+  - enabled: 1
+    path: Assets/Scenes/Space-Invader.unity
+    guid: e7c6d21e4752f6d41b0a3faaf3a30876
   m_configObjects: {}
