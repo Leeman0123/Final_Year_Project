@@ -15,4 +15,17 @@ public class Laser : MonoBehaviour
     {
         gameObject.transform.position += new Vector3 (0, 0.1f, 0);
     }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.tag == "Enemy") {
+            GameFunction.instance.AddScore(10);
+            Debug.Log("Kill Normal Enemy");
+        } else if (collision.tag == "Correct") {
+            GameFunction.instance.AddScore(20);
+            Debug.Log("Kill Correct Enemy");
+        } else if (collision.tag == "Wrong") {
+            GameFunction.instance.MinusScore(10);
+            Debug.Log("Kill Wrong Enemy");
+        }
+    }
 }

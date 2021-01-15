@@ -50,7 +50,7 @@ public class ShipControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Enemy")
+        if (col.tag == "Enemy" || col.tag == "Correct" || col.tag == "Wrong") //minus life when Enemy attack player
         {
             Destroy(col.gameObject);
             Instantiate(explo, transform.position, transform.rotation);

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class GameFunction : MonoBehaviour
 {
     public GameObject Enemy;
+    public GameObject[] Special, Boss;
     public GameObject GameTitle, GameOverTitle;
     public GameObject PlayButton, RestartButton, QuitButton;
 
@@ -20,6 +21,11 @@ public class GameFunction : MonoBehaviour
     public float time;
     public int Score;
     public bool IsPlaying;
+    public bool BossSpawn;
+    public float EnemySpawnSpeed = 2f;
+    public float ReadySpecial;
+    public int SpawnSpecial = 5;
+    public int SpawnBoss = 100;
 
     /*public float BulletTime; //disable this 3 variable for PC version
     public GameObject Ship;
@@ -31,21 +37,35 @@ public class GameFunction : MonoBehaviour
         instance = this;
         Score = 0;
         IsPlaying = false;
+        BossSpawn = false;
         GameTitle.SetActive(true);
         GameOverTitle.SetActive(false);
         RestartButton.SetActive(false);
         playaudio = GetComponent<AudioSource>();
+        ReadySpecial = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-        if (time > 0.75f && IsPlaying == true)
-        {
-            Vector3 pos = new Vector3(Random.Range(-1.75f, 1.75f), 8f, -1);
-            Instantiate(Enemy, pos, transform.rotation);
-            time = 0;
+        if (BossSpawn == false) {
+            time += Time.deltaTime;
+            if (time > EnemySpawnSpeed && IsPlaying == true) {
+                Vector3 pos = new Vector3(Random.Range(-1.75f, 1.75f), 8f, -1);
+
+                if (Score >= SpawnBoss) { //Boss fight
+                    pos = new Vector3(0f, 7.3f, -1);
+                    Instantiate(Boss[Random.Range(0,1)], pos, transform.rotation);
+                    BossSpawn = true;
+                } else if (ReadySpecial >= SpawnSpecial) { //Special Enemy
+                    Instantiate(Special[Random.Range(0, 1)], pos, transform.rotation);
+                    ReadySpecial = 0;
+                } else {
+                    Instantiate(Enemy, pos, transform.rotation);
+                }
+                time = 0;
+                ReadySpecial++;
+            }
         }
         
         /*BulletTime += Time.deltaTime;//disable for PC version
@@ -58,9 +78,14 @@ public class GameFunction : MonoBehaviour
         }*/
     }
 
-    public void AddScore()
+    public void AddScore(int add)
     {
-        Score += 10;
+        Score += add;
+        ScoreText.text = "Score : " + Score;
+    }
+
+    public void MinusScore (int minus) {
+        Score -= minus;
         ScoreText.text = "Score : " + Score;
     }
 
@@ -95,5 +120,6 @@ public class GameFunction : MonoBehaviour
 
     public void NextLevel() {
         PlayerPrefs.SetInt("levelReached", 2);
+        
     }
 }

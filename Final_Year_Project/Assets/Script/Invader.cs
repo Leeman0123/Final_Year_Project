@@ -10,6 +10,8 @@ public class Invader : MonoBehaviour
 
     public float BulletTime;
     public GameObject Bullet;
+    public float EnemyFlightSpeed = -0.005f;
+    public float EnemyShootSpeed = 1f;
 
     // Start is called before the first frame update
     void Start()
@@ -20,9 +22,9 @@ public class Invader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position += new Vector3(0, -0.01f, 0);
+        gameObject.transform.position += new Vector3(0, EnemyFlightSpeed, 0);
         BulletTime += Time.deltaTime;
-        if (BulletTime > 1f) {
+        if (BulletTime > EnemyShootSpeed) {
             Vector3 Bullet_pos = transform.position + new Vector3(0, 0.6f, 0);
             Instantiate(Bullet, Bullet_pos, transform.rotation);
             BulletTime = 0f;
@@ -39,7 +41,6 @@ public class Invader : MonoBehaviour
             Instantiate(explo, transform.position, transform.rotation);
             Destroy(col.gameObject);
             Destroy(gameObject);
-            GameFunction.instance.AddScore();
         }
 
         

@@ -18,10 +18,13 @@ public class DestroyEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Enemy")
+        if (col.tag == "Enemy" || col.tag == "Correct" || col.tag == "Wrong")
         {
-            Debug.Log("Destroy");
+            Debug.Log("Destroy by Wall");
             Destroy(col.gameObject);
+            if (col.tag == "Wrong") {
+                GameFunction.instance.AddScore(20);
+            }
         }
     }
 }
