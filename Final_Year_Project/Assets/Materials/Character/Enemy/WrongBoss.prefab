@@ -643,7 +643,8 @@ MonoBehaviour:
   canshoot: 0
   BulletTime: 0
   Bullet: {fileID: 8605431518810287618, guid: 0a0b1e5758e254c4f8c301bfa6728476, type: 3}
-  EnemyShootSpeed: 1.25
+  EnemyShootSpeed: 1
+  textchange: 0
 --- !u!1 &4291354123423984684
 GameObject:
   m_ObjectHideFlags: 0
@@ -892,6 +893,7 @@ MonoBehaviour:
   BulletTime: 0
   Bullet: {fileID: 8605431518810287618, guid: 0a0b1e5758e254c4f8c301bfa6728476, type: 3}
   EnemyShootSpeed: 1.25
+  textchange: 0
 --- !u!1 &4291354124075241874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1139,7 +1141,8 @@ MonoBehaviour:
   canshoot: 0
   BulletTime: 0
   Bullet: {fileID: 8605431518810287618, guid: 0a0b1e5758e254c4f8c301bfa6728476, type: 3}
-  EnemyShootSpeed: 1.25
+  EnemyShootSpeed: 1.75
+  textchange: 0
 --- !u!1 &4291354124129807309
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,7 +1390,8 @@ MonoBehaviour:
   canshoot: 0
   BulletTime: 0
   Bullet: {fileID: 8605431518810287618, guid: 0a0b1e5758e254c4f8c301bfa6728476, type: 3}
-  EnemyShootSpeed: 1.25
+  EnemyShootSpeed: 1.5
+  textchange: 0
 --- !u!1 &5885637780260944958
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,7 +1569,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -1719,6 +1723,7 @@ MonoBehaviour:
   - {fileID: 4291354124129807309}
   EnemyFlightSpeed: -0.01
   shoulddestroyship: 0
+  score: 100
   cankill: 0
   executeonce: 0
 --- !u!1 &6203482451847307971

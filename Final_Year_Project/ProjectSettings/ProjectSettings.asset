@@ -168,7 +168,7 @@ PlayerSettings:
   androidSupportedAspectRatio: 1
   androidMaxAspectRatio: 2.1
   applicationIdentifier:
-    Android: com.reuno.corgienginetechdemo
+    Android: com.se.fyp
     Standalone: com.se.fyp
     Tizen: com.reuno.corgienginetechdemo
     iPhone: com.reuno.corgienginetechdemo

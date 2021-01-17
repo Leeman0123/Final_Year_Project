@@ -20,10 +20,15 @@ public class DestroyEnemy : MonoBehaviour
     {
         if (col.tag == "Enemy" || col.tag == "Correct" || col.tag == "Wrong")
         {
-            Debug.Log("Destroy by Wall");
             Destroy(col.gameObject);
             if (col.tag == "Wrong") {
                 GameFunction.instance.AddScore(20);
+                Debug.Log("Wrong answer destroy by wall");
+            } else if (col.tag == "Correct") {
+                GameFunction.instance.MinusScore(10);
+                Debug.Log("Correct answer destroy by wall");
+            } else {
+                Debug.Log("Destroy by Wall");
             }
         }
     }

@@ -5,11 +5,14 @@ using UnityEngine.UI;
 
 public class ShipControl : MonoBehaviour
 {
+
+    public static ShipControl shipinstance;
+
     public GameObject Bullet; //disable for mobile version
     public GameObject explo;
 
-    public int life;
-    public static ShipControl shipinstance;
+    public int life = 5;
+    public float BulletTime;
     public Text LifeText;
     AudioSource playaudio;
     public AudioClip audioClip;
@@ -19,7 +22,6 @@ public class ShipControl : MonoBehaviour
     {
         shipinstance = this;
         playaudio = GetComponent<AudioSource>();
-        life = 5;
         LifeText.text = "Life : " + life;
     }
 
@@ -38,8 +40,16 @@ public class ShipControl : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space)) {
             Vector3 pos = gameObject.transform.position + new Vector3(0, 0.6f, 0);
             Instantiate(Bullet, pos, gameObject.transform.rotation);
+
+        } else if (Input.GetKey(KeyCode.Space)) {
+            if (BulletTime > 0.2f) {
+                Vector3 pos = gameObject.transform.position + new Vector3(0, 0.6f, 0);
+                Instantiate(Bullet, pos, gameObject.transform.rotation);
+                BulletTime = 0f;
+            }
+            BulletTime += Time.deltaTime;
         }
-        
+
         /*if (Input.GetTouch(0).phase == TouchPhase.Moved) //Control for mobile version
         {
             float x = Input.touches[0].deltaPosition.x * Time.deltaTime * 0.5f;
@@ -50,7 +60,7 @@ public class ShipControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Enemy" || col.tag == "Correct" || col.tag == "Wrong") //minus life when Enemy attack player
+        if (col.tag == "Enemy" || col.tag == "Correct" || col.tag == "Wrong" || col.tag == "EnemyBullet") //minus life when Enemy attack player
         {
             Destroy(col.gameObject);
             Instantiate(explo, transform.position, transform.rotation);

@@ -12,6 +12,7 @@ TagManager:
   - Bullet
   - Correct
   - Wrong
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX

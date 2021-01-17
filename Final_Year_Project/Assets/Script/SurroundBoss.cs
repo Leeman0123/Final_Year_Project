@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SurroundBoss : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class SurroundBoss : MonoBehaviour
     public float BulletTime;
     public GameObject Bullet;
     public float EnemyShootSpeed = 1.25f;
+    public bool textchange = false;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,9 @@ public class SurroundBoss : MonoBehaviour
         instance = this;
         playaudio = GetComponent<AudioSource>();
         canshoot = false;
+        if (!textchange) {
+            transform.GetComponentInChildren<Canvas>().GetComponentInChildren<Text>().text = "Don't Destroy Me";
+        }
     }
 
     // Update is called once per frame

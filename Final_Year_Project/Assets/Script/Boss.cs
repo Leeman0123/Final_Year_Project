@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Boss : MonoBehaviour {
 
@@ -23,6 +24,8 @@ public class Boss : MonoBehaviour {
         Debug.Log(shoulddestroyship);
         cankill = false;
         playaudio = GetComponent<AudioSource>();
+        transform.GetChild(shoulddestroyship).GetComponentInChildren<Canvas>().GetComponentInChildren<Text>().text = "Destroy Me";
+        transform.GetChild(shoulddestroyship).GetComponent<SurroundBoss>().textchange = true;
     }
 
     // Update is called once per frame
@@ -40,6 +43,7 @@ public class Boss : MonoBehaviour {
         if (surroundShip[shoulddestroyship] == null && cankill == false) {
             Debug.Log("You can kill boss now");
             foreach (Transform child in transform) {
+                GameFunction.instance.AddScore(25);
                 GameObject.Destroy(child.gameObject);                
             }
             cankill = true;
@@ -55,7 +59,7 @@ public class Boss : MonoBehaviour {
                 Instantiate(explo, transform.position, transform.rotation);
                 Destroy(gameObject);
                 GameFunction.instance.AddScore(score);
-                GameFunction.instance.GameOver();
+                GameFunction.instance.GameWin();
             } else {
                 Destroy(collision.gameObject);
             }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Invader : MonoBehaviour
 {
+    public static Invader instance;
     AudioSource playaudio;
     public AudioClip audioClip;
     public GameObject explo;
@@ -16,6 +17,7 @@ public class Invader : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        instance = this;
         playaudio = GetComponent<AudioSource>();
     }
 
@@ -25,7 +27,7 @@ public class Invader : MonoBehaviour
         gameObject.transform.position += new Vector3(0, EnemyFlightSpeed, 0);
         BulletTime += Time.deltaTime;
         if (BulletTime > EnemyShootSpeed) {
-            Vector3 Bullet_pos = transform.position + new Vector3(0, 0.6f, 0);
+            Vector3 Bullet_pos = transform.position + new Vector3(0, -0.6f, 0);
             Instantiate(Bullet, Bullet_pos, transform.rotation);
             BulletTime = 0f;
         }
@@ -39,7 +41,6 @@ public class Invader : MonoBehaviour
             playaudio.clip = audioClip;
             playaudio.Play();
             Instantiate(explo, transform.position, transform.rotation);
-            Destroy(col.gameObject);
             Destroy(gameObject);
         }
 

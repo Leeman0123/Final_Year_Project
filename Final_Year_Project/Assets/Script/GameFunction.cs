@@ -8,8 +8,8 @@ public class GameFunction : MonoBehaviour
 {
     public GameObject Enemy;
     public GameObject[] Special, Boss;
-    public GameObject GameTitle, GameOverTitle;
-    public GameObject PlayButton, RestartButton, QuitButton;
+    public GameObject GameTitle, GameOverTitle, GameWinTitle;
+    public GameObject PlayButton, RestartButton, QuitButton, NextLevelButton;
 
     public static GameFunction instance;
 
@@ -21,15 +21,17 @@ public class GameFunction : MonoBehaviour
     public float time;
     public int Score;
     public bool IsPlaying;
-    public bool BossSpawn;
-    public float EnemySpawnSpeed = 2f;
-    public float ReadySpecial;
-    public int SpawnSpecial = 5;
-    public int SpawnBoss = 100;
+    public bool BossSpawn; //check the boss is it spawn
+    public float EnemySpawnSpeed = 2f; //set how long to spawn enemy
+    public float EnemyFlightSpeed = -0.005f; //set enemy flight speed
+    public float EnemyShootSpeed = -1f; //set enemy shoot speed
+    public float ReadySpecial; //check how long to spawn special enemy
+    public int SpawnSpecial = 5; // set how long to spawn special enemy
+    public int SpawnBoss = 100; //set when the boss spawn
 
-    /*public float BulletTime; //disable this 3 variable for PC version
+    public float BulletTime; //disable this 3 variable for PC version
     public GameObject Ship;
-    public GameObject Bullet;*/
+    public GameObject Bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -41,8 +43,11 @@ public class GameFunction : MonoBehaviour
         GameTitle.SetActive(true);
         GameOverTitle.SetActive(false);
         RestartButton.SetActive(false);
+        GameWinTitle.SetActive(false);
+        NextLevelButton.SetActive(false);
         playaudio = GetComponent<AudioSource>();
         ReadySpecial = 0;
+        time = 5f;
     }
 
     // Update is called once per frame
@@ -55,16 +60,20 @@ public class GameFunction : MonoBehaviour
 
                 if (Score >= SpawnBoss) { //Boss fight
                     pos = new Vector3(0f, 7.3f, -1);
-                    Instantiate(Boss[Random.Range(0,1)], pos, transform.rotation);
+                    Instantiate(Boss[Random.Range(0,2)], pos, transform.rotation);
                     BossSpawn = true;
                 } else if (ReadySpecial >= SpawnSpecial) { //Special Enemy
-                    Instantiate(Special[Random.Range(0, 1)], pos, transform.rotation);
+                    Instantiate(Special[Random.Range(0, 2)], pos, transform.rotation);
                     ReadySpecial = 0;
-                } else {
+                } else { //Normal Enemy
                     Instantiate(Enemy, pos, transform.rotation);
                 }
+                Debug.Log("Spawn " + Enemy.name);
+                Invader.instance.EnemyFlightSpeed = this.EnemyFlightSpeed;
+                Invader.instance.EnemyShootSpeed = this.EnemyShootSpeed;
                 time = 0;
                 ReadySpecial++;
+                Debug.Log("ReadySpecial: " + ReadySpecial);
             }
         }
         
@@ -78,10 +87,12 @@ public class GameFunction : MonoBehaviour
         }*/
     }
 
-    public void AddScore(int add)
-    {
+    public void AddScore(int add) {
+        Debug.Log("Old Score:" + Score); 
+        Debug.Log("Score Add:" + add);        
         Score += add;
         ScoreText.text = "Score : " + Score;
+        Debug.Log("New Score:" + Score);
     }
 
     public void MinusScore (int minus) {
@@ -95,6 +106,8 @@ public class GameFunction : MonoBehaviour
         GameTitle.SetActive(false);
         PlayButton.SetActive(false);
         QuitButton.SetActive(false);
+        GameWinTitle.SetActive(false);
+        NextLevelButton.SetActive(false);
     }
 
     public void GameOver()
@@ -104,6 +117,16 @@ public class GameFunction : MonoBehaviour
         IsPlaying = false;
         GameOverTitle.SetActive(true);
         RestartButton.SetActive(true);
+        QuitButton.SetActive(true);
+    }
+
+    public void GameWin() {
+        playaudio.clip = audioClip;
+        playaudio.Play();
+        IsPlaying = false;
+        GameWinTitle.SetActive(true);
+        RestartButton.SetActive(true);
+        NextLevelButton.SetActive(true);
         QuitButton.SetActive(true);
         NextLevel();
     }
@@ -120,6 +143,9 @@ public class GameFunction : MonoBehaviour
 
     public void NextLevel() {
         PlayerPrefs.SetInt("levelReached", 2);
-        
+    }
+
+    public void GoNextLevel (string levelName) {
+        SceneManager.LoadScene(levelName);
     }
 }
