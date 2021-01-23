@@ -191,6 +191,7 @@ GameObject:
   - component: {fileID: 6034334483444006579}
   - component: {fileID: 6516209293589682110}
   - component: {fileID: 1285866154390499882}
+  - component: {fileID: 9115800645551589100}
   m_Layer: 0
   m_Name: CorrectEnemy
   m_TagString: Correct
@@ -424,3 +425,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &9115800645551589100
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7289875047762404505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00b00aa795072f145bf1bd1815092033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

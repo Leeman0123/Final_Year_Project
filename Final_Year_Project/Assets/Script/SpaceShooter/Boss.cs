@@ -24,7 +24,7 @@ public class Boss : MonoBehaviour {
         Debug.Log(shoulddestroyship);
         cankill = false;
         playaudio = GetComponent<AudioSource>();
-        transform.GetChild(shoulddestroyship).GetComponentInChildren<Canvas>().GetComponentInChildren<Text>().text = "Destroy Me";
+        transform.GetChild(shoulddestroyship).GetComponentInChildren<Canvas>().GetComponentInChildren<Text>().text = JSONReader.instance.getCorrect();
         transform.GetChild(shoulddestroyship).GetComponent<SurroundBoss>().textchange = true;
     }
 

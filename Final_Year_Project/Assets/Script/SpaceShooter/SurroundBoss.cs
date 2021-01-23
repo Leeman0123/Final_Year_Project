@@ -25,7 +25,7 @@ public class SurroundBoss : MonoBehaviour
         playaudio = GetComponent<AudioSource>();
         canshoot = false;
         if (!textchange) {
-            transform.GetComponentInChildren<Canvas>().GetComponentInChildren<Text>().text = "Don't Destroy Me";
+            transform.GetComponentInChildren<Canvas>().GetComponentInChildren<Text>().text = JSONReader.instance.getWrong();
         }
     }
 

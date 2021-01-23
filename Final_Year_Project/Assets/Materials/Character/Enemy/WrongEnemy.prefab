@@ -190,6 +190,7 @@ GameObject:
   - component: {fileID: 7072605312184043526}
   - component: {fileID: 5083981917236060281}
   - component: {fileID: 5718890344180844916}
+  - component: {fileID: -1826616176087987612}
   - component: {fileID: 354656098523294944}
   m_Layer: 0
   m_Name: WrongEnemy
@@ -328,6 +329,18 @@ MonoBehaviour:
   Bullet: {fileID: 8605431518810287618, guid: 0a0b1e5758e254c4f8c301bfa6728476, type: 3}
   EnemyFlightSpeed: -0.005
   EnemyShootSpeed: 1
+--- !u!114 &-1826616176087987612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8077622751119030867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 58d154789c23d4c45878de10ffa1c19f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!82 &354656098523294944
 AudioSource:
   m_ObjectHideFlags: 0
