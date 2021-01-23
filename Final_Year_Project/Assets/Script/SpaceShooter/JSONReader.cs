@@ -39,14 +39,15 @@ public class JSONReader : MonoBehaviour
     public string getWrong() {
         int randomnum = Random.Range(0, myVerbList.verb.Length);
         string basetense = myVerbList.verb[randomnum].basetense;
-        string passtense = myVerbList.verb[randomnum].pastsimple;
+        string pasttense = myVerbList.verb[randomnum].pastsimple;
         string pastparticiple = myVerbList.verb[randomnum].pastparticiple;
-        while (basetense.Equals(passtense) || passtense.Equals(pastparticiple)) {
+        while (basetense.Equals(pasttense) || pasttense.Equals(pastparticiple)) {
             randomnum = Random.Range(0, myVerbList.verb.Length);
             basetense = myVerbList.verb[randomnum].basetense;
-            passtense = myVerbList.verb[randomnum].pastsimple;
+            pasttense = myVerbList.verb[randomnum].pastsimple;
             pastparticiple = myVerbList.verb[randomnum].pastparticiple;
         }
+        Debug.Log("Base:" + basetense + " Pass:" + pasttense + " PP:" + pastparticiple);
         return pastparticiple;
     }
 

@@ -69,11 +69,10 @@ public class GameFunction : MonoBehaviour
                     Instantiate(Enemy, pos, transform.rotation);
                 }
                 Debug.Log("Spawn " + Enemy.name);
-                Invader.instance.EnemyFlightSpeed = this.EnemyFlightSpeed;
-                Invader.instance.EnemyShootSpeed = this.EnemyShootSpeed;
                 time = 0;
                 ReadySpecial++;
                 Debug.Log("ReadySpecial: " + ReadySpecial);
+                setInvaderSpeed();
             }
         }
         
@@ -147,5 +146,10 @@ public class GameFunction : MonoBehaviour
 
     public void GoNextLevel (string levelName) {
         SceneManager.LoadScene(levelName);
+    }
+
+    public void setInvaderSpeed() {
+        Invader.instance.EnemyFlightSpeed = this.EnemyFlightSpeed;
+        Invader.instance.EnemyShootSpeed = this.EnemyShootSpeed;
     }
 }

@@ -9,7 +9,7 @@ public class EnemyLaser : MonoBehaviour
     void Start()
     {
         bulletspeed = Invader.instance.EnemyFlightSpeed - 0.02f;
-        Debug.Log("Bullet Flight speed:" + bulletspeed);
+        //Debug.Log("Bullet Flight speed:" + bulletspeed);
     }
 
     // Update is called once per frame

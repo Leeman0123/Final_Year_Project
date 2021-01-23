@@ -37,12 +37,8 @@ public class ShipControl : MonoBehaviour
             gameObject.transform.position += new Vector3(-0.025f, 0, 0);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            Vector3 pos = gameObject.transform.position + new Vector3(0, 0.6f, 0);
-            Instantiate(Bullet, pos, gameObject.transform.rotation);
-
-        } else if (Input.GetKey(KeyCode.Space)) {
-            if (BulletTime > 0.2f) {
+        if (Input.GetKey(KeyCode.Space)) {
+            if (BulletTime > 0.1f) {
                 Vector3 pos = gameObject.transform.position + new Vector3(0, 0.6f, 0);
                 Instantiate(Bullet, pos, gameObject.transform.rotation);
                 BulletTime = 0f;
