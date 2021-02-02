@@ -693,7 +693,9 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Space Invader
 
-'
+    Past Tense
+
+    Level 1'
 --- !u!222 &643214458
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1353,10 +1355,9 @@ MonoBehaviour:
   Enemy: {fileID: 9210992170414350043, guid: 3319d65e27c4daf48936c082df88ae4e, type: 3}
   Special:
   - {fileID: 7289875047762404505, guid: ea738321ddd028843b851cb49c1b6c13, type: 3}
-  - {fileID: 8077622751119030867, guid: 13c3a5b37494f7148b44b9c88defd457, type: 3}
+  - {fileID: 1540507975275888338, guid: 575c9d9cf03cc5143a93e9ef512e2aed, type: 3}
   Boss:
-  - {fileID: 5923981385537225392, guid: c550d8752d3cc6346a2fa69f7a4ce562, type: 3}
-  - {fileID: 8729704583610728820, guid: e02222c44efe72b46ac965541778b96e, type: 3}
+  - {fileID: 758526189160672361, guid: e02222c44efe72b46ac965541778b96e, type: 3}
   GameTitle: {fileID: 643214455}
   GameOverTitle: {fileID: 1877636510}
   GameWinTitle: {fileID: 1951752772}
@@ -1369,13 +1370,12 @@ MonoBehaviour:
   time: 0
   Score: 0
   IsPlaying: 0
+  nextlevel: 2
   BossSpawn: 0
   EnemySpawnSpeed: 3
-  EnemyFlightSpeed: -0.005
-  EnemyShootSpeed: 1
   ReadySpecial: 0
-  SpawnSpecial: 4
-  SpawnBoss: 140
+  SpawnSpecial: 5
+  SpawnBoss: 150
   BulletTime: 0
   Ship: {fileID: 1147310223}
   Bullet: {fileID: 6485478324643650224, guid: 516aee214d45ec945b53495bceefa2f6, type: 3}
@@ -1510,7 +1510,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Bullet: {fileID: 6485478324643650224, guid: 516aee214d45ec945b53495bceefa2f6, type: 3}
   explo: {fileID: 1863659684641561933, guid: 6cbe7f1931885a84fb95514226e9a15a, type: 3}
-  life: 100
+  life: 50
   BulletTime: 0
   LifeText: {fileID: 624868584}
   audioClip: {fileID: 8300000, guid: 8e3872e24c1b8c34da2fd83c1b9fd1c3, type: 3}

@@ -409,7 +409,7 @@ GameObject:
   - component: {fileID: 3004597775470250485}
   - component: {fileID: 943898093979263370}
   - component: {fileID: 5728426003143339283}
-  - component: {fileID: 898348938}
+  - component: {fileID: 7876430468921959352}
   m_Layer: 0
   m_Name: WrongEnemy (1)
   m_TagString: Wrong
@@ -625,7 +625,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &898348938
+--- !u!114 &7876430468921959352
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4291354122692606880}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56bb764d5798a14ba09e1442b5d7be6, type: 3}
+  m_Script: {fileID: 11500000, guid: 43357ffbeed36fb44aebe7d45577a17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: d1d2a012378658347a94456e4af472c9, type: 3}
@@ -658,7 +658,7 @@ GameObject:
   - component: {fileID: 3004597774588927609}
   - component: {fileID: 943898094978037254}
   - component: {fileID: 5728426002680396447}
-  - component: {fileID: 1861289336}
+  - component: {fileID: 6437920879160188235}
   m_Layer: 0
   m_Name: WrongEnemy
   m_TagString: Wrong
@@ -874,7 +874,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1861289336
+--- !u!114 &6437920879160188235
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -883,7 +883,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4291354123423984684}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56bb764d5798a14ba09e1442b5d7be6, type: 3}
+  m_Script: {fileID: 11500000, guid: 43357ffbeed36fb44aebe7d45577a17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: d1d2a012378658347a94456e4af472c9, type: 3}
@@ -907,7 +907,7 @@ GameObject:
   - component: {fileID: 3004597774092919751}
   - component: {fileID: 943898093137742776}
   - component: {fileID: 5728426002297751329}
-  - component: {fileID: 1336046148}
+  - component: {fileID: 6872126846876893136}
   m_Layer: 0
   m_Name: WrongEnemy (2)
   m_TagString: Wrong
@@ -1123,7 +1123,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1336046148
+--- !u!114 &6872126846876893136
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1132,7 +1132,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4291354124075241874}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56bb764d5798a14ba09e1442b5d7be6, type: 3}
+  m_Script: {fileID: 11500000, guid: 43357ffbeed36fb44aebe7d45577a17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: d1d2a012378658347a94456e4af472c9, type: 3}
@@ -1141,7 +1141,7 @@ MonoBehaviour:
   canshoot: 0
   BulletTime: 0
   Bullet: {fileID: 8605431518810287618, guid: 0a0b1e5758e254c4f8c301bfa6728476, type: 3}
-  EnemyShootSpeed: 1.75
+  EnemyShootSpeed: 1.5
   textchange: 0
 --- !u!1 &4291354124129807309
 GameObject:
@@ -1156,7 +1156,7 @@ GameObject:
   - component: {fileID: 3004597774155995544}
   - component: {fileID: 943898093200830951}
   - component: {fileID: 5728426002243272062}
-  - component: {fileID: 2115932953}
+  - component: {fileID: 2291738938320036302}
   m_Layer: 0
   m_Name: WrongEnemy (3)
   m_TagString: Wrong
@@ -1372,7 +1372,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &2115932953
+--- !u!114 &2291738938320036302
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1381,7 +1381,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4291354124129807309}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d56bb764d5798a14ba09e1442b5d7be6, type: 3}
+  m_Script: {fileID: 11500000, guid: 43357ffbeed36fb44aebe7d45577a17f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: d1d2a012378658347a94456e4af472c9, type: 3}
@@ -1390,7 +1390,7 @@ MonoBehaviour:
   canshoot: 0
   BulletTime: 0
   Bullet: {fileID: 8605431518810287618, guid: 0a0b1e5758e254c4f8c301bfa6728476, type: 3}
-  EnemyShootSpeed: 1.5
+  EnemyShootSpeed: 1.75
   textchange: 0
 --- !u!1 &5885637780260944958
 GameObject:
@@ -1483,7 +1483,7 @@ GameObject:
   - component: {fileID: 4614430096918081765}
   - component: {fileID: 7251534446761105562}
   - component: {fileID: 2793554898522805251}
-  - component: {fileID: 1121251309}
+  - component: {fileID: 4059223212126880322}
   m_Layer: 0
   m_Name: WrongBoss
   m_TagString: Enemy
@@ -1702,7 +1702,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1121251309
+--- !u!114 &4059223212126880322
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1711,17 +1711,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 5923981385537225392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3974524906704d4c82285e2a68377c4, type: 3}
+  m_Script: {fileID: 11500000, guid: 2fcb56f6ed216d7419eefb4c37a46b51, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   audioClip: {fileID: 8300000, guid: d1d2a012378658347a94456e4af472c9, type: 3}
   explo: {fileID: 1863659684641561933, guid: 6cbe7f1931885a84fb95514226e9a15a, type: 3}
+  bullet: {fileID: 8605431518810287618, guid: 0a0b1e5758e254c4f8c301bfa6728476, type: 3}
   surroundShip:
   - {fileID: 4291354123423984684}
   - {fileID: 4291354122692606880}
   - {fileID: 4291354124075241874}
   - {fileID: 4291354124129807309}
-  EnemyFlightSpeed: -0.01
+  bulletTime: 0
+  bossShootSpeed: 1
+  enemyFlightSpeed: -0.005
   shoulddestroyship: 0
   score: 100
   cankill: 0

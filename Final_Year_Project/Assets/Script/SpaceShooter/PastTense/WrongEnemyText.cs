@@ -8,13 +8,7 @@ public class WrongEnemyText : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        string Wrongans = JSONReader.instance.getWrong();
+        string Wrongans = JSONReader.instance.GetPastSimpleWrong();
         transform.GetComponentInChildren<Canvas>().GetComponentInChildren<Text>().text = Wrongans;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

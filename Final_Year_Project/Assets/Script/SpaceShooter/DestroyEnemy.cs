@@ -18,13 +18,14 @@ public class DestroyEnemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Enemy" || col.tag == "Correct" || col.tag == "Wrong")
+        if (col.CompareTag("Enemy") || col.CompareTag("Correct") || col.CompareTag("Wrong"))
         {
             Destroy(col.gameObject);
-            if (col.tag == "Wrong") {
+            Invader.EnemiesAlive--;
+            if (col.CompareTag("Wrong")) {
                 GameFunction.instance.AddScore(20);
                 Debug.Log("Wrong answer destroy by wall");
-            } else if (col.tag == "Correct") {
+            } else if (col.CompareTag("Correct")) {
                 GameFunction.instance.MinusScore(10);
                 Debug.Log("Correct answer destroy by wall");
             } else {

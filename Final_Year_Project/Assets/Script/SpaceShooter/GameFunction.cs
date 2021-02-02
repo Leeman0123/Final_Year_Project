@@ -21,10 +21,9 @@ public class GameFunction : MonoBehaviour
     public float time;
     public int Score;
     public bool IsPlaying;
+    public int nextlevel = 1;
     public bool BossSpawn; //check the boss is it spawn
     public float EnemySpawnSpeed = 2f; //set how long to spawn enemy
-    public float EnemyFlightSpeed = -0.005f; //set enemy flight speed
-    public float EnemyShootSpeed = -1f; //set enemy shoot speed
     public float ReadySpecial; //check how long to spawn special enemy
     public int SpawnSpecial = 5; // set how long to spawn special enemy
     public int SpawnBoss = 100; //set when the boss spawn
@@ -59,20 +58,22 @@ public class GameFunction : MonoBehaviour
                 Vector3 pos = new Vector3(Random.Range(-1.75f, 1.75f), 8f, -1);
 
                 if (Score >= SpawnBoss) { //Boss fight
-                    pos = new Vector3(0f, 7.3f, -1);
-                    Instantiate(Boss[Random.Range(0,2)], pos, transform.rotation);
-                    BossSpawn = true;
+                    Debug.Log(Invader.EnemiesAlive);
+                    if (Invader.EnemiesAlive == 0) {
+                        pos = new Vector3(0f, 7.3f, -1);
+                        Instantiate(Boss[Random.Range(0, Boss.Length)], pos, transform.rotation);
+                        BossSpawn = true;
+                    }
                 } else if (ReadySpecial >= SpawnSpecial) { //Special Enemy
-                    Instantiate(Special[Random.Range(0, 2)], pos, transform.rotation);
+                    Instantiate(Special[Random.Range(0, Special.Length)], pos, transform.rotation);
                     ReadySpecial = 0;
                 } else { //Normal Enemy
                     Instantiate(Enemy, pos, transform.rotation);
                 }
-                Debug.Log("Spawn " + Enemy.name);
+                Debug.Log("Spawn " + Enemy.tag);
                 time = 0;
                 ReadySpecial++;
                 Debug.Log("ReadySpecial: " + ReadySpecial);
-                setInvaderSpeed();
             }
         }
         
@@ -95,8 +96,11 @@ public class GameFunction : MonoBehaviour
     }
 
     public void MinusScore (int minus) {
+        Debug.Log("Old Score:" + Score);
+        Debug.Log("Score decrease:" + minus);
         Score -= minus;
         ScoreText.text = "Score : " + Score;
+        Debug.Log("New Score:" + Score);
     }
 
     public void GameStart()
@@ -107,6 +111,7 @@ public class GameFunction : MonoBehaviour
         QuitButton.SetActive(false);
         GameWinTitle.SetActive(false);
         NextLevelButton.SetActive(false);
+        Debug.Log("Game Start");
     }
 
     public void GameOver()
@@ -117,12 +122,15 @@ public class GameFunction : MonoBehaviour
         GameOverTitle.SetActive(true);
         RestartButton.SetActive(true);
         QuitButton.SetActive(true);
+        Debug.Log("Game Over");
     }
 
-    public void GameWin() {
+    public IEnumerator GameWin() {
+        Debug.Log("Player Win");
+        IsPlaying = false;
+        yield return new WaitForSeconds(1);
         playaudio.clip = audioClip;
         playaudio.Play();
-        IsPlaying = false;
         GameWinTitle.SetActive(true);
         RestartButton.SetActive(true);
         NextLevelButton.SetActive(true);
@@ -137,19 +145,17 @@ public class GameFunction : MonoBehaviour
 
     public void QuitGame()
     {
-        SceneManager.LoadScene("LevelSelect");
+        SceneManager.LoadScene("SpaceShooterLevelSelect");
     }
 
     public void NextLevel() {
-        PlayerPrefs.SetInt("levelReached", 2);
+        Debug.Log("Store level" + PlayerPrefs.GetInt("spaceshooterLevelReached"));
+        if (PlayerPrefs.GetInt("spaceshooterLevelReached") > nextlevel) {
+            PlayerPrefs.SetInt("spaceshooterLevelReached", nextlevel);
+        }
     }
 
     public void GoNextLevel (string levelName) {
         SceneManager.LoadScene(levelName);
-    }
-
-    public void setInvaderSpeed() {
-        Invader.instance.EnemyFlightSpeed = this.EnemyFlightSpeed;
-        Invader.instance.EnemyShootSpeed = this.EnemyShootSpeed;
     }
 }

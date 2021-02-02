@@ -8,7 +8,7 @@ public class EnemyLaser : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        bulletspeed = Invader.instance.EnemyFlightSpeed - 0.02f;
+        bulletspeed = -0.03f;
         //Debug.Log("Bullet Flight speed:" + bulletspeed);
     }
 

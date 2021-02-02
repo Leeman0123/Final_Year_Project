@@ -18,7 +18,7 @@ public class DestroyLaser : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Bullet" || col.tag == "EnemyBullet")
+        if (col.CompareTag("Bullet") || col.CompareTag("EnemyBullet"))
         {
             Destroy(col.gameObject);
         }

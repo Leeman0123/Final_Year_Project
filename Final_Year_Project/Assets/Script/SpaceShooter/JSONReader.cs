@@ -36,24 +36,69 @@ public class JSONReader : MonoBehaviour
         }
     }
 
-    public string getWrong() {
+    public string GetPastSimpleWrong() {
         int randomnum = Random.Range(0, myVerbList.verb.Length);
         string basetense = myVerbList.verb[randomnum].basetense;
         string pasttense = myVerbList.verb[randomnum].pastsimple;
         string pastparticiple = myVerbList.verb[randomnum].pastparticiple;
-        while (basetense.Equals(pasttense) || pasttense.Equals(pastparticiple)) {
+        Debug.Log("Base:" + basetense + " Pass:" + pasttense + " PP:" + pastparticiple);
+        while (pasttense.Equals(basetense) || pasttense.Equals(pastparticiple)) {
             randomnum = Random.Range(0, myVerbList.verb.Length);
             basetense = myVerbList.verb[randomnum].basetense;
             pasttense = myVerbList.verb[randomnum].pastsimple;
             pastparticiple = myVerbList.verb[randomnum].pastparticiple;
+            Debug.Log("Base:" + basetense + " Pass:" + pasttense + " PP:" + pastparticiple);
         }
-        Debug.Log("Base:" + basetense + " Pass:" + pasttense + " PP:" + pastparticiple);
         return pastparticiple;
     }
 
-    public string getCorrect() {
+    public string GetPastSimpleCorrect() {
         string correct;
         correct = myVerbList.verb[Random.Range(0, myVerbList.verb.Length)].pastsimple;
+        return correct;
+    }
+
+    public string GetBaseWrong() {
+        int randomnum = Random.Range(0, myVerbList.verb.Length);
+        string basetense = myVerbList.verb[randomnum].basetense;
+        string pasttense = myVerbList.verb[randomnum].pastsimple;
+        string pastparticiple = myVerbList.verb[randomnum].pastparticiple;
+        Debug.Log("Base:" + basetense + " Pass:" + pasttense + " PP:" + pastparticiple);
+        while (basetense.Equals(pasttense) || basetense.Equals(pastparticiple)) {
+            randomnum = Random.Range(0, myVerbList.verb.Length);
+            basetense = myVerbList.verb[randomnum].basetense;
+            pasttense = myVerbList.verb[randomnum].pastsimple;
+            pastparticiple = myVerbList.verb[randomnum].pastparticiple;
+            Debug.Log("Base:" + basetense + " Pass:" + pasttense + " PP:" + pastparticiple);
+        }
+        return pastparticiple;
+    }
+
+    public string GetBaseCorrect() {
+        string correct;
+        correct = myVerbList.verb[Random.Range(0, myVerbList.verb.Length)].basetense;
+        return correct;
+    }
+
+    public string GetPastParticipleWrong() {
+        int randomnum = Random.Range(0, myVerbList.verb.Length);
+        string basetense = myVerbList.verb[randomnum].basetense;
+        string pasttense = myVerbList.verb[randomnum].pastsimple;
+        string pastparticiple = myVerbList.verb[randomnum].pastparticiple;
+        Debug.Log("Base:" + basetense + " Pass:" + pasttense + " PP:" + pastparticiple);
+        while (pastparticiple.Equals(pasttense) || pastparticiple.Equals(pasttense)) {
+            randomnum = Random.Range(0, myVerbList.verb.Length);
+            basetense = myVerbList.verb[randomnum].basetense;
+            pasttense = myVerbList.verb[randomnum].pastsimple;
+            pastparticiple = myVerbList.verb[randomnum].pastparticiple;
+            Debug.Log("Base:" + basetense + " Pass:" + pasttense + " PP:" + pastparticiple);
+        }
+        return pasttense;
+    }
+
+    public string GetPastParticipleCorrect() {
+        string correct;
+        correct = myVerbList.verb[Random.Range(0, myVerbList.verb.Length)].pastparticiple;
         return correct;
     }
 }

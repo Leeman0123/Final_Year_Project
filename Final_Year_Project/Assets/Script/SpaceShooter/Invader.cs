@@ -14,9 +14,13 @@ public class Invader : MonoBehaviour
     public float EnemyFlightSpeed = -0.005f;
     public float EnemyShootSpeed = 1f;
 
+    public static int EnemiesAlive = 0;
+
     // Start is called before the first frame update
     void Start()
     {
+        EnemiesAlive++;
+        Debug.Log("Enemy Number:" + EnemiesAlive);
         instance = this;
         playaudio = GetComponent<AudioSource>();
     }
@@ -35,15 +39,20 @@ public class Invader : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Bullet")
+        if (col.CompareTag("Bullet"))
         {
-            Debug.Log("Destroy Emeny");
-            playaudio.clip = audioClip;
-            playaudio.Play();
-            Instantiate(explo, transform.position, transform.rotation);
-            Destroy(gameObject);
+            EnemyDie();   
         }
+    }
 
-        
+    public void EnemyDie() {
+        Debug.Log("Destroy Emeny");
+        EnemiesAlive--;
+        Debug.Log("Enemy Number:" + EnemiesAlive);
+        playaudio.clip = audioClip;
+        playaudio.Play();
+        Instantiate(explo, transform.position, transform.rotation);
+        Destroy(gameObject);
+        return;
     }
 }

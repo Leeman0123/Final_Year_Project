@@ -56,8 +56,11 @@ public class ShipControl : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.tag == "Enemy" || col.tag == "Correct" || col.tag == "Wrong" || col.tag == "EnemyBullet") //minus life when Enemy attack player
+        if (col.CompareTag("Enemy") || col.CompareTag("Correct") || col.CompareTag("Wrong") || col.CompareTag("EnemyBullet")) //minus life when Enemy attack player
         {
+            if (!col.CompareTag("EnemyBullet")) {
+                Invader.EnemiesAlive--;
+            }
             Destroy(col.gameObject);
             Instantiate(explo, transform.position, transform.rotation);
             life--;

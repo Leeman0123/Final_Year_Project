@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SurroundBoss : MonoBehaviour
+public class WrongSurround : MonoBehaviour
 {
+
     AudioSource playaudio;
     public AudioClip audioClip;
     public GameObject explo;
 
-    public static SurroundBoss instance;
+    public static WrongSurround instance;
 
     public Vector3 angleToRotate;
     public bool canshoot;
@@ -17,7 +18,6 @@ public class SurroundBoss : MonoBehaviour
     public GameObject Bullet;
     public float EnemyShootSpeed = 1.25f;
     public bool textchange = false;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -25,13 +25,12 @@ public class SurroundBoss : MonoBehaviour
         playaudio = GetComponent<AudioSource>();
         canshoot = false;
         if (!textchange) {
-            transform.GetComponentInChildren<Canvas>().GetComponentInChildren<Text>().text = JSONReader.instance.getWrong();
+            transform.GetComponentInChildren<Canvas>().GetComponentInChildren<Text>().text = JSONReader.instance.GetPastSimpleCorrect();
         }
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         transform.RotateAround(this.transform.parent.position, new Vector3(0f, 0f, 1f), 20 * Time.deltaTime); //surround the boss
         this.transform.Rotate(angleToRotate * Time.deltaTime); //face to player
         if (canshoot == true) {
@@ -45,7 +44,7 @@ public class SurroundBoss : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
-        if (collision.tag == "Bullet") {
+        if (collision.CompareTag("Bullet")) {
             Debug.Log("Destroy Emeny");
             playaudio.clip = audioClip;
             playaudio.Play();
