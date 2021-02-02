@@ -8,6 +8,11 @@ TagManager:
   - Music
   - Background
   - NoMask
+  - Enemy
+  - Bullet
+  - Correct
+  - Wrong
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
