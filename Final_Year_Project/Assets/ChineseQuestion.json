@@ -1,0 +1,24 @@
+{
+    "Items": [
+        {
+            "question": "請選擇缺少的字:不絕於__",
+			"correctAns": "耳",
+			"wrongAns": ["眼", "鼻","口"]
+        },
+		{
+			"question": "請選擇缺少的字:不露__色",
+			"correctAns": "聲",
+			"wrongAns": ["聽", "說", "顏"]
+		},
+		{
+			"question": "請選擇缺少的字:鬼哭__嚎",
+			"correctAns": "神",
+			"wrongAns": ["人", "豬", "狗"]
+		},
+		{
+			"question": "請選擇缺少的字:鶴鳴__皋",
+			"correctAns": "九",
+			"wrongAns": ["五", "七", "八" ]
+		}
+    ]
+}
