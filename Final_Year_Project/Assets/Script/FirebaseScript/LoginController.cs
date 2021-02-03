@@ -111,7 +111,7 @@ public class LoginController : MonoBehaviour
         }
         else
         {
-            operation = SceneManager.LoadSceneAsync("Level02");
+            operation = SceneManager.LoadSceneAsync("TeacherMain");
         }
         loadingScreen.SetActive(true);
         while (!operation.isDone)

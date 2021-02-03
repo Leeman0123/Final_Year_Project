@@ -45,14 +45,12 @@ public class FinishedHandler : MonoBehaviour
         btn.onClick.AddListener(() =>
         {
             string userId = GameObject.Find("CheckAuth").GetComponent<CheckAuthentication>().GetUserId();
-            GameObject.Find("DatabaseQuizWriter").GetComponent<DatabaseQuizWriter>()
+            StartCoroutine(GameObject.Find("DatabaseQuizWriter").GetComponent<DatabaseQuizWriter>()
             .WriteVocabAnimals(
-                userId, 
+                userId,
                 correct,
                 GameObject.Find("BarBackground").GetComponentInChildren<BarScript>().GetRemainTime(),
-                total);
-            GameObject.Find("DatabaseQuizWriter").GetComponent<DatabaseQuizWriter>()
-            .WriteUserCoins(userId, 5);
+                total));
         });
     }
 

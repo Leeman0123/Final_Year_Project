@@ -159,6 +159,7 @@ public class FirebaseManager : MonoBehaviour
                     {
                         StartCoroutine(UpdateDatabaseStudentName(newUser, studentNameText.text));
                         StartCoroutine(UpdateDatabaseUserEmail(newUser, email, 0));
+                        StartCoroutine(UpdateDatabaseStudentCoins(newUser));
                         Debug.Log("Register account with Email:" + email + " and Student Name:" + studentName + " Successfully!!");
                     }
                     else
@@ -237,6 +238,23 @@ public class FirebaseManager : MonoBehaviour
     {
         //Users Row => UserId => name => 
         var DBTask = DBreference.Child("students").Child(user.UserId).Child("name").SetValueAsync(name);
+        //Wait Until Modify DB task is completed;
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to update student name task with {DBTask.Exception}");
+        }
+        else
+        {
+            Debug.Log("Updated Student coins as 0" + " with userID: " + user.UserId);
+        }
+    }
+
+    IEnumerator UpdateDatabaseStudentCoins(FirebaseUser user)
+    {
+        //Users Row => UserId => name => 
+        var DBTask = DBreference.Child("students").Child(user.UserId).Child("coins").SetValueAsync(0);
         //Wait Until Modify DB task is completed;
         yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
 

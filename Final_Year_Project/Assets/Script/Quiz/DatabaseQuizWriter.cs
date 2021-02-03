@@ -8,80 +8,63 @@ public class DatabaseQuizWriter : MonoBehaviour
 {
     [SerializeField] GameObject progressPanel;
     private bool dataSaved = false;
-    public void WriteVocabAnimals(string userId, int correctCount, string remainTime, int answerTotal)
+    public IEnumerator WriteVocabAnimals(string userId, int correctCount, string remainTime, int answerTotal)
     {
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-        reference.Child("EnglishQuiz").Child("VocabAnimals").Child(userId).GetValueAsync().ContinueWith(task => {
-            if (task.IsFaulted)
+        var getTask = reference
+            .Child("EnglishQuiz")
+            .Child("VocabAnimals")
+            .Child(userId)
+            .GetValueAsync();
+        yield return new WaitUntil(() => getTask.IsCompleted || getTask.IsFaulted);
+        if (getTask.IsCompleted)
+        {
+            Dictionary<string, object> results = (Dictionary<string, object>)getTask.Result.Value;
+            if (results == null)
             {
-                // Handle the error...
-                Debug.Log("Error");
+                StartCoroutine(UpdateVocabAnimalsQuizTable(userId, correctCount, remainTime, answerTotal));
+                StartCoroutine(WriteUserCoins(userId, 5));
             }
-            else if (task.IsCompleted)
+            else
             {
-                DataSnapshot snapshot = task.Result;
-                if (snapshot.Child("correctCount").Value == null) {
-                    DatabaseReference mReference = FirebaseDatabase.DefaultInstance.RootReference;
-                    VocabAnimals va = new VocabAnimals(correctCount, remainTime, answerTotal);
-                    string json = JsonUtility.ToJson(va);
-                    mReference.Child("EnglishQuiz").Child(va.GetType().Name).Child(userId).SetRawJsonValueAsync(json);
-                }
-                else if ((int.Parse(snapshot.Child("correctCount").Value.ToString())) < correctCount)
+                int correctTotal = int.Parse(results["correctCount"].ToString());
+                if (correctTotal < correctCount)
                 {
-                    
-                        DatabaseReference mReference = FirebaseDatabase.DefaultInstance.RootReference;
-                        VocabAnimals va = new VocabAnimals(correctCount, remainTime, answerTotal);
-                        string json = JsonUtility.ToJson(va);
-                        mReference.Child("EnglishQuiz").Child(va.GetType().Name).Child(userId).SetRawJsonValueAsync(json);
+                    StartCoroutine(UpdateVocabAnimalsQuizTable(userId, correctCount, remainTime, answerTotal));
+                    StartCoroutine(WriteUserCoins(userId, 5));
                 }
-                dataSaved = true;
             }
-        });
+            dataSaved = true;
+        }
     }
 
-    public void WriteUserCoins(string userId, int coins)
+    public IEnumerator UpdateVocabAnimalsQuizTable(string userId, int correctCount, string remainTime, int answerTotal)
     {
-        DatabaseReference mReference = FirebaseDatabase.DefaultInstance.RootReference;
-        mReference.Child("students").Child(userId).GetValueAsync().ContinueWith(task => {
-            if (task.IsFaulted)
-            {
-                // Handle the error...
-                Debug.Log("Error");
-            }
-            else if (task.IsCompleted)
-            {
-                DataSnapshot snapshot = task.Result;
-                if (snapshot.Child("coins").Value == null)
-                {
-                    DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-                    Debug.Log(snapshot.Child("coins").Value);
-                    string email = snapshot.Child("email").Value.ToString();
-                    string name = snapshot.Child("name").Value.ToString();
-                    Students students = new Students(
-                        email,
-                        name,
-                        coins);
-                    string json = JsonUtility.ToJson(students);
-                    reference.Child("students").Child(userId).SetRawJsonValueAsync(json);
-                }
-                else if (snapshot.Child("coins").Value != null)
-                {
-                    DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-                    int currentCoins = int.Parse(snapshot.Child("coins").Value.ToString());
-                    string email = snapshot.Child("email").Value.ToString();
-                    string name = snapshot.Child("name").Value.ToString();
-                    Debug.Log(currentCoins + "," + coins);
-                    Students students = new Students(
-                        email,
-                        name,
-                        (currentCoins + coins));
-                    string json = JsonUtility.ToJson(students);
-                    reference.Child("students").Child(userId).SetRawJsonValueAsync(json);
-                }
-            }
-        });
-       
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        VocabAnimals va = new VocabAnimals(correctCount, remainTime, answerTotal);
+        string json = JsonUtility.ToJson(va);
+        var getTask = reference.Child("EnglishQuiz").Child(va.GetType().Name).Child(userId).SetRawJsonValueAsync(json);
+        yield return new WaitUntil(() => getTask.IsCompleted || getTask.IsFaulted);
     }
+
+    public IEnumerator WriteUserCoins(string userId, int coins)
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        var DBTask = reference.Child("students").Child(userId).Child("coins").SetValueAsync(coins);
+        //Wait Until Modify DB task is completed;
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+
+        if (DBTask.Exception != null)
+        {
+            Debug.LogWarning(message: $"Failed to update student name task with {DBTask.Exception}");
+        }
+        else
+        {
+            Debug.Log("Updated Student coins as 0" + " with userID: " + userId);
+        }
+    }
+
+
 
     void Update()
     {

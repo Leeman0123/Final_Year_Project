@@ -53,4 +53,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/GameSelect/GameSelect.unity
     guid: cca3cf2b4c876424a82883b7636e0d57
+  - enabled: 1
+    path: Assets/Scenes/Teacher/TeacherMain.unity
+    guid: a543d3d828931c649bf66b25dad0d48e
+  - enabled: 1
+    path: Assets/Scenes/Register/RegisterPage.unity
+    guid: 86a201d366f66da429dee3e2d8f65f20
   m_configObjects: {}
