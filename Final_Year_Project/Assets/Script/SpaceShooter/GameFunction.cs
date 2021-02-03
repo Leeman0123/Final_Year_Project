@@ -150,7 +150,7 @@ public class GameFunction : MonoBehaviour
 
     public void NextLevel() {
         Debug.Log("Store level" + PlayerPrefs.GetInt("spaceshooterLevelReached"));
-        if (PlayerPrefs.GetInt("spaceshooterLevelReached") > nextlevel) {
+        if (PlayerPrefs.GetInt("spaceshooterLevelReached") < nextlevel) {
             PlayerPrefs.SetInt("spaceshooterLevelReached", nextlevel);
         }
     }
