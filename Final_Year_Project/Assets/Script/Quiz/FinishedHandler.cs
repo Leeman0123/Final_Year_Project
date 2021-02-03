@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class FinishedHandler : MonoBehaviour
 {
@@ -45,12 +46,25 @@ public class FinishedHandler : MonoBehaviour
         btn.onClick.AddListener(() =>
         {
             string userId = GameObject.Find("CheckAuth").GetComponent<CheckAuthentication>().GetUserId();
-            StartCoroutine(GameObject.Find("DatabaseQuizWriter").GetComponent<DatabaseQuizWriter>()
-            .WriteVocabAnimals(
-                userId,
-                correct,
-                GameObject.Find("BarBackground").GetComponentInChildren<BarScript>().GetRemainTime(),
-                total));
+            if (SceneManager.GetActiveScene().name.Equals("Animals1"))
+            {
+                StartCoroutine(GameObject.Find("DatabaseQuizWriter").GetComponent<DatabaseQuizWriter>()
+                                        .WriteVocabAnimals(
+                                            userId,
+                                            correct,
+                                            GameObject.Find("BarBackground").GetComponentInChildren<BarScript>().GetRemainTime(),
+                                            total));
+            }
+            else if (SceneManager.GetActiveScene().name.Equals("Vehicle1"))
+            {
+                StartCoroutine(GameObject.Find("DatabaseQuizWriter").GetComponent<DatabaseQuizWriter>()
+                                        .WriteVocabVehicles(
+                                            userId,
+                                            correct,
+                                            GameObject.Find("BarBackground").GetComponentInChildren<BarScript>().GetRemainTime(),
+                                            total));
+            }
+
         });
     }
 

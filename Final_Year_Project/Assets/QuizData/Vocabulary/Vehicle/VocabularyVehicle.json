@@ -1,0 +1,64 @@
+{
+    "Items": [
+        {
+            "question": "Which vocabulary represent to 巴士?",
+			"correctAns": "Bus",
+			"wrongAns": ["Train", "Tram","Bam"]
+        },
+		{
+			"question": "Which vocabulary represent to 電單車?",
+			"correctAns": "Motorcycle ",
+			"wrongAns": ["Scooter ", "Subway", "Ship"]
+		},
+		{
+			"question": "Which vocabulary represent to 露營車?",
+			"correctAns": "Camper ",
+			"wrongAns": ["Truck", "Terminal ", "Ferry "]
+		},
+		{
+			"question": "Which vocabulary represent to 救生艇?",
+			"correctAns": "LifeBoat",
+			"wrongAns": ["Boat", "Railway", "Engine" ]
+		},
+		{
+			"question": "Which vocabulary represent to 長途直通車?",
+			"correctAns": "Nonstop",
+			"wrongAns": ["Vehicle", "Plane", "Car", "Bus"]
+		},
+		{
+			"question": "Which vocabulary represent to 電力火車?",
+			"correctAns": "Electric Train",
+			"wrongAns": ["Night Express", "Express", "Train", "Through Train"]
+		},
+		{
+			"question": "Which vocabulary represent to 跑車?",
+			"correctAns": "Sport car",
+			"wrongAns": ["Car", "Run Car", "Compact Car", "SUV"]
+		},
+		{
+			"question": "Which vocabulary represent to 船?",
+			"correctAns": "Ship",
+			"wrongAns": ["Ferry", "Canoe", "Sailboat", "Liner"]
+		},
+		{
+			"question": "Which vocabulary represent to 輕軌?",
+			"correctAns": "Light Rail",
+			"wrongAns": ["Train", "Tram", "Subway", "Rail"]
+		},
+		{
+			"question": "Which vocabulary represent to 郵輪?",
+			"correctAns": "Cruise Ship",
+			"wrongAns": ["Motor boat", "Ferry", "Yacht", "rabbit"]
+		},
+		{
+			"question": "Which vocabulary represent to 電動車?",
+			"correctAns": "Electric cars",
+			"wrongAns": ["Electronic", "Car", "Sport Car", "Hybrid Car"]
+		},
+		{
+			"question": "Which vocabulary represent to 飛機?",
+			"correctAns": "Airplane",
+			"wrongAns": ["Flights", "Flyer", "Travel", "Bike"]
+		}
+    ]
+}
