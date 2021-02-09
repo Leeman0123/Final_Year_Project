@@ -45,6 +45,7 @@ public class FinishedHandler : MonoBehaviour
     {
         btn.onClick.AddListener(() =>
         {
+            Debug.Log((SceneManager.GetActiveScene().name));
             string userId = GameObject.Find("CheckAuth").GetComponent<CheckAuthentication>().GetUserId();
             if (SceneManager.GetActiveScene().name.Equals("Animals1"))
             {

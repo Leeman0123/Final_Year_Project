@@ -8,6 +8,11 @@ public class DatabaseQuizWriter : MonoBehaviour
 {
     [SerializeField] GameObject progressPanel;
     private bool dataSaved = false;
+
+    void Start()
+    {
+
+    }
     public IEnumerator WriteVocabAnimals(string userId, int correctCount, string remainTime, int answerTotal)
     {
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;

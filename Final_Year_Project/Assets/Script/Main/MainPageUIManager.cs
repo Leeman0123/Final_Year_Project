@@ -21,6 +21,7 @@ public class MainPageUIManager : MonoBehaviour
     [Header("LogoutProgress")]
     [SerializeField] GameObject loginCanvasPanel;
     [SerializeField] GameObject loginRequiredPanel;
+
     private string userId;
     private CheckAuthentication script;
 
