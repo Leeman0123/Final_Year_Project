@@ -13,7 +13,6 @@ public class Laser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position += new Vector3 (0, 0.1f, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

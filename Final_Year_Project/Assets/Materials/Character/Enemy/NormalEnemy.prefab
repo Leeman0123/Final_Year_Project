@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4652477883681091068}
   - component: {fileID: -8419899120104535960}
   m_Layer: 0
-  m_Name: NornalEnemy_01
+  m_Name: NormalEnemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,6 +148,8 @@ MonoBehaviour:
   explo: {fileID: 1863659684641561933, guid: 6cbe7f1931885a84fb95514226e9a15a, type: 3}
   BulletTime: 0
   Bullet: {fileID: 8605431518810287618, guid: 0a0b1e5758e254c4f8c301bfa6728476, type: 3}
+  EnemyFlightSpeed: -0.02
+  EnemyShootSpeed: 1
 --- !u!82 &-8419899120104535960
 AudioSource:
   m_ObjectHideFlags: 0

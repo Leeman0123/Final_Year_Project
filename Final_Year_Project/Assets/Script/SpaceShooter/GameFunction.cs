@@ -10,6 +10,7 @@ public class GameFunction : MonoBehaviour
     public GameObject[] Special, Boss;
     public GameObject GameTitle, GameOverTitle, GameWinTitle;
     public GameObject PlayButton, RestartButton, QuitButton, NextLevelButton;
+    public GameObject ItemSelectPanel;
 
     public static GameFunction instance;
 
@@ -20,6 +21,7 @@ public class GameFunction : MonoBehaviour
 
     public float time;
     public int Score;
+    public bool doubleScore;
     public bool IsPlaying;
     public int nextlevel = 1;
     public bool BossSpawn; //check the boss is it spawn
@@ -37,9 +39,11 @@ public class GameFunction : MonoBehaviour
     {
         instance = this;
         Score = 0;
+        doubleScore = false;
         IsPlaying = false;
         BossSpawn = false;
         GameTitle.SetActive(true);
+        ItemSelectPanel.SetActive(true);
         GameOverTitle.SetActive(false);
         RestartButton.SetActive(false);
         GameWinTitle.SetActive(false);
@@ -106,12 +110,36 @@ public class GameFunction : MonoBehaviour
     public void GameStart()
     {
         IsPlaying = true;
+        ItemSelectPanel.SetActive(false);
         GameTitle.SetActive(false);
         PlayButton.SetActive(false);
         QuitButton.SetActive(false);
         GameWinTitle.SetActive(false);
         NextLevelButton.SetActive(false);
         Debug.Log("Game Start");
+        for (int i = 0; i <= 2; i++) {
+            if (ItemSelector.itemInstance.itemEnable[i]) {
+                switch (i) {
+                    case 0:
+                        ShipControl.shipinstance.life++;
+                        PlayerPrefs.SetInt("spaceshooterInvincibleOwned", ItemSelector.itemInstance.itemOwned[i] - 1);
+                        Debug.Log("Invincible activated");
+                        break;
+                    case 1:
+                        PlayerPrefs.SetInt("spaceshooterSpecialShootOwned", ItemSelector.itemInstance.itemOwned[i] - 1);
+                        Debug.Log("Special Shoot activated");
+                        break;
+                    case 2:
+                        doubleScore = true;
+                        PlayerPrefs.SetInt("spaceshooterDoublecoinOwned", ItemSelector.itemInstance.itemOwned[i] - 1);
+                        Debug.Log("Double Coin activated");
+                        break;
+                    default:
+                        Debug.LogError("Unknow Item, Item ID : " + i);
+                        break;
+                }
+            }
+        }
     }
 
     public void GameOver()

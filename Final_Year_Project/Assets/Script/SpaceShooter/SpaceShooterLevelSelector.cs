@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class SpaceShooterLevelSelector : MonoBehaviour {
 
     public Button[] levelbuttons;
+    public Button backButton;
 
     private void Start() {
 
@@ -19,8 +20,12 @@ public class SpaceShooterLevelSelector : MonoBehaviour {
     }
 
     public void Select(string levelName) {
-
         SceneManager.LoadScene(levelName);
+    }
 
+    public void BackToMain() {
+        PlayerPrefs.DeleteAll();
+        Debug.Log("PlayerPrefs reset");
+        SceneManager.LoadScene("Main");
     }
 }
