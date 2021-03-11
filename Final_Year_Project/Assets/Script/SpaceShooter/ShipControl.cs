@@ -8,15 +8,14 @@ public class ShipControl : MonoBehaviour
 
     public static ShipControl shipinstance;
 
-    public GameObject Bullet; //disable for mobile version
     public GameObject explo;
+    public GameObject playerShip;
 
     public int life = 5;
-    public float BulletTime;
     public Text LifeText;
     AudioSource playaudio;
-    public AudioClip audioClip;
-
+    public AudioClip getHitAudio, invincibleAudio;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -30,20 +29,15 @@ public class ShipControl : MonoBehaviour
     {
         //Control for PC version 
         if (Input.GetKey(KeyCode.D)) {
-            gameObject.transform.position += new Vector3(0.025f, 0, 0);
+            gameObject.transform.position += new Vector3(0.25f, 0, 0);
         }
 
         if (Input.GetKey(KeyCode.A)) {
-            gameObject.transform.position += new Vector3(-0.025f, 0, 0);
+            gameObject.transform.position += new Vector3(-0.25f, 0, 0);
         }
 
-        if (Input.GetKey(KeyCode.Space)) {
-            if (BulletTime > 0.1f) {
-                Vector3 pos = gameObject.transform.position + new Vector3(0, 0.6f, 0);
-                Instantiate(Bullet, pos, gameObject.transform.rotation);
-                BulletTime = 0f;
-            }
-            BulletTime += Time.deltaTime;
+        if (Input.GetKey(KeyCode.C) && ItemSelector.itemInstance.itemEnable[0]) {
+            StartCoroutine(Invincible());
         }
 
         /*if (Input.GetTouch(0).phase == TouchPhase.Moved) //Control for mobile version
@@ -65,7 +59,7 @@ public class ShipControl : MonoBehaviour
             Instantiate(explo, transform.position, transform.rotation);
             life--;
             LifeText.text = "Life : " + life;
-            playaudio.clip = audioClip;
+            playaudio.clip = getHitAudio;
             playaudio.Play();
             if (life == 0)
             {
@@ -73,5 +67,20 @@ public class ShipControl : MonoBehaviour
                 GameFunction.instance.GameOver();
             }
         }
+    }
+
+    private IEnumerator Invincible() {
+        BoxCollider2D boxCollider2D = playerShip.GetComponent<BoxCollider2D>();
+        boxCollider2D.enabled = false;
+        Debug.Log("Invincible now");
+        playaudio.clip = invincibleAudio;
+        playaudio.loop = true;
+        playaudio.Play();
+        ItemSelector.itemInstance.itemEnable[0] = false;
+        yield return new WaitForSeconds(10);
+        Debug.Log("Invincible end");
+        boxCollider2D.enabled = true;
+        playaudio.loop = false;
+        playaudio.Stop();
     }
 }

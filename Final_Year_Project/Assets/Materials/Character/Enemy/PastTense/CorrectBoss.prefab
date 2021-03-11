@@ -332,7 +332,7 @@ MonoBehaviour:
   - {fileID: 7150895925342256971}
   bulletTime: 0
   bossShootSpeed: 1
-  enemyFlightSpeed: -0.005
+  enemyFlightSpeed: -0.02
   shoulddestroyship: 0
   score: 100
   cankill: 0
