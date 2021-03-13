@@ -8,14 +8,17 @@ public class SpaceShooterLevelSelector : MonoBehaviour {
 
     public Button[] levelbuttons;
     public Button backButton;
+    public Sprite lockimage;
 
     private void Start() {
 
         int levelReached = PlayerPrefs.GetInt("spaceshooterLevelReached", 1);
 
         for (int i = 0; i < levelbuttons.Length; i++) {
-            if (i + 1 > levelReached)
+            if (i + 1 > levelReached) {
                 levelbuttons[i].interactable = false;
+                levelbuttons[i].GetComponent<Image>().sprite = lockimage;
+            }
         }
     }
 
