@@ -37,6 +37,7 @@ public class GameFunction : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Screen.orientation = ScreenOrientation.Portrait;
         instance = this;
         Score = 0;
         doubleScore = false;
