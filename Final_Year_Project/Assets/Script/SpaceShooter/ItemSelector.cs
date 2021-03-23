@@ -19,12 +19,15 @@ public class ItemSelector : MonoBehaviour
     public Sprite enableImage, disableImage, selectedImage;
 
     private CheckAuthentication script;
+    private string userID;
 
     // Start is called before the first frame update
     void Start()
     {
         itemInstance = this;
         script = GameObject.Find("CheckAuth").GetComponent<CheckAuthentication>();
+        userID = script.GetUserId();
+        Debug.Log(userID);
         StartCoroutine(GetItemAmount());
     }
 
@@ -52,8 +55,6 @@ public class ItemSelector : MonoBehaviour
     }
 
     IEnumerator GetItemAmount() {
-        string userID = script.GetUserId();
-        Debug.Log(userID);
         var getTask = FirebaseDatabase.DefaultInstance
         .GetReference("SpaceShooter")
         .Child("ItemAmount")
@@ -65,7 +66,55 @@ public class ItemSelector : MonoBehaviour
             itemOwned[0] = int.Parse(results["Invincible"].ToString());
             itemOwned[1] = int.Parse(results["SpecialMode"].ToString());
             itemOwned[2] = int.Parse(results["DoubleCoin"].ToString());
-            ShowItemAmount();
+        }
+        ShowItemAmount();
+    }
+
+    public IEnumerator SetInvincibleAmount(int change) {
+        itemOwned[0] = itemOwned[0] + change;
+        var DBTask = script.DBreference
+            .Child("SpaceShooter")
+            .Child("ItemAmount")
+            .Child(userID)
+            .Child("Invincible")
+            .SetValueAsync(itemOwned[0]);
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        if (DBTask.Exception != null) {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        } else {
+            Debug.Log("Invincible Amount Updated. New Amount : " + itemOwned[0]);
+        }
+    }
+
+    public IEnumerator SetSpecialModeAmount(int change) {
+        itemOwned[1] = itemOwned[1] + change;
+        var DBTask = script.DBreference
+            .Child("SpaceShooter")
+            .Child("ItemAmount")
+            .Child(userID)
+            .Child("SpecialMode")
+            .SetValueAsync(itemOwned[1]);
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        if (DBTask.Exception != null) {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        } else {
+            Debug.Log("Special Mode Amount Updated. New Amount : " + itemOwned[1]);
+        }
+    }
+
+    public IEnumerator SetDoubleCoinAmount(int change) {
+        itemOwned[2] = itemOwned[2] + change;
+        var DBTask = script.DBreference
+            .Child("SpaceShooter")
+            .Child("ItemAmount")
+            .Child(userID)
+            .Child("DoubleCoin")
+            .SetValueAsync(itemOwned[2]);
+        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
+        if (DBTask.Exception != null) {
+            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
+        } else {
+            Debug.Log("Double Coin Amount Updated. New Amount : " + itemOwned[2]);
         }
     }
 }
