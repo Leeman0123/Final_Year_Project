@@ -42,12 +42,17 @@ public class GameFunction : MonoBehaviour
     public float ReadySpecial; //check how long to spawn special enemy
     public int SpawnSpecial = 5; // set how long to spawn special enemy
     public int SpawnBoss = 100; //set when the boss spawn
+
     private CheckAuthentication script;
+    private DatabaseReference reference;
+    private string userID;
 
     // Start is called before the first frame update
     void Start()
     {
         script = GameObject.Find("CheckAuth").GetComponent<CheckAuthentication>();
+        reference = FirebaseDatabase.DefaultInstance.RootReference;
+        userID = script.GetUserId();
         Screen.orientation = ScreenOrientation.Portrait;
         instance = this;
         StartCoroutine(GetPlayerScore());
@@ -161,7 +166,7 @@ public class GameFunction : MonoBehaviour
         Debug.Log("Player Win");
         IsPlaying = false;
         if (Score > oldScore)
-            StartCoroutine(UpdateScore());
+            UpdateScore();
         yield return new WaitForSeconds(1);
         playaudio.clip = audioClip;
         playaudio.Play();
@@ -180,9 +185,10 @@ public class GameFunction : MonoBehaviour
     }
 
     public void NextLevel() {
-        Debug.Log("Store level ");
-        if (PlayerPrefs.GetInt("spaceshooterLevelReached") < nextlevel) {
-            PlayerPrefs.SetInt("spaceshooterLevelReached", nextlevel);
+        int levelReached = SpaceShooterLevelSelector.ssLevelSelectorInstance._levelReached;
+        Debug.Log("Store level " + levelReached);
+        if (levelReached < nextlevel) {
+            SpaceShooterLevelSelector.ssLevelSelectorInstance.SetPlayerLevel(nextlevel);
         }
     }
 
@@ -190,25 +196,12 @@ public class GameFunction : MonoBehaviour
         SceneManager.LoadScene(levelName);
     }
 
-    private IEnumerator UpdateScore() {
-        string userID = script.GetUserId();
-        var DBTask = script
-            .DBreference
-            .Child("SpaceShooter")
-            .Child("Score")
-            .Child(userID)
-            .Child("Level" + (nextlevel - 1))
-            .SetValueAsync(Score);
-        yield return new WaitUntil(predicate: () => DBTask.IsCompleted);
-        if (DBTask.Exception != null) {
-            Debug.LogWarning(message: $"Failed to register task with {DBTask.Exception}");
-        } else {
-            Debug.Log("Score Updated");
-        }
+    private void UpdateScore() {
+        reference.Child("SpaceShooter").Child("Score").Child(userID).Child("Level" + (nextlevel - 1)).SetValueAsync(Score);
+        Debug.Log("Score Updated");
     }
 
     private IEnumerator GetPlayerScore() {
-        string userID = script.GetUserId();
         var getTask = FirebaseDatabase.DefaultInstance
             .GetReference("SpaceShooter")
             .Child("Score")
