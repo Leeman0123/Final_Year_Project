@@ -73,6 +73,7 @@ public class WrongBoss : MonoBehaviour
                 GameFunction.instance.AddScore(score);
                 StartCoroutine(GameFunction.instance.GameWin());
                 GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
                 //Destroy(gameObject);
                 Debug.Log("Boss Destroy");
             } else {

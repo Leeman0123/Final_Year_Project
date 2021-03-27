@@ -71,6 +71,7 @@ public class CorrectBossPastParticiple : MonoBehaviour {
                 Instantiate(explo, transform.position, transform.rotation);                
                 GameFunction.instance.AddScore(score);
                 StartCoroutine(GameFunction.instance.GameWin());
+                GetComponent<BoxCollider2D>().enabled = false;
                 GetComponent<SpriteRenderer>().enabled = false;
                 //Destroy(gameObject);
                 Debug.Log("Boss Destroy");

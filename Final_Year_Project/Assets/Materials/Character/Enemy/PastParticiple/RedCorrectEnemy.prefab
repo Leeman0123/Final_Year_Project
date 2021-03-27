@@ -150,7 +150,7 @@ MonoBehaviour:
   explo: {fileID: 1863659684641561933, guid: 6cbe7f1931885a84fb95514226e9a15a, type: 3}
   BulletTime: 0
   Bullet: {fileID: 8605431518810287618, guid: 0a0b1e5758e254c4f8c301bfa6728476, type: 3}
-  EnemyFlightSpeed: -0.005
+  EnemyFlightSpeed: -0.02
   EnemyShootSpeed: 1
 --- !u!82 &7190271469269633923
 AudioSource:

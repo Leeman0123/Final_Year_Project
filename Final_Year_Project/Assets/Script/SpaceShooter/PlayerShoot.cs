@@ -12,6 +12,7 @@ public class PlayerShoot : MonoBehaviour
     public float bulletForce = 10f;
     public bool itemenable;
 
+    [Header("SwipeControl")]
     public float maxSwipeTime;
     public float minSwipeDistance;
 
@@ -22,6 +23,7 @@ public class PlayerShoot : MonoBehaviour
     private Vector2 startSwipePosition;
     private Vector2 endSwipePosition;
     private float swipeLength;
+
     void Start()
     {
         itemenable = true;
@@ -30,41 +32,49 @@ public class PlayerShoot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space)) {
-            if (itemenable)
-                NormalShoot();
-            else
-                Item1Shoot();
-        }
-        if (Input.GetKeyDown(KeyCode.V) && ItemSelector.itemInstance.itemEnable[1]) {
-            SwitchShoot();
-        }
+        if (GameFunction.instance.IsPlaying) {
+            if (Input.GetKey(KeyCode.Space)) {
+                Shoot();
+            }
+            if (Input.GetKeyDown(KeyCode.V) && ItemSelector.itemInstance.itemEnable[1]) {
+                SwitchShoot();
+            }
 
-    }
+            if (Input.touchCount > 0) {
+                Shoot();
+            }
 
-    private void Swipe() {
-        if (Input.touchCount > 0) {
-            Touch touch = Input.GetTouch(0);
-            if (touch.phase == TouchPhase.Began) {
-                swipeStartTime = Time.time;
-                startSwipePosition = touch.position;
-            } else if (touch.phase == TouchPhase.Ended) {
-                swipeEndTime = Time.time;
-                endSwipePosition = touch.position;
-                swipeTime = swipeEndTime - swipeStartTime;
-                swipeLength = (endSwipePosition - startSwipePosition).magnitude;
-                if (swipeTime < maxSwipeTime && swipeLength > minSwipeDistance && ItemSelector.itemInstance.itemEnable[1]) {
-                    SwitchShoot();
+            if (Input.touchCount > 0) { //swipe
+                Touch touch = Input.GetTouch(0);
+                if (touch.phase == TouchPhase.Began) {
+                    swipeStartTime = Time.time;
+                    startSwipePosition = touch.position;
+                } else if (touch.phase == TouchPhase.Ended) {
+                    swipeEndTime = Time.time;
+                    endSwipePosition = touch.position;
+                    swipeTime = swipeEndTime - swipeStartTime;
+                    swipeLength = (endSwipePosition - startSwipePosition).magnitude;
+                    Debug.Log("Swipe Length : " + swipeLength);
+                    if (swipeTime < maxSwipeTime && swipeLength > minSwipeDistance) {
+                        SwitchShoot();
+                    }
                 }
             }
         }
     }
 
     private void SwitchShoot() {
-        if (itemenable)
+        if (itemenable && ItemSelector.itemInstance.itemEnable[1])
             itemenable = false;
         else
             itemenable = true;
+    }
+
+    private void Shoot() {
+        if (itemenable)
+            NormalShoot();
+        else
+            ItemShoot();
     }
 
     private void NormalShoot() {
@@ -77,7 +87,7 @@ public class PlayerShoot : MonoBehaviour
         BulletTime += Time.deltaTime;
     }
 
-    private void Item1Shoot() {
+    private void ItemShoot() {
         if (BulletTime > 0.1f) {
             GameObject bullet1 = Instantiate(BulletPrefab, firePoint.position, firePoint.rotation);
             GameObject bullet2 = Instantiate(BulletPrefab, firePoint.position, firePoint.rotation);

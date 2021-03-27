@@ -37,8 +37,6 @@ public class SpaceShooterLevelSelector : MonoBehaviour {
     }
 
     public void BackToMain() {
-        PlayerPrefs.DeleteAll();
-        Debug.Log("PlayerPrefs reset");
         SceneManager.LoadScene("Main");
     }
 

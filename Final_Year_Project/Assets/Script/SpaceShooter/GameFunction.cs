@@ -9,6 +9,8 @@ public class GameFunction : MonoBehaviour
 {
 
     public static GameFunction instance;
+    [Header("Player")]
+    public GameObject player;
     [Header("Enemy")]
     public GameObject Enemy;
     public GameObject[] Special;
@@ -20,12 +22,6 @@ public class GameFunction : MonoBehaviour
     [Header("Text Object")]
     public Text HighScore;
     public Text ScoreText;
-    [Header("Button Object")]
-    public GameObject PlayButton;
-    public GameObject RestartButton;
-    public GameObject QuitButton;
-    public GameObject NextLevelButton;
-    public GameObject ItemSelectPanel;
     [Header("Audio")]
     public AudioClip audioClip;
     AudioSource playaudio;
@@ -164,6 +160,7 @@ public class GameFunction : MonoBehaviour
 
     public IEnumerator GameWin() {
         Debug.Log("Player Win");
+        player.GetComponent<BoxCollider2D>().enabled = false;
         IsPlaying = false;
         if (Score > oldScore)
             UpdateScore();

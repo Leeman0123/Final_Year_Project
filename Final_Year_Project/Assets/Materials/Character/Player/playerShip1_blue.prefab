@@ -324,9 +324,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explo: {fileID: 1863659684641561933, guid: 6cbe7f1931885a84fb95514226e9a15a, type: 3}
+  playerShip: {fileID: 2747427912903433835}
   life: 50
   LifeText: {fileID: 2747427912386228748}
-  audioClip: {fileID: 8300000, guid: 8e3872e24c1b8c34da2fd83c1b9fd1c3, type: 3}
+  getHitAudio: {fileID: 8300000, guid: 4e845604cdc23ae4f93292f83be4edf2, type: 3}
+  invincibleAudio: {fileID: 8300000, guid: a860f90c371a593418095e0af801feb3, type: 3}
 --- !u!82 &2747427912903433841
 AudioSource:
   m_ObjectHideFlags: 0
@@ -466,5 +468,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e5ba58d6b6d50f4aa9db9682a2e3edf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 6485478324643650224, guid: 516aee214d45ec945b53495bceefa2f6, type: 3}
+  BulletPrefab: {fileID: 6485478324643650224, guid: 516aee214d45ec945b53495bceefa2f6,
+    type: 3}
+  firePoint: {fileID: 2747427913180434097}
   BulletTime: 0
+  bulletForce: 10
+  itemenable: 0
+  maxSwipeTime: 0.2
+  minSwipeDistance: 0.2
