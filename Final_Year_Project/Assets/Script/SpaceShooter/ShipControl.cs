@@ -17,7 +17,7 @@ public class ShipControl : MonoBehaviour
     public AudioClip getHitAudio, invincibleAudio;
 
     private float lastTapTime;
-    private const float DOUBLE_TAP_TIME = 1f;
+    private const float DOUBLE_TAP_TIME = 0.5f;
 
     // Start is called before the first frame update
     void Start()

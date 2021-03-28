@@ -563,24 +563,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &763055762 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 610459197515009630, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 610459197162373324}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &834313466 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 610459197972241462, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 610459197162373324}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &839647977 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 610459198000972325, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 610459197162373324}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &881782377 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 610459197891751589, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
@@ -712,11 +694,6 @@ MonoBehaviour:
   GameLoseCanvas: {fileID: 1505188437}
   HighScore: {fileID: 960660011}
   ScoreText: {fileID: 1561972606}
-  PlayButton: {fileID: 839647977}
-  RestartButton: {fileID: 834313466}
-  QuitButton: {fileID: 1331612551}
-  NextLevelButton: {fileID: 763055762}
-  ItemSelectPanel: {fileID: 1782173552}
   audioClip: {fileID: 8300000, guid: 059fe43656251ea408fa551f9c16e4f8, type: 3}
   time: 0
   doubleCoin: 0
@@ -1083,12 +1060,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1331612551 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 610459195940342603, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 610459197162373324}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1404761161 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 610459196395172997, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
@@ -1403,12 +1374,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1782173552 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 610459196521058236, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
-    type: 3}
-  m_PrefabInstance: {fileID: 610459197162373324}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1872978505 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 610459196463817349, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
@@ -1712,7 +1677,7 @@ PrefabInstance:
     - target: {fileID: 610459197581373938, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
         type: 3}
       propertyPath: m_Name
-      value: Canvas
+      value: SpaceShooterUI
       objectReference: {fileID: 0}
     - target: {fileID: 610459197654009721, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
         type: 3}
