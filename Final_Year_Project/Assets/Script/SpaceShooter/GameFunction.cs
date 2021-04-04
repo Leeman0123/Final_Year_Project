@@ -162,6 +162,7 @@ public class GameFunction : MonoBehaviour
         Debug.Log("Player Win");
         player.GetComponent<BoxCollider2D>().enabled = false;
         IsPlaying = false;
+        StartCoroutine(GetPlayerCoins());
         if (Score > oldScore)
             UpdateScore();
         yield return new WaitForSeconds(1);
@@ -210,5 +211,29 @@ public class GameFunction : MonoBehaviour
             oldScore = int.Parse(results["Level" + (nextlevel - 1)].ToString());
             HighScore.text = "High Score : " + oldScore;
         }
+    }
+
+    private IEnumerator GetPlayerCoins() {
+        var getTask = FirebaseDatabase.DefaultInstance
+        .GetReference("students")
+        .Child(script.GetUserId())
+        .GetValueAsync();
+        yield return new WaitUntil(() => getTask.IsCompleted || getTask.IsFaulted);
+        if (getTask.IsCompleted) {
+            Dictionary<string, object> results = (Dictionary<string, object>)getTask.Result.Value;
+            int coins = int.Parse(results["coins"].ToString());
+            SetPlayerCoins(coins, (int)(Score * 0.05));
+        }
+    }
+
+    private void SetPlayerCoins(int coins, int increaseValue) {
+        Debug.Log("Before Set : " + coins);
+        if (doubleCoin) {
+            increaseValue *= 2;
+        }
+        Debug.Log("Increase Value : " + increaseValue);
+        coins += increaseValue;
+        Debug.Log("After value : " + coins);
+        reference.Child("students").Child(userID).Child("coins").SetValueAsync(coins);
     }
 }
