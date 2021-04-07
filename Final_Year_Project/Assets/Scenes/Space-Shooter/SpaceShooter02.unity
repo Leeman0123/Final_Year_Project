@@ -1722,9 +1722,9 @@ MonoBehaviour:
   - {fileID: 983043995}
   itemOwned: 000000000000000000000000
   itemEnable: 000000
-  enableImage: {fileID: 21300000, guid: 4d2436a7c65ec0a4695f589ed6616aa4, type: 3}
-  disableImage: {fileID: 21300000, guid: a888a37bf624dc345ab9f7edf0709838, type: 3}
-  selectedImage: {fileID: 21300000, guid: b8b8c65cfae8d264699feee04656820a, type: 3}
+  enableImage: {fileID: 21300000, guid: 49d2fd2c162c79b4185d5f099632a8d3, type: 3}
+  disableImage: {fileID: 21300000, guid: 31ce4777d10639a4791d6bff0d3562a2, type: 3}
+  selectedImage: {fileID: 21300000, guid: c4a6a3796b98e954399a650485b9c529, type: 3}
 --- !u!4 &1917673581
 Transform:
   m_ObjectHideFlags: 0

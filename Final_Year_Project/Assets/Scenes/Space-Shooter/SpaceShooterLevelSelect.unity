@@ -233,7 +233,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4d2436a7c65ec0a4695f589ed6616aa4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49d2fd2c162c79b4185d5f099632a8d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 09d33a6b7aa366948bcc71251467fd4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49d2fd2c162c79b4185d5f099632a8d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -696,7 +696,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 09d33a6b7aa366948bcc71251467fd4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49d2fd2c162c79b4185d5f099632a8d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -816,7 +816,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 37e3d71a8b7b3aa4494345950b4d7c97, type: 3}
+    m_Font: {fileID: 12800000, guid: ca243be151460fd42aaae5276215ccc7, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -828,7 +828,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level 5
+  m_Text: Final Stage
 --- !u!222 &430853646
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -949,7 +949,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 09d33a6b7aa366948bcc71251467fd4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49d2fd2c162c79b4185d5f099632a8d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1254,7 +1254,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 09d33a6b7aa366948bcc71251467fd4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49d2fd2c162c79b4185d5f099632a8d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1384,7 +1384,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 09d33a6b7aa366948bcc71251467fd4b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 49d2fd2c162c79b4185d5f099632a8d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1540,7 +1540,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 37e3d71a8b7b3aa4494345950b4d7c97, type: 3}
+    m_Font: {fileID: 12800000, guid: ca243be151460fd42aaae5276215ccc7, type: 3}
     m_FontSize: 36
     m_FontStyle: 0
     m_BestFit: 0
@@ -1618,7 +1618,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 37e3d71a8b7b3aa4494345950b4d7c97, type: 3}
+    m_Font: {fileID: 12800000, guid: ca243be151460fd42aaae5276215ccc7, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -1630,7 +1630,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level 4
+  m_Text: 'Past Participle
+
+    Level 2'
 --- !u!222 &1483946792
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1762,7 +1764,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 37e3d71a8b7b3aa4494345950b4d7c97, type: 3}
+    m_Font: {fileID: 12800000, guid: ca243be151460fd42aaae5276215ccc7, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -1774,7 +1776,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level 2
+  m_Text: 'Past Participle
+
+    Level 1'
 --- !u!222 &1609703602
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1832,13 +1836,8 @@ MonoBehaviour:
   - {fileID: 1131153576}
   - {fileID: 608409776}
   - {fileID: 1277702159}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   backButton: {fileID: 10065119}
-  lockimage: {fileID: 21300000, guid: 537388886f9611f4bac68815715feffe, type: 3}
+  lockimage: {fileID: 21300000, guid: c86cadaeb8387e1439c108292bb06755, type: 3}
   _levelReached: 0
 --- !u!1 &1631631520
 GameObject:
@@ -1897,7 +1896,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 37e3d71a8b7b3aa4494345950b4d7c97, type: 3}
+    m_Font: {fileID: 12800000, guid: ca243be151460fd42aaae5276215ccc7, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -1909,7 +1908,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level 3
+  m_Text: 'Past Tense
+
+    Level 2'
 --- !u!222 &1631631523
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1975,7 +1976,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 37e3d71a8b7b3aa4494345950b4d7c97, type: 3}
+    m_Font: {fileID: 12800000, guid: ca243be151460fd42aaae5276215ccc7, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
     m_BestFit: 0
@@ -1987,7 +1988,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Level 1
+  m_Text: "Past Tense \nLevel 1"
 --- !u!222 &2043791203
 CanvasRenderer:
   m_ObjectHideFlags: 0
