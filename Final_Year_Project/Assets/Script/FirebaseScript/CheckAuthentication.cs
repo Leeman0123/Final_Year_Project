@@ -13,6 +13,8 @@ public class CheckAuthentication : MonoBehaviour
 {
     private FirebaseUser user;
     private FirebaseAuth auth;
+    public DatabaseReference DBreference;
+    [Header("AuthInteractiveScript")]
     [SerializeField] GameObject[] interactiveScript;
     private bool setInteractiveScript = true;
 
@@ -42,6 +44,7 @@ public class CheckAuthentication : MonoBehaviour
     public void InitializeFirebase()
     {
         auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+        DBreference = FirebaseDatabase.DefaultInstance.RootReference;
     }
 
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Firebase.Database;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -6,20 +7,30 @@ using UnityEngine.UI;
 
 public class GameFunction : MonoBehaviour
 {
-    public GameObject Enemy;
-    public GameObject[] Special, Boss;
-    public GameObject GameTitle, GameOverTitle, GameWinTitle;
-    public GameObject PlayButton, RestartButton, QuitButton, NextLevelButton;
 
     public static GameFunction instance;
-
+    [Header("Player")]
+    public GameObject player;
+    [Header("Enemy")]
+    public GameObject Enemy;
+    public GameObject[] Special;
+    public GameObject[] Boss;
+    [Header("Canvas")]
+    public GameObject GameStartCanvas;
+    public GameObject GameWinCanvas;
+    public GameObject GameLoseCanvas;
+    [Header("Text Object")]
+    public Text HighScore;
     public Text ScoreText;
-
-    AudioSource playaudio;
+    [Header("Audio")]
     public AudioClip audioClip;
+    AudioSource playaudio;
 
+    [Header("Variable")]
     public float time;
-    public int Score;
+    private int Score;
+    private int oldScore;
+    public bool doubleCoin;
     public bool IsPlaying;
     public int nextlevel = 1;
     public bool BossSpawn; //check the boss is it spawn
@@ -28,22 +39,26 @@ public class GameFunction : MonoBehaviour
     public int SpawnSpecial = 5; // set how long to spawn special enemy
     public int SpawnBoss = 100; //set when the boss spawn
 
-    public float BulletTime; //disable this 3 variable for PC version
-    public GameObject Ship;
-    public GameObject Bullet;
+    private CheckAuthentication script;
+    private DatabaseReference reference;
+    private string userID;
 
     // Start is called before the first frame update
     void Start()
     {
+        script = GameObject.Find("CheckAuth").GetComponent<CheckAuthentication>();
+        reference = FirebaseDatabase.DefaultInstance.RootReference;
+        userID = script.GetUserId();
+        Screen.orientation = ScreenOrientation.Portrait;
         instance = this;
+        StartCoroutine(GetPlayerScore());
         Score = 0;
+        doubleCoin = false;
         IsPlaying = false;
         BossSpawn = false;
-        GameTitle.SetActive(true);
-        GameOverTitle.SetActive(false);
-        RestartButton.SetActive(false);
-        GameWinTitle.SetActive(false);
-        NextLevelButton.SetActive(false);
+        GameStartCanvas.SetActive(true);
+        GameWinCanvas.SetActive(false);
+        GameLoseCanvas.SetActive(false);
         playaudio = GetComponent<AudioSource>();
         ReadySpecial = 0;
         time = 5f;
@@ -106,12 +121,32 @@ public class GameFunction : MonoBehaviour
     public void GameStart()
     {
         IsPlaying = true;
-        GameTitle.SetActive(false);
-        PlayButton.SetActive(false);
-        QuitButton.SetActive(false);
-        GameWinTitle.SetActive(false);
-        NextLevelButton.SetActive(false);
+        GameStartCanvas.SetActive(false);
+        GameWinCanvas.SetActive(false);
+        GameLoseCanvas.SetActive(false);
         Debug.Log("Game Start");
+        for (int i = 0; i <= 2; i++) {
+            if (ItemSelector.itemInstance.itemEnable[i]) {
+                switch (i) {
+                    case 0:
+                        StartCoroutine(ItemSelector.itemInstance.SetInvincibleAmount(-1));
+                        Debug.Log("Invincible activated");
+                        break;
+                    case 1:
+                        StartCoroutine(ItemSelector.itemInstance.SetSpecialModeAmount(-1));
+                        Debug.Log("Special Shoot activated");
+                        break;
+                    case 2:
+                        doubleCoin = true;
+                        StartCoroutine(ItemSelector.itemInstance.SetDoubleCoinAmount(-1));
+                        Debug.Log("Double Coin activated");
+                        break;
+                    default:
+                        Debug.LogError("Unknow Item, Item ID : " + i);
+                        break;
+                }
+            }
+        }
     }
 
     public void GameOver()
@@ -119,22 +154,21 @@ public class GameFunction : MonoBehaviour
         playaudio.clip = audioClip;
         playaudio.Play();
         IsPlaying = false;
-        GameOverTitle.SetActive(true);
-        RestartButton.SetActive(true);
-        QuitButton.SetActive(true);
+        GameLoseCanvas.SetActive(true);
         Debug.Log("Game Over");
     }
 
     public IEnumerator GameWin() {
         Debug.Log("Player Win");
+        player.GetComponent<BoxCollider2D>().enabled = false;
         IsPlaying = false;
+        StartCoroutine(GetPlayerCoins());
+        if (Score > oldScore)
+            UpdateScore();
         yield return new WaitForSeconds(1);
         playaudio.clip = audioClip;
         playaudio.Play();
-        GameWinTitle.SetActive(true);
-        RestartButton.SetActive(true);
-        NextLevelButton.SetActive(true);
-        QuitButton.SetActive(true);
+        GameWinCanvas.SetActive(true);
         NextLevel();
     }
 
@@ -149,13 +183,57 @@ public class GameFunction : MonoBehaviour
     }
 
     public void NextLevel() {
-        Debug.Log("Store level" + PlayerPrefs.GetInt("spaceshooterLevelReached"));
-        if (PlayerPrefs.GetInt("spaceshooterLevelReached") < nextlevel) {
-            PlayerPrefs.SetInt("spaceshooterLevelReached", nextlevel);
+        int levelReached = SpaceShooterLevelSelector.ssLevelSelectorInstance._levelReached;
+        Debug.Log("Store level " + levelReached);
+        if (levelReached < nextlevel) {
+            SpaceShooterLevelSelector.ssLevelSelectorInstance.SetPlayerLevel(nextlevel);
         }
     }
 
     public void GoNextLevel (string levelName) {
         SceneManager.LoadScene(levelName);
+    }
+
+    private void UpdateScore() {
+        reference.Child("SpaceShooter").Child("Score").Child(userID).Child("Level" + (nextlevel - 1)).SetValueAsync(Score);
+        Debug.Log("Score Updated");
+    }
+
+    private IEnumerator GetPlayerScore() {
+        var getTask = FirebaseDatabase.DefaultInstance
+            .GetReference("SpaceShooter")
+            .Child("Score")
+            .Child(userID)
+            .GetValueAsync();
+        yield return new WaitUntil(() => getTask.IsCompleted || getTask.IsFaulted);
+        if (getTask.IsCompleted) {
+            Dictionary<string, object> results = (Dictionary<string, object>)getTask.Result.Value;
+            oldScore = int.Parse(results["Level" + (nextlevel - 1)].ToString());
+            HighScore.text = "High Score : " + oldScore;
+        }
+    }
+
+    private IEnumerator GetPlayerCoins() {
+        var getTask = FirebaseDatabase.DefaultInstance
+        .GetReference("students")
+        .Child(script.GetUserId())
+        .GetValueAsync();
+        yield return new WaitUntil(() => getTask.IsCompleted || getTask.IsFaulted);
+        if (getTask.IsCompleted) {
+            Dictionary<string, object> results = (Dictionary<string, object>)getTask.Result.Value;
+            int coins = int.Parse(results["coins"].ToString());
+            SetPlayerCoins(coins, (int)(Score * 0.05));
+        }
+    }
+
+    private void SetPlayerCoins(int coins, int increaseValue) {
+        Debug.Log("Before Set : " + coins);
+        if (doubleCoin) {
+            increaseValue *= 2;
+        }
+        Debug.Log("Increase Value : " + increaseValue);
+        coins += increaseValue;
+        Debug.Log("After value : " + coins);
+        reference.Child("students").Child(userID).Child("coins").SetValueAsync(coins);
     }
 }

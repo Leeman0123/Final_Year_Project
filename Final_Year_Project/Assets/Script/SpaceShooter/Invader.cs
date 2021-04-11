@@ -11,7 +11,7 @@ public class Invader : MonoBehaviour
 
     public float BulletTime;
     public GameObject Bullet;
-    public float EnemyFlightSpeed = -0.005f;
+    public float EnemyFlightSpeed = -0.02f;
     public float EnemyShootSpeed = 1f;
 
     public static int EnemiesAlive = 0;

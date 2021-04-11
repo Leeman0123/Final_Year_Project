@@ -7,7 +7,7 @@ public class StartMenuManager : MonoBehaviour
 {
     public void QuitApplication()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
     }
 
