@@ -1,0 +1,74 @@
+{
+    "Items": [
+		{
+			"question": "2 + 1 = ?",
+			"correctAns": "3",
+			"wrongAns": ["5", "6", "1"]
+		},
+		{
+			"question": "2 + 3 = ?",
+			"correctAns": "5",
+			"wrongAns": ["10", "8", "6"]
+		},
+		{
+			"question": "5 + 2 = ?",
+			"correctAns": "7",
+			"wrongAns": ["2", "8", "10" ]
+		},
+		{
+			"question": "3 + 1 = ?",
+			"correctAns": "4",
+			"wrongAns": ["2", "5", "7"]
+		},
+		{
+			"question": "6 + 2 = ?",
+			"correctAns": "8",
+			"wrongAns": ["2", "3", "5"]
+		},
+		{
+			"question": "8 + 4 = ?",
+			"correctAns": "12",
+			"wrongAns": ["9", "1", "5"]
+		},
+		{
+			"question": "9 + 2 = ?",
+			"correctAns": "11",
+			"wrongAns": ["8", "9", "7"]
+		},
+		{
+			"question": "5 + 4 = ?",
+			"correctAns": "9",
+			"wrongAns": ["4", "5", "7"]
+		},
+		{
+			"question": "1 + 6 = ?",
+			"correctAns": "7",
+			"wrongAns": ["3", "8", "5"]
+		},
+		{
+			"question": "9 + 6 = ?",
+			"correctAns": "15",
+			"wrongAns": ["21", "14", "25"]
+		},
+		{
+			"question": "9 + 11 = ?",
+			"correctAns": "20",
+			"wrongAns": ["25", "13", "34"]
+		},
+		{
+			"question": "5 + 8 = ?",
+			"correctAns": "13",
+			"wrongAns": ["10", "12", "16"]
+		},
+		{
+			"question": "10 + 2 = ?",
+			"correctAns": "12",
+			"wrongAns": ["20", "10", "2"]
+		},
+		{
+			"question": "8 + 1 = ?",
+			"correctAns": "9",
+			"wrongAns": ["10", "5", "2"]
+		}
+    ]
+}

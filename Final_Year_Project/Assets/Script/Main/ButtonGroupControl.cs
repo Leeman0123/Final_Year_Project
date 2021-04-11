@@ -16,6 +16,9 @@ public class ButtonGroupControl : MonoBehaviour
     [SerializeField] GameObject mathsView;
     [Header("Subject Type Close Btn")]
     [SerializeField] Button subjectCloseBtn;
+    [Header("EnglishBtn")]
+    [SerializeField] Button vocabBtn;
+    [SerializeField] GameObject vocabGroup;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,6 +26,18 @@ public class ButtonGroupControl : MonoBehaviour
         englishBtn.onClick.AddListener(() => ShowEnglishView());
         mathsBtn.onClick.AddListener(() => ShowMathsView());
         subjectCloseBtn.onClick.AddListener(() => BackMainButtonGroup());
+        vocabBtn.onClick.AddListener(() => ShowVocabGroup());
+    }
+
+    void ShowVocabGroup()
+    {
+        vocabGroup.SetActive(true);
+        CloseQuizTypeView();
+    }
+
+    void CloseVocabGroup()
+    {
+        vocabGroup.SetActive(false);
     }
 
     void ShowMainView()
@@ -40,6 +55,7 @@ public class ButtonGroupControl : MonoBehaviour
         ShowMainView();
         CloseQuizTypeView();
         subjectCloseBtn.gameObject.SetActive(false);
+        CloseVocabGroup();
     }
 
     void CloseQuizTypeView()
