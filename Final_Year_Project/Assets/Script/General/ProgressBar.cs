@@ -9,8 +9,13 @@ public class ProgressBar : MonoBehaviour
 
     [Header("Loading Panel")]
     [SerializeField] Slider slider;
-    [SerializeField] string scene;
+    public string scene;
+    public string message;
     // Start is called before the first frame update
+
+    void Awake() {
+        gameObject.transform.Find("Message").GetComponent<Text>().text = message;
+    }
 
     void LoadScene()
     {
@@ -27,7 +32,6 @@ public class ProgressBar : MonoBehaviour
     {
         
     }
-
 
     IEnumerator LoadProgressBar()
     {

@@ -65,4 +65,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuizScene/English/Vocab/Vehicle1.unity
     guid: 04e01339dfd615543960734729c927a8
+  - enabled: 1
+    path: Assets/Scenes/Teacher/EditAccount.unity
+    guid: 841eaa22bd45afa4388d9f789bff4351
   m_configObjects: {}

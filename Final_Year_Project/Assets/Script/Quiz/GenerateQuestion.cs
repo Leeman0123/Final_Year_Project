@@ -8,7 +8,7 @@ public class GenerateQuestion : MonoBehaviour
     // Start is called before the first frame update
     public Button btn;
     private Button correctAnsBtn;
-    private List<Question> questionsList = new List<Question>();
+    private List<EnglishSpellingQuestion> questionsList = new List<EnglishSpellingQuestion>();
     private int skippedIndex;
     private int count = 0;
     private int correct = 0;
@@ -30,8 +30,8 @@ public class GenerateQuestion : MonoBehaviour
             instance = this;
         }
         string json = File.ReadAllText(Application.dataPath + jsonPath);
-        Question[] questions = JsonHelper.FromJson<Question>(json);
-        foreach (Question q in questions) {
+        EnglishSpellingQuestion[] questions = JsonHelper.FromJson<EnglishSpellingQuestion>(json);
+        foreach (EnglishSpellingQuestion q in questions) {
             questionsList.Add(q);
         }
         questionsTotal = questions.Length;
@@ -56,13 +56,11 @@ public class GenerateQuestion : MonoBehaviour
 
     void CheckAnswer(Button button)
     {
-        BarScript script = GameObject.Find("BarBackground").GetComponentInChildren<BarScript>();
         if (button == correctAnsBtn)
         {
             Debug.Log("Correct Answer");
             if (count < 12)
-            {
-                script.ResetTime();
+            {;
                 GetNextQuestion();
                 correct++;
                 UpdateScore();
@@ -80,7 +78,6 @@ public class GenerateQuestion : MonoBehaviour
             Debug.Log("Count:" + count);
             if (count < 12)
             {
-                script.ResetTime();
                 GetNextQuestion();
             }
             else if (count == 12)
@@ -168,7 +165,6 @@ public class GenerateQuestion : MonoBehaviour
         {
             finishedView.SetActive(true);
             count++;
-            GameObject.Find("BarBackground").GetComponentInChildren<BarScript>().StopTimer();
         }
     }
 }

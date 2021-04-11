@@ -13,7 +13,6 @@ public class CheckAuthentication : MonoBehaviour
 {
     private FirebaseUser user;
     private FirebaseAuth auth;
-    [Header("AuthInteractiveScript")]
     [SerializeField] GameObject[] interactiveScript;
     private bool setInteractiveScript = true;
 
