@@ -35,7 +35,8 @@ public class StoreManager : MonoBehaviour
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         userID = script.GetUserId();
         CreateItemDictionary();
-        RefreshPage();
+        StartCoroutine(ShowItemAmount());
+        StartCoroutine(GetCoinsTotal());
         okBtn.onClick.AddListener(() => buyErrorPanel.SetActive(false));
     }
 
@@ -48,6 +49,7 @@ public class StoreManager : MonoBehaviour
     void RefreshPage() {
         StartCoroutine(GetCoinsTotal());
         StartCoroutine(ShowItemAmount());
+        coinsTotal.text = coins.ToString();
     }
 
     public IEnumerator GetCoinsTotal() {
@@ -59,7 +61,7 @@ public class StoreManager : MonoBehaviour
         if (getTask.IsCompleted) {
             Dictionary<string, object> results = (Dictionary<string, object>)getTask.Result.Value;
             coins = int.Parse(results["coins"].ToString());
-            coinsTotal.text = coins.ToString();
+            Debug.Log("Coins : " + coins);
         }
     }
 
