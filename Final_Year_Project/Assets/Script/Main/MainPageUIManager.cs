@@ -21,6 +21,9 @@ public class MainPageUIManager : MonoBehaviour
     [Header("LogoutProgress")]
     [SerializeField] GameObject loginCanvasPanel;
     [SerializeField] GameObject loginRequiredPanel;
+    [Header("Store")]
+    [SerializeField] Button storeBtn;
+    [SerializeField] GameObject storePanel;
 
     private string userId;
     private CheckAuthentication script;
@@ -43,6 +46,7 @@ public class MainPageUIManager : MonoBehaviour
         loginBtn.onClick.AddListener(() => {
             loginRequiredPanel.SetActive(true);
         });
+        storeBtn.onClick.AddListener(() => ShowStorePanel());
     }
 
     void CloseLogoutPanel()
@@ -72,5 +76,10 @@ public class MainPageUIManager : MonoBehaviour
     {
         panelBackground.SetActive(true);
         loginErrorPanel.SetActive(true);
+    }
+
+    void ShowStorePanel() {
+        panelBackground.SetActive(true);
+        storePanel.SetActive(true);
     }
 }
