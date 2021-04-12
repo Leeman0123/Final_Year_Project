@@ -67,13 +67,14 @@ public class StoreManager : MonoBehaviour
 
     public IEnumerator GetSpaceShooterItem() {
         var getTask = FirebaseDatabase.DefaultInstance
-        .GetReference("SpaceShooter")
-        .Child("ItemAmount")
+        .GetReference("students")
         .Child(userID)
+        .Child("ItemAmount")
         .GetValueAsync();
         yield return new WaitUntil(() => getTask.IsCompleted || getTask.IsFaulted);
         if (getTask.IsCompleted) {
             Dictionary<string, object> results = (Dictionary<string, object>)getTask.Result.Value;
+            Debug.Log(results);
             spaceShooterItemOwned[0] = int.Parse(results["Invincible"].ToString());
             spaceShooterItemOwned[1] = int.Parse(results["SpecialMode"].ToString());
             spaceShooterItemOwned[2] = int.Parse(results["DoubleCoin"].ToString());
@@ -84,7 +85,7 @@ public class StoreManager : MonoBehaviour
         //    if (task.IsCompleted) {                
         //        DataSnapshot snapshot = task.Result;
         //        Debug.Log(snapshot.Child("Invincible").Value.ToString());
-        //        spaceShooterItemOwned[0] = int.Parse(snapshot.Child("/Invincible").Value.ToString());
+        //        spaceShooterItemOwned[0] = int.Parse(snapshot.Child("Invincible").Value.ToString());
         //        spaceShooterItemOwned[1] = int.Parse(snapshot.Child("SpecialMode").Value.ToString());
         //        spaceShooterItemOwned[2] = int.Parse(snapshot.Child("DoubleCoin").Value.ToString());
         //    }
@@ -103,7 +104,7 @@ public class StoreManager : MonoBehaviour
         storePanel.SetActive(false);
     }
     
-    public void buyItemSpaceShooter(string itemName) {
+    public void buyItem(string itemName) {
         int coin = itemDictionary[itemName];
         Debug.Log("ItemName : " + itemName + " ItemPrice : " + coin);
         if (coins >= coin) {
@@ -111,12 +112,12 @@ public class StoreManager : MonoBehaviour
             Debug.Log(coins);
             reference.Child("students").Child(userID).Child("coins").SetValueAsync(coins);
             FirebaseDatabase dbInstance = FirebaseDatabase.DefaultInstance;
-            dbInstance.GetReference("SpaceShooter").Child("ItemAmount").Child(userID).GetValueAsync().ContinueWithOnMainThread(task => {
+            dbInstance.GetReference("students").Child(userID).Child("ItemAmount").GetValueAsync().ContinueWithOnMainThread(task => {
                 if (task.IsCompleted) {
                     DataSnapshot snapshot = task.Result;
                     int temp = int.Parse(snapshot.Child(itemName).Value.ToString());
                     temp++;
-                    reference.Child("SpaceShooter").Child("ItemAmount").Child(userID).Child(itemName).SetValueAsync(temp);
+                    reference.Child("students").Child(userID).Child("ItemAmount").Child(itemName).SetValueAsync(temp);
                     RefreshPage();
                 }
             });
