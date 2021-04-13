@@ -8,7 +8,7 @@ public class MathGenerateQuestion : MonoBehaviour
     // Start is called before the first frame update
     public Button btn;
     private Button correctAnsBtn;
-    private List<Question> questionsList = new List<Question>();
+    private List<MathQuestion> questionsList = new List<MathQuestion>();
     private int skippedIndex;
     private int count = 0;
     private int correct = 0;
@@ -31,8 +31,8 @@ public class MathGenerateQuestion : MonoBehaviour
             instance = this;
         }
         string json = File.ReadAllText(Application.dataPath + jsonPath);
-        Question[] questions = JsonHelper.FromJson<Question>(json);
-        foreach (Question q in questions) {
+        MathQuestion[] questions = JsonHelper.FromJson<MathQuestion>(json);
+        foreach (MathQuestion q in questions) {
             questionsList.Add(q);
         }
         questionsTotal = questions.Length;

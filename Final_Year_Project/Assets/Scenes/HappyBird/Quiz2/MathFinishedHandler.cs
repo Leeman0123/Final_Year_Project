@@ -14,6 +14,7 @@ public class MathFinishedHandler : MonoBehaviour
     [SerializeField] GameObject amazing;
     [SerializeField] GameObject FinishPanel;
     [SerializeField] Text scoreText;
+    [SerializeField] Text Image;
     [SerializeField] Button btn;
     private int correct = 0;
     private int total = 0;
@@ -116,6 +117,7 @@ public class MathFinishedHandler : MonoBehaviour
 
             }
             scoreText.text = string.Format("Score: {0}/10", correct);
+            Image.text = string.Format("+ {0}", correct);
 
             //Coins = Coins + correct;
             reference.Child("students").Child(userID).Child("coins").SetValueAsync(NewCoin);
@@ -131,6 +133,7 @@ public class MathFinishedHandler : MonoBehaviour
         MathGenerateQuestion gq = MathGenerateQuestion.instance;
         correct = gq.GetCorrect();
         scoreText.text = string.Format("Score: {0}/10", correct);
+        Image.text = string.Format("+ {0}", correct);
 
     }
 
