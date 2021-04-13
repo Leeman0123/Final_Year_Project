@@ -47,9 +47,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CorgiEngine/Demos/LevelSelection/LevelSelectionMap.unity
     guid: 0bba9bfc439ed1f458ec61e4c0008ebd
-  - enabled: 1
-    path: Assets/Scenes/bird/Lv1.unity
-    guid: 443c52bccf5657f4da857f97c46fd34b
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/MyGame/ChineseGame.unity
     guid: 5020d88ede595e449b963a78bd00be7d
@@ -71,4 +71,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Teacher/EditAccount.unity
     guid: 841eaa22bd45afa4388d9f789bff4351
+  - enabled: 1
+    path: Assets/Scenes/HappyBird/Bird_HomePage.unity
+    guid: d1747f19261891147be606778ba3756a
+  - enabled: 1
+    path: Assets/Scenes/HappyBird/Bird_Low_LevelSelect.unity
+    guid: a7be14afc3465094bad644f80fe11f30
+  - enabled: 1
+    path: Assets/Scenes/HappyBird/Bird_Low_LV1.unity
+    guid: 4ed117fcf3a60ba49b7d54f7a18ae841
+  - enabled: 1
+    path: Assets/Scenes/HappyBird/Bird_Low_LV2.unity
+    guid: 7950e572109bd8848808372b1eb962f0
+  - enabled: 1
+    path: Assets/Scenes/HappyBird/Bird_Low_LV3.unity
+    guid: 33b82a9b525f95542b430fea32942489
+  - enabled: 1
+    path: Assets/Scenes/HappyBird/Quiz2/MathQuiz.unity
+    guid: e5c63a521c6071f4c979cb9a769b7bb6
   m_configObjects: {}
