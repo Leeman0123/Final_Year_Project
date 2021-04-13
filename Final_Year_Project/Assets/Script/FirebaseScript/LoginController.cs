@@ -20,8 +20,10 @@ public class LoginController : MonoBehaviour
     [Header("Student Login")]
     [SerializeField] Button studentLoginBtn;
     [Header("Loading Panel")]
+    [SerializeField] GameObject loginSessionPanel;
     [SerializeField] GameObject loadingScreen;
     [SerializeField] Slider slider;
+    bool loginManually = false;
     void Awake()
     {
         Firebase.FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
@@ -74,23 +76,20 @@ public class LoginController : MonoBehaviour
             if (signedIn)
             {
                 Debug.Log("Logined");
-                LoadLevel();
+                if (!loginManually){
+                    loginSessionPanel.gameObject.SetActive(true);
+                }
             }
         }
     }
-
     void Login()
     {
+        loginManually = true;
         StartCoroutine(WaitLogin(email.text, password.text));
-        if (user != null)
-        {
-            LoadLevel();
-        }
-
     }
 
 
-    void LoadLevel()
+    public void LoadLevel()
     {
         LoadUserScreenProgressAction();
     }
@@ -98,28 +97,21 @@ public class LoginController : MonoBehaviour
     void LoadUserScreenProgressAction()
     {
         StartCoroutine(CheckStudentExist(user.UserId, (result) => {
-            StartCoroutine(LoadUserScreenProgress(result));
+            LoadUserScreenProgress(result);
         }));
     }
 
-    IEnumerator LoadUserScreenProgress(bool isStudent)
+    void LoadUserScreenProgress(bool isStudent)
     {
-        AsyncOperation operation;
         if (isStudent)
         {
-            operation = SceneManager.LoadSceneAsync("Main");
+            GeneralScript.RedirectPageWithT("Main", "Redirecting to Student main page...", "Canvas");
         }
         else
         {
-            operation = SceneManager.LoadSceneAsync("TeacherMain");
-        }
-        loadingScreen.SetActive(true);
-        while (!operation.isDone)
-        {
-            float progress = Mathf.Clamp01(operation.progress / .9f);
-            slider.value = progress;
-            yield return null;
-        }
+            GeneralScript.RedirectPageWithT("TeacherMain", "Redirecting to Student main page...", "Canvas");
+        } 
+        
     }
 
     IEnumerator WaitLogin(string email, string password)
@@ -142,6 +134,7 @@ public class LoginController : MonoBehaviour
             user = loginTask.Result;
             Debug.LogFormat("User signed in successfully: {0} ({1})",
                 user.DisplayName, user.UserId);
+            LoadLevel();
         }
     }
 

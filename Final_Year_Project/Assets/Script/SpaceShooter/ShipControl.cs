@@ -8,14 +8,16 @@ public class ShipControl : MonoBehaviour
 
     public static ShipControl shipinstance;
 
-    public GameObject Bullet; //disable for mobile version
     public GameObject explo;
+    public GameObject playerShip;
 
     public int life = 5;
-    public float BulletTime;
     public Text LifeText;
     AudioSource playaudio;
-    public AudioClip audioClip;
+    public AudioClip getHitAudio, invincibleAudio;
+
+    private float lastTapTime;
+    private const float DOUBLE_TAP_TIME = 0.5f;
 
     // Start is called before the first frame update
     void Start()
@@ -28,30 +30,38 @@ public class ShipControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Control for PC version 
-        if (Input.GetKey(KeyCode.D)) {
-            gameObject.transform.position += new Vector3(0.025f, 0, 0);
-        }
-
-        if (Input.GetKey(KeyCode.A)) {
-            gameObject.transform.position += new Vector3(-0.025f, 0, 0);
-        }
-
-        if (Input.GetKey(KeyCode.Space)) {
-            if (BulletTime > 0.1f) {
-                Vector3 pos = gameObject.transform.position + new Vector3(0, 0.6f, 0);
-                Instantiate(Bullet, pos, gameObject.transform.rotation);
-                BulletTime = 0f;
+        if (GameFunction.instance.IsPlaying) {
+            //Control for PC version 
+            if (Input.GetKey(KeyCode.D)) {
+                gameObject.transform.position += new Vector3(0.25f, 0, 0);
             }
-            BulletTime += Time.deltaTime;
-        }
 
-        /*if (Input.GetTouch(0).phase == TouchPhase.Moved) //Control for mobile version
-        {
-            float x = Input.touches[0].deltaPosition.x * Time.deltaTime * 0.5f;
-            float y = Input.touches[0].deltaPosition.y * Time.deltaTime * 0.5f;
-            transform.Translate(new Vector3(x, y, 0));
-        }*/
+            if (Input.GetKey(KeyCode.A)) {
+                gameObject.transform.position += new Vector3(-0.25f, 0, 0);
+            }
+
+            if (Input.GetKey(KeyCode.C)) {
+                StartCoroutine(Invincible());
+            }
+
+            if (Input.touchCount.Equals(1)) //Control for mobile version
+            {
+                Touch touch = Input.GetTouch(0);
+                Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+                touchPosition.z = -1f;
+                transform.position = touchPosition;
+            }
+
+            if (Input.GetTouch(0).phase == TouchPhase.Ended) {
+                float timeSinceLastTap = Time.time - lastTapTime;
+
+                if (timeSinceLastTap <= DOUBLE_TAP_TIME) {
+                    StartCoroutine(Invincible());
+                }
+
+                lastTapTime = Time.time;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D col)
@@ -65,13 +75,30 @@ public class ShipControl : MonoBehaviour
             Instantiate(explo, transform.position, transform.rotation);
             life--;
             LifeText.text = "Life : " + life;
-            playaudio.clip = audioClip;
+            playaudio.clip = getHitAudio;
             playaudio.Play();
             if (life == 0)
             {
                 Destroy(gameObject);
                 GameFunction.instance.GameOver();
             }
+        }
+    }
+
+    private IEnumerator Invincible() {
+        if (ItemSelector.itemInstance.itemEnable[0] && GameFunction.instance.IsPlaying) {
+            BoxCollider2D boxCollider2D = playerShip.GetComponent<BoxCollider2D>();
+            boxCollider2D.enabled = false;
+            Debug.Log("Invincible now");
+            playaudio.clip = invincibleAudio;
+            playaudio.loop = true;
+            playaudio.Play();
+            ItemSelector.itemInstance.itemEnable[0] = false;
+            yield return new WaitForSeconds(10);
+            Debug.Log("Invincible end");
+            boxCollider2D.enabled = true;
+            playaudio.loop = false;
+            playaudio.Stop();
         }
     }
 }

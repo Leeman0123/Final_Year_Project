@@ -1,0 +1,76 @@
+{
+    "Items": [
+        {
+            "question": "Which vocabulary represent to 螞蟻?",
+            "chinese": "螞蟻",
+			"correctAns": "Ant",
+			"wrongAns": ["Aet", "Bat","Cat"]
+        },
+		{
+			"question": "Which vocabulary represent to 蝙蝠?",
+			"chinese": "蝙蝠",
+			"correctAns": "Bat",
+			"wrongAns": ["Bird", "Bet", "Pat"]
+		},
+		{
+			"question": "Which vocabulary represent to 水牛?",
+			"chinese": "水牛",
+			"correctAns": "Buffalo",
+			"wrongAns": ["Butterfly", "Bee", "Bear"]
+		},
+		{
+			"question": "Which vocabulary represent to 蝴蝶?",
+			"chinese": "蝴蝶",
+			"correctAns": "Butterfly",
+			"wrongAns": ["Bug", "Worm", "flies" ]
+		},
+		{
+			"question": "Which vocabulary represent to 駱駝?",
+			"chinese": "駱駝",
+			"correctAns": "camel",
+			"wrongAns": ["Cat", "Cold", "Calf", "Cub"]
+		},
+		{
+			"question": "Which vocabulary represent to 恐龍?",
+			"chinese": "恐龍",
+			"correctAns": "dinosaur",
+			"wrongAns": ["fawn", "chick", "crane", "pullet"]
+		},
+		{
+			"question": "Which vocabulary represent to 麋鹿?",
+			"chinese": "麋鹿",
+			"correctAns": "elk",
+			"wrongAns": ["eagle", "duck", "donkey", "flamingo"]
+		},
+		{
+			"question": "Which vocabulary represent to 青蛙?",
+			"chinese": "青蛙",
+			"correctAns": "frog",
+			"wrongAns": ["kit", "cub", "pup", "fingerling"]
+		},
+		{
+			"question": "Which vocabulary represent to 公牛?",
+			"chinese": "公牛",
+			"correctAns": "ox",
+			"wrongAns": ["cow", "owlet", "fledgling", "peachick"]
+		},
+		{
+			"question": "Which vocabulary represent to 浣熊?",
+			"chinese": "浣熊",
+			"correctAns": "Raccoon",
+			"wrongAns": ["bunny", "kitten", "pinkie", "rabbit"]
+		},
+		{
+			"question": "Which vocabulary represent to 鯊魚?",
+			"chinese": "鯊魚",
+			"correctAns": "shark",
+			"wrongAns": ["spiderling", "cosset", "tadpole", "poult"]
+		},
+		{
+			"question": "Which vocabulary represent to 啄木鳥?",
+			"chinese": "啄木鳥",
+			"correctAns": "woodpecker",
+			"wrongAns": ["joey", "calf", "pup", "hatchling"]
+		}
+    ]
+}

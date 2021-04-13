@@ -96,7 +96,7 @@ public class StartMenuUIManager : MonoBehaviour
     //Quit Application
     void QuitGame()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        //UnityEditor.EditorApplication.isPlaying = false;
         Application.Quit();
     }
 

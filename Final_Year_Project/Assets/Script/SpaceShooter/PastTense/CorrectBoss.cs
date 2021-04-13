@@ -52,15 +52,14 @@ public class CorrectBoss : MonoBehaviour {
             }
             cankill = true;
         }
+
         bulletTime += Time.deltaTime;
         if (bulletTime > bossShootSpeed && GameFunction.instance.IsPlaying) {
-            Debug.Log("Before shoot: " + bulletTime);
             Vector3 Bullet_1_pos = transform.position + new Vector3(-0.3f, -0.6f, 0);
             Vector3 Bullet_2_pos = transform.position + new Vector3(0.3f, -0.6f, 0);
             Instantiate(bullet, Bullet_1_pos, transform.rotation);
             Instantiate(bullet, Bullet_2_pos, transform.rotation);
             bulletTime = 0f;
-            Debug.Log("After shoot: " + bulletTime);
         }
     }
 
@@ -74,6 +73,7 @@ public class CorrectBoss : MonoBehaviour {
                 GameFunction.instance.AddScore(score);
                 StartCoroutine(GameFunction.instance.GameWin());
                 GetComponent<SpriteRenderer>().enabled = false;
+                GetComponent<BoxCollider2D>().enabled = false;
                 //Destroy(gameObject);
                 Debug.Log("Boss Destroy");
             } else {
