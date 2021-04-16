@@ -23,7 +23,7 @@ public class StoreManager : MonoBehaviour
     private int[] spaceShooterItemOwned = new int[3];
 
 
-    private CheckAuthentication script;
+    //private CheckAuthentication script;
     private DatabaseReference reference;
     private string userID;
 
@@ -31,9 +31,9 @@ public class StoreManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        script = GameObject.Find("CheckAuth").GetComponent<CheckAuthentication>();
+        Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         reference = FirebaseDatabase.DefaultInstance.RootReference;
-        userID = script.GetUserId();
+        userID = auth.CurrentUser.UserId;
         CreateItemDictionary();
         StartCoroutine(ShowItemAmount());
         StartCoroutine(GetCoinsTotal());
