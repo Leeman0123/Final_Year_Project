@@ -9,8 +9,11 @@ using System.IO;
 public class BirdLowLevelSelect : MonoBehaviour {
 
     public Text CoinText;
+    public Text DoubleCoinText;
     public Button[] levelbuttons;
     public GameObject NotEnoughCoinPanel;
+
+    public int itemOwned;
     int Coins;
     int levelReached;
     [SerializeField] GameObject CheckAuth;
@@ -28,7 +31,8 @@ public class BirdLowLevelSelect : MonoBehaviour {
 
         StartCoroutine(GetPlayerCoins());
         StartCoroutine(GetBirdLevel());
-        
+        StartCoroutine(GetItemAmount());
+
         //reference.Child("students").Child(userID).Child("BirdLevel").SetValueAsync(1);
 
         //levelReached = PlayerPrefs.GetInt("BirdLowLevel", 1);
@@ -42,6 +46,7 @@ public class BirdLowLevelSelect : MonoBehaviour {
     private void Update()
     {
         CoinText.text = "Coin : " + Coins;
+        DoubleCoinText.text = "x2 : " + itemOwned;
     }
 
     private IEnumerator GetPlayerCoins()
@@ -84,6 +89,23 @@ public class BirdLowLevelSelect : MonoBehaviour {
             //string coins = results["coins"].ToString();
             //Debug.Log(coins);
             //SetPlayerCoins(Coins, (int)(Score * 0.05));
+        }
+    }
+
+    IEnumerator GetItemAmount()
+    {
+        var getTask = FirebaseDatabase.DefaultInstance
+        .GetReference("students")
+        .Child(userID)
+        .Child("ItemAmount")
+        .GetValueAsync();
+        yield return new WaitUntil(() => getTask.IsCompleted || getTask.IsFaulted);
+        if (getTask.IsCompleted)
+        {
+            Dictionary<string, object> results = (Dictionary<string, object>)getTask.Result.Value;
+            Debug.Log(results);
+            itemOwned = int.Parse(results["DoubleCoin"].ToString());
+            
         }
     }
 

@@ -12,6 +12,7 @@ public class Emeny : MonoBehaviour
     public void Start()
     {
         EnemiesAlive++;
+        Debug.Log(EnemiesAlive);
 
     }
     public void Awake()
@@ -32,13 +33,14 @@ public class Emeny : MonoBehaviour
         Debug.Log("Old:" + EnemiesAlive);
         EnemiesAlive--;
         Debug.Log(EnemiesAlive);
+        BirdFunction.instance.AddEnemies();
         //Destroy(gameObject);
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<PolygonCollider2D>().enabled = false;
         if (EnemiesAlive <=0)
         {
-            StartCoroutine(Wait());
-            //BirdFunction.instance.GameWin();
+            //StartCoroutine(Wait());
+            BirdFunction.instance.GameWin();
             
         }
     }

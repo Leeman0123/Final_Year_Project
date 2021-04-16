@@ -1517,6 +1517,7 @@ MonoBehaviour:
   amazing: {fileID: 481251577}
   FinishPanel: {fileID: 789114465}
   scoreText: {fileID: 1742249868}
+  Image: {fileID: 1561782393}
   btn: {fileID: 1872655637}
   CheckAuth: {fileID: 116205391}
 --- !u!1 &790874282

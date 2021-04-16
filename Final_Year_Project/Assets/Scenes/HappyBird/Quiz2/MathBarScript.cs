@@ -42,6 +42,7 @@ public class MathBarScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(stopTimer);
         //float time = gameTime - Time.time;
         if (!stopTimer)
         {
@@ -52,6 +53,7 @@ public class MathBarScript : MonoBehaviour
             int minutes = Mathf.FloorToInt(time / 60);
             int seconds = Mathf.FloorToInt(time - minutes * 60f);
             Bar.fillAmount = time / MaxBarValue;
+            //Debug.Log(time);
             if (Bar.fillAmount >= 0.7 && Bar.fillAmount <= 1.0)
             {
                 Bar.color = new Color32(59, 219, 109, 255);

@@ -26,6 +26,7 @@ public class MathTimer : MonoBehaviour
             int minutes = Mathf.FloorToInt(time / 60);
             int seconds = Mathf.FloorToInt(time - minutes * 60f);
             string textTime = string.Format("{0:0}:{1:00}", minutes, seconds);
+            //Debug.Log(time);
             if (time <= 0)
             {
                 gameTime += 30;

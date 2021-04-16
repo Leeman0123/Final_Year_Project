@@ -17,6 +17,7 @@ public class MathMessagePanelControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         message.text = string.Format("This quiz has total {0} questions.\n\n" +
             "Each question has {1} seconds to answer. \n\n" +
             "Get a coin for every correct answer", questionsCount, questionsSeconds);
