@@ -35,12 +35,16 @@ public class MainPageGameManager : MonoBehaviour
     public GameObject P3ScrollView;
     [Header("P1 English Btn")]
     public Button p1VocabAnimals;
+    [Header("Store")]
+    [SerializeField] Button storeBtn;
+    [SerializeField] GameObject storePanel;
     // Start is called before the first frame update
     void Start()
     {
         InitializeFirebase();
         backBtnEng.onClick.AddListener(() => ShowEngSelect());
         engP1.onClick.AddListener(() => ShowP1Eng());
+        storeBtn.onClick.AddListener(() => ShowStorePanel());
         p1VocabAnimals.onClick.AddListener(() =>
         {
             string coinsJson = File.ReadAllText(Application.dataPath + "/QuizData/English/AnimalsMC/VocabularyAnimalsCoins.json");
@@ -68,6 +72,12 @@ public class MainPageGameManager : MonoBehaviour
         backBtnEng.gameObject.SetActive(true);
         engSelectLevelScrollView.gameObject.SetActive(false);
         P1ScrollView.SetActive(true);
+    }
+
+    void ShowStorePanel()
+    {
+        //panelBackground.SetActive(true);
+        storePanel.SetActive(true);
     }
 
 
