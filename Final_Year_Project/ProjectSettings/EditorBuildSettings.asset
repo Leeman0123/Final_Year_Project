@@ -47,9 +47,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CorgiEngine/Demos/LevelSelection/LevelSelectionMap.unity
     guid: 0bba9bfc439ed1f458ec61e4c0008ebd
-  - enabled: 1
-    path: Assets/Scenes/bird/Lv1.unity
-    guid: 443c52bccf5657f4da857f97c46fd34b
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/MyGame/ChineseGame.unity
     guid: 5020d88ede595e449b963a78bd00be7d
