@@ -100,7 +100,7 @@ public class StoreManager : MonoBehaviour
     }
 
     public void CloseStore() {
-        panelBackground.SetActive(false);
+        //panelBackground.SetActive(false);
         storePanel.SetActive(false);
     }
     
