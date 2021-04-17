@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using Firebase.Auth;
+using System.Threading;
 
 public class GenerateRandomMcQuestion : MonoBehaviour
 {
@@ -28,10 +29,20 @@ public class GenerateRandomMcQuestion : MonoBehaviour
     public Button messagePanelCloseBtn;
     [Header("Finished UI Panel")]
     public Text scoreText;
-    public Text coinsText;
     public GameObject amazing;
     public GameObject good;
     public GameObject awesome;
+    public GameObject congradMessageContain;
+    public Text newRecordText;
+    public Text previousResultText;
+    public Button nextBtn;
+    [Header("SavedPanel")]
+    public GameObject savedPanel;
+    public Text timeUsedText;
+    public Text savedCorrectCountText;
+    public Text coinsGainText;
+    public Text attemptText;
+
 
     public static GenerateRandomMcQuestion instance;
     private FirebaseAuth auth;
@@ -51,6 +62,7 @@ public class GenerateRandomMcQuestion : MonoBehaviour
             
         });
         messagePanelOkBtn.onClick.AddListener(() => StartQuiz());
+        nextBtn.onClick.AddListener(() => ShowSavedDatabasePanel());
         /*GenerateRandomQuestion();
         UpdateScore();*/
         if(instance == null)
@@ -81,23 +93,104 @@ public class GenerateRandomMcQuestion : MonoBehaviour
         }
         int index = UnityEngine.Random.Range(0, answerBtn.Length);
         correctBtn = new CorrectBtn(index, answerBtn[index]);
-        EnglishSpellingQuestion esq = questions.Peek();
-        Stack<string> wrongAnsList = new Stack<string>(esq.wrongAns);
-        questionTitle.text = esq.question;
-        for (int i = 0; i < answerBtn.Length; i++)
+        if (questions.Count != 0)
         {
-            if (answerBtn[i].Equals(correctBtn.button))
+            EnglishSpellingQuestion esq = questions.Peek();
+            Stack<string> wrongAnsList = new Stack<string>(esq.wrongAns);
+            questionTitle.text = esq.question;
+            for (int i = 0; i < answerBtn.Length; i++)
             {
-                answerBtn[i].GetComponentInChildren<Text>().text = esq.correctAns;
-                answerBtn[i].onClick.AddListener(() => correctBtnOperation());
+                if (answerBtn[i].Equals(correctBtn.button))
+                {
+                    answerBtn[i].GetComponentInChildren<Text>().text = esq.correctAns;
+                    answerBtn[i].onClick.AddListener(() => correctBtnOperation());
+                }
+                else
+                {
+                    answerBtn[i].GetComponentInChildren<Text>().text = wrongAnsList.Pop();
+                    answerBtn[i].onClick.AddListener(() => wrongBtnOperation());
+                }
+            }
+        }
+        else
+        {
+            ShowFinishPanel();
+        }
+    }
+
+    async void ShowSavedDatabasePanel()
+    {
+        string userId = auth.CurrentUser.UserId;
+        TimerCounter timerCounter = GameObject.Find("GameManager").GetComponent<TimerCounter>();
+        EnglishQuizVocabAnimalsOne currentResult = await DbHelper.GetEngVocabAnimOneResultById(userId);
+        Students student = await DbHelper.GetStudentById(userId);
+        int studentCoins = student.coins;
+        timeUsedText.text = $"Time used:{timerCounter.GetTimeCountString()}";
+        savedCorrectCountText.text = $"{correctCount}/{totalQuestion}";
+        int myTime =  timerCounter.GetSeconds();
+        savedPanel.SetActive(true);
+        if (currentResult == null)
+        {
+            coinsGainText.text = "Coins: +5";
+            attemptText.text = "The quiz result will be saved, and you have 2 times chance";
+            bool success = await DbHelper.AddNewEngVocabOneResult(userId, correctCount, totalQuestion, myTime, 2);
+            int newstudentCoins = studentCoins + 5;
+            bool updateCoinSuccess = await DbHelper.UpdateStudentCoins(userId, newstudentCoins);
+            if (!success || !updateCoinSuccess)
+            {
+                GeneralScript.ShowErrorMessagePanel("Canvas", "Cannot connect to the firebase server");
+            }
+            else if (success && updateCoinSuccess) {
+                Destroy(savedPanel);
+                GeneralScript.RedirectPageWithT("Main", "Redirecting to the main page..", "Canvas");
+            }
+        }
+        else
+        {
+            if (currentResult.attemptLeft > 0)
+            {
+                int currentResultAttemptLeft = currentResult.attemptLeft;
+                if (correctCount > currentResult.correctCount)
+                {
+                    int newCoins = studentCoins + 2;
+                    int newAttempt = currentResultAttemptLeft -1 ;
+                    coinsGainText.text = "Coins: +2";
+                    attemptText.text = $"The quiz result will be saved, and you have {currentResultAttemptLeft} times chance";
+                    bool updateCoinSuccess = await DbHelper.UpdateStudentCoins(userId, newCoins);
+                    bool updateCorrectCountSuccess = await DbHelper.UpdateAnimalsOneQuizCorrectCount(userId, correctCount);
+                    bool updateTimesSuccess = await DbHelper.UpdateAnimalsOneQuizTimes(userId, myTime);
+                    bool updateAttempTimesSuccess = await DbHelper.UpdateAnimalsOneQuizAttempt(userId, newAttempt);
+                    if (updateCoinSuccess 
+                        && updateCorrectCountSuccess
+                        && updateTimesSuccess
+                        && updateAttempTimesSuccess)
+                    {
+                        Destroy(savedPanel);
+                        GeneralScript.RedirectPageWithT("Main", "Redirecting to the main page..", "Canvas");
+                    }
+                } else
+                {
+                    int newAttempt = currentResultAttemptLeft - 1;
+                    coinsGainText.text = "Coins: +0";
+                    attemptText.text = $"The quiz result will be saved, and you have {currentResultAttemptLeft} times chance";
+                    bool updateAttempTimesSuccess = await DbHelper.UpdateAnimalsOneQuizAttempt(userId, newAttempt);
+                    if (updateAttempTimesSuccess)
+                    {
+                        Destroy(savedPanel);
+                        GeneralScript.RedirectPageWithT("Main", "Redirecting to the main page..", "Canvas");
+                    }
+                }
             }
             else
             {
-                answerBtn[i].GetComponentInChildren<Text>().text = wrongAnsList.Pop();
-                answerBtn[i].onClick.AddListener(() => wrongBtnOperation());
+                coinsGainText.text = "Coins: +0";
+                attemptText.text = $"All quiz's attemp chance used. This result will not save";
+                Destroy(savedPanel);
+                GeneralScript.RedirectPageWithT("Main", "Redirecting to the main page..", "Canvas");
             }
         }
     }
+
 
     void ShuffleCorrectBtn()
     {
@@ -124,7 +217,12 @@ public class GenerateRandomMcQuestion : MonoBehaviour
         }
     }
 
-    async void correctBtnOperation()
+    IEnumerator DelayFor()
+    {
+        yield return new WaitForSeconds(4);
+    }
+
+    void correctBtnOperation()
     {
         Debug.Log("Correct Btn");
         correctCount++;
@@ -141,20 +239,42 @@ public class GenerateRandomMcQuestion : MonoBehaviour
         }
         catch (Exception)
         {
-            finishedPanel.SetActive(true);
-            timerCounter.StopTimer();
-            string userId = auth.CurrentUser.UserId;
-            EnglishQuizVocabAnimalsOne x =  await DbHelper.GetEngVocabAnimOneResultById(userId);
-            if (correctCount == totalQuestion) {
-                awesome.SetActive(true);
-                good.SetActive(false);
-                amazing.SetActive(false);
-            }
-            if (x == null) {
-                Debug.Log("No record");
-            }
+            ShowFinishPanel();
         }
         
+    }
+
+    async void ShowFinishPanel()
+    {
+        TimerCounter timerCounter = GameObject.Find("GameManager").GetComponent<TimerCounter>();
+        finishedPanel.SetActive(true);
+        timerCounter.StopTimer();
+        string userId = auth.CurrentUser.UserId;
+        EnglishQuizVocabAnimalsOne currentResult = await DbHelper.GetEngVocabAnimOneResultById(userId);
+        if (correctCount == totalQuestion)
+        {
+            awesome.SetActive(true);
+            good.SetActive(false);
+            amazing.SetActive(false);
+        }
+        scoreText.text = $"Score: {correctCount}/{totalQuestion}";
+        if (currentResult == null)
+        {
+            newRecordText.text = "New record Added";
+            newRecordText.rectTransform.localPosition = new Vector3(0, -15, 0);
+            congradMessageContain.GetComponent<RectTransform>().localPosition = new Vector3(0, 109, 0);
+        }
+        else
+        {
+            string previousResult = currentResult.correctCount.ToString();
+            string lastQuizQuestions = currentResult.questionsTotal.ToString();
+            previousResultText.text = $"Previous Result: {previousResult}/{lastQuizQuestions}";
+            previousResultText.gameObject.SetActive(true);
+            if (correctCount > currentResult.correctCount)
+            {
+                newRecordText.text = "You did better than your last quiz!!";
+            }
+        }
     }
 
     void UpdateScore()
@@ -199,8 +319,8 @@ public class GenerateRandomMcQuestion : MonoBehaviour
     {
         Debug.Log("Wrong Btn");
         Debug.Log("Mobile phone vibration");
-        GameObject.Find("GameManager").GetComponent<TimerCounter>().AddTime(5);
-        GameObject.Find("GameManager").GetComponent<TimerCounter>().ReduceTimeAvailabe(5);
+        GameObject.Find("GameManager").GetComponent<TimerCounter>().AddTime(8);
+        GameObject.Find("GameManager").GetComponent<TimerCounter>().ReduceTimeAvailabe(8);
         incorrect.SetActive(true);
         Handheld.Vibrate();
         StartCoroutine(DelayShuffleCorrectBtn(1.25f));

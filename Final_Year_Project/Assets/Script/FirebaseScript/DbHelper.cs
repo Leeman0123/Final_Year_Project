@@ -123,7 +123,7 @@ public class DbHelper : MonoBehaviour
         }
     }
 
-    public async Task<bool> AddNewEngVocabOneResult(string uid, int correctCount, int questionsTotal, int timeCount)
+    public static async Task<bool> AddNewEngVocabOneResult(string uid, int correctCount, int questionsTotal, int timeCount, int available)
     {
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
         EnglishQuizVocabAnimalsOne eqvao = new EnglishQuizVocabAnimalsOne();
@@ -131,9 +131,9 @@ public class DbHelper : MonoBehaviour
         eqvao.correctCount = correctCount;
         eqvao.questionsTotal = questionsTotal;
         eqvao.timeCount = timeCount;
-        eqvao.attemptLeft = 1;
+        eqvao.attemptLeft = available;
         string json = JsonUtility.ToJson(eqvao);
-        var task = reference.Child("EnglishQuiz").Child("PrimaryOne").Child(uid).SetRawJsonValueAsync(json);
+        var task = reference.Child("EnglishQuiz").Child("PrimaryOne").Child("EnglishQuizVocabAnimalsOne").Child(uid).SetRawJsonValueAsync(json);
         await task;
         if (task.Exception != null)
         {
@@ -147,6 +147,7 @@ public class DbHelper : MonoBehaviour
         var task = FirebaseDatabase.DefaultInstance
                     .GetReference("EnglishQuiz")
                     .Child("PrimaryOne")
+                    .Child("EnglishQuizVocabAnimalsOne")
                     .Child(uid)
                     .GetValueAsync();
         await task;
@@ -165,5 +166,64 @@ public class DbHelper : MonoBehaviour
         eqvao.timeCount = Convert.ToInt32(data.Child("timeCount").Value);
         eqvao.attemptLeft = Convert.ToInt32(data.Child("attemptLeft").Value);
         return eqvao;
+    }
+
+    public static async Task<bool> UpdateStudentCoins(string userId, int coins) {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference("students")
+                    .Child(userId)
+                    .Child("coins").SetValueAsync(coins);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> UpdateAnimalsOneQuizTimes(string userId, int timesCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryOne")
+            .Child("EnglishQuizVocabAnimalsOne")
+            .Child(userId)
+            .Child("timeCount").SetValueAsync(timesCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static async Task<bool> UpdateAnimalsOneQuizCorrectCount(string userId, int correctCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryOne")
+            .Child("EnglishQuizVocabAnimalsOne")
+            .Child(userId)
+            .Child("correctCount").SetValueAsync(correctCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static async Task<bool> UpdateAnimalsOneQuizAttempt(string userId, int attemptCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryOne")
+            .Child("EnglishQuizVocabAnimalsOne")
+            .Child(userId)
+            .Child("attemptLeft").SetValueAsync(attemptCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
     }
 }
