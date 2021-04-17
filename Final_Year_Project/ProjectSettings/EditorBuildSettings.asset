@@ -9,12 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenuUpdated/StartMenu.unity
     guid: 463afb8081a884246aa4ce88d2ef1d28
   - enabled: 1
-    path: Assets/CorgiEngine/Common/Scenes/SplashScreen.unity
-    guid: 7b96552fd1198fa4eaae54a2f975645e
-  - enabled: 1
-    path: Assets/CorgiEngine/Common/Scenes/StartScreen.unity
-    guid: b9cf7e391a5874f80a0485164885fe54
-  - enabled: 1
     path: Assets/Scenes/MainScene/Main.unity
     guid: fd5547d52a3894e4fac838347684fec3
   - enabled: 1
@@ -41,15 +35,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/CorgiEngine/ThirdParty/MoreMountains/MMTools/Tools/SceneLoading/LoadingScreen.unity
     guid: 888394d52616e5e42b3b54c3f2bbd3eb
-  - enabled: 1
+  - enabled: 0
     path: Assets/CorgiEngine/Demos/LevelSelection/LevelSelection.unity
     guid: 38b3bbb0fec788241870d54b46b03e47
-  - enabled: 1
+  - enabled: 0
     path: Assets/CorgiEngine/Demos/LevelSelection/LevelSelectionMap.unity
     guid: 0bba9bfc439ed1f458ec61e4c0008ebd
-  - enabled: 0
-    path: 
-    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/Scenes/MyGame/ChineseGame.unity
     guid: 5020d88ede595e449b963a78bd00be7d

@@ -5,22 +5,27 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Firebase.Auth;
 
 public class GenerateRandomMcQuestion : MonoBehaviour
 {
     public string mcQuestionPath;
-    private Stack<EnglishSpellingQuestion> questions;
+    public Stack<EnglishSpellingQuestion> questions;
     private CorrectBtn correctBtn;
     private int totalQuestion;
     private int correctCount;
     [Header("Answer Btn")]
     public Button[] answerBtn;
+    [Header("Correct_Incorrect UI")]
+    public GameObject correct;
+    public GameObject incorrect;
     [Header("Ui")]
     public Text questionTitle;
     public Text socreText;
     public GameObject finishedPanel;
     public GameObject messagePanel;
     public Button messagePanelOkBtn;
+    public Button messagePanelCloseBtn;
     [Header("Finished UI Panel")]
     public Text scoreText;
     public Text coinsText;
@@ -28,17 +33,30 @@ public class GenerateRandomMcQuestion : MonoBehaviour
     public GameObject good;
     public GameObject awesome;
 
+    public static GenerateRandomMcQuestion instance;
+    private FirebaseAuth auth;
+
     void Start()
     {
-        string json = File.ReadAllText(Application.dataPath + mcQuestionPath);
+        auth = FirebaseAuth.DefaultInstance;
+        string json = File.ReadAllText(Application.persistentDataPath + "/" + mcQuestionPath);
         List<EnglishSpellingQuestion> questionsList = new List<EnglishSpellingQuestion>(JsonHelper.FromJson<EnglishSpellingQuestion>(json));
         totalQuestion = questionsList.Count;
         questionsList = questionsList.OrderBy(i => Guid.NewGuid()).ToList();
         questions = new Stack<EnglishSpellingQuestion>(questionsList);
         SetMessagePanelMessage();
+        messagePanelCloseBtn.onClick.AddListener(() =>{
+            messagePanelCloseBtn.gameObject.transform.parent.gameObject.SetActive(false);
+            GeneralScript.RedirectPageWithT("Main", "Redirecting to the main page...", "Canvas");
+            
+        });
         messagePanelOkBtn.onClick.AddListener(() => StartQuiz());
         /*GenerateRandomQuestion();
         UpdateScore();*/
+        if(instance == null)
+        {
+            instance = this;
+        }
     }
 
     void SetMessagePanelMessage()
@@ -106,10 +124,11 @@ public class GenerateRandomMcQuestion : MonoBehaviour
         }
     }
 
-    void correctBtnOperation()
+    async void correctBtnOperation()
     {
         Debug.Log("Correct Btn");
         correctCount++;
+        correct.SetActive(true);
         Debug.Log("Correct count: " + correctCount);
         UpdateScore();
         TimerCounter timerCounter = GameObject.Find("GameManager").GetComponent<TimerCounter>();
@@ -124,11 +143,15 @@ public class GenerateRandomMcQuestion : MonoBehaviour
         {
             finishedPanel.SetActive(true);
             timerCounter.StopTimer();
-            if (correctCount == totalQuestion)
-            {
-                awesome.gameObject.SetActive(true);
-                good.gameObject.SetActive(false);
-                amazing.gameObject.SetActive(false);
+            string userId = auth.CurrentUser.UserId;
+            EnglishQuizVocabAnimalsOne x =  await DbHelper.GetEngVocabAnimOneResultById(userId);
+            if (correctCount == totalQuestion) {
+                awesome.SetActive(true);
+                good.SetActive(false);
+                amazing.SetActive(false);
+            }
+            if (x == null) {
+                Debug.Log("No record");
             }
         }
         
@@ -149,6 +172,8 @@ public class GenerateRandomMcQuestion : MonoBehaviour
 
     void EnableAnswerBtn()
     {
+        incorrect.SetActive(false);
+        correct.SetActive(false);
         for (int i = 0; i < answerBtn.Length; i++)
         {
             answerBtn[i].interactable = true;
@@ -173,6 +198,11 @@ public class GenerateRandomMcQuestion : MonoBehaviour
     void wrongBtnOperation()
     {
         Debug.Log("Wrong Btn");
+        Debug.Log("Mobile phone vibration");
+        GameObject.Find("GameManager").GetComponent<TimerCounter>().AddTime(5);
+        GameObject.Find("GameManager").GetComponent<TimerCounter>().ReduceTimeAvailabe(5);
+        incorrect.SetActive(true);
+        Handheld.Vibrate();
         StartCoroutine(DelayShuffleCorrectBtn(1.25f));
     }
 

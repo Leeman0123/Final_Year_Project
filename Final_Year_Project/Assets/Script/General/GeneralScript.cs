@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Firebase.Storage;
 public class GeneralScript : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -51,6 +52,29 @@ public class GeneralScript : MonoBehaviour
             GameObject.Destroy(panel);
         });
         panel.transform.SetParent(GameObject.Find(myParent).transform, false);
+    }
+
+    public static void ShowDownloadPanel(string myParent, string myMessage) {
+        var loadedObject = Resources.Load("General/ProgressBarDownPanelWithText");
+        GameObject panel = GameObject.Instantiate(loadedObject) as GameObject;
+        panel.gameObject.name = "ProgressBarDownPanelWithText";
+        Text message = panel.transform.Find("Message").gameObject.GetComponent<Text>();
+        message.text = myMessage;
+        panel.transform.SetParent(GameObject.Find(myParent).transform, false);
+        panel.SetActive(true);
+    }
+
+    public static void DisplayDownloadStateForDownloadPanel(string fileName)
+    {
+        string myMessage = string.Format("Downloading {0}", fileName);
+        ProgessBarForDownloadPanel panelScript = GameObject.Find("ProgressBarDownPanelWithText").GetComponent<ProgessBarForDownloadPanel>();
+        panelScript.SetMessageText(myMessage);
+        panelScript.SetSaveMessage(fileName);
+    }
+
+    public static void DestroyDownloadPanel()
+    {
+        Destroy(GameObject.Find("ProgressBarDownPanelWithText"));
     }
 
 }

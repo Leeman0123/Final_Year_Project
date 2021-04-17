@@ -2,7 +2,9 @@
 using UnityEditor;
 using System.Collections;
 using System.IO;
-
+// Runtime code here
+#if UNITY_EDITOR
+// Editor specific code here
 public class GameDataEditor : EditorWindow
 {
 
@@ -63,3 +65,4 @@ public class GameDataEditor : EditorWindow
 
     }
 }
+#endif

@@ -45,17 +45,25 @@ public class MainPageGameManager : MonoBehaviour
         backBtnEng.onClick.AddListener(() => ShowEngSelect());
         engP1.onClick.AddListener(() => ShowP1Eng());
         storeBtn.onClick.AddListener(() => ShowStorePanel());
-        p1VocabAnimals.onClick.AddListener(() =>
+        p1VocabAnimals.onClick.AddListener(async() =>
         {
-            string coinsJson = File.ReadAllText(Application.dataPath + "/QuizData/English/AnimalsMC/VocabularyAnimalsCoins.json");
-            Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
-            GameObject createNewGameObject = new GameObject("CoinsLevel");
-            CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
-            c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
-            DontDestroyOnLoad(createNewGameObject);
-            GeneralScript.RedirectPageWithT("Animals1", "Redirecting to the Vocab - Animals(P1)", "Canvas");
-
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadAnimalsP1QuizConisDetails();
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadAnimalsP1Quiz();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess) {
+                RedirectToEngMCAnimalsL1();
+            }
         });
+    }
+
+    void RedirectToEngMCAnimalsL1()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "VocabularyAnimalsCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Animals1", "Redirecting to the Vocab - Animals(P1)", "Canvas");
     }
 
     void ShowEngSelect()
@@ -95,6 +103,7 @@ public class MainPageGameManager : MonoBehaviour
         {
             auth.SignOut();
             confirmLogoutBtn.transform.parent.gameObject.SetActive(false);
+            GeneralScript.RedirectPageWithT("StartMenu", "Logouting...", "Canvas");
         });
         popUpLogoutRequiredBtn.onClick.AddListener(() =>
         {

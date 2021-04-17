@@ -142,7 +142,7 @@ public class DbHelper : MonoBehaviour
         return true;
     }
 
-    public async Task<EnglishQuizVocabAnimalsOne> GetEngVocabAnimOneResultById(string uid)
+    public static async Task<EnglishQuizVocabAnimalsOne> GetEngVocabAnimOneResultById(string uid)
     {
         var task = FirebaseDatabase.DefaultInstance
                     .GetReference("EnglishQuiz")
@@ -155,6 +155,9 @@ public class DbHelper : MonoBehaviour
             return null;
         }
         DataSnapshot data = task.Result;
+        if (data.Child("uid").Value == null) {
+            return null;
+        }
         EnglishQuizVocabAnimalsOne eqvao = new EnglishQuizVocabAnimalsOne();
         eqvao.uid = data.Child("uid").Value.ToString();
         eqvao.correctCount = Convert.ToInt32(data.Child("correctCount").Value);

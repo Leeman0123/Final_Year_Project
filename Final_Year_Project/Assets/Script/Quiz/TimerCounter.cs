@@ -68,6 +68,8 @@ public class TimerCounter : MonoBehaviour
                 if (barColorArea.fillAmount <= 0)
                 {
                     ResetTimer();
+                    GenerateRandomMcQuestion.instance.questions.Pop();
+                    GenerateRandomMcQuestion.instance.GenerateRandomQuestion();
                 }
             }
         }
@@ -76,6 +78,14 @@ public class TimerCounter : MonoBehaviour
     public void ResetTimer()
     {
         time = 30f;
+    }
+
+    public void AddTime(float seconds) {
+        timeCount += seconds;
+    }
+
+    public void ReduceTimeAvailabe(float seconds) {
+        time -= seconds;
     }
 
     public void StartTimer()
