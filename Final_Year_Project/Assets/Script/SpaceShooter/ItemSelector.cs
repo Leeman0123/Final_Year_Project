@@ -52,7 +52,7 @@ public class ItemSelector : MonoBehaviour
             itemText[i].text = "Owned : " + itemOwned[i];
             itemEnable[i] = false;
             if (itemOwned[i] <= 0) {
-                itemButton[i].enabled = false;
+                itemButton[i].interactable = false;
                 itemButton[i].GetComponent<Image>().sprite = disableImage;
             }
         }

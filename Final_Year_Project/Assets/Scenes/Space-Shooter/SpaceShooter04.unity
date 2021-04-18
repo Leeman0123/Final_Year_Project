@@ -1099,6 +1099,16 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeColor
       objectReference: {fileID: 0}
+    - target: {fileID: 610459196395172997, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 610459196395172997, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 610459197097731983, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1148,6 +1158,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 610459197461415549, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 610459197461415549, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 610459197515009624, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
         type: 3}
@@ -1317,6 +1337,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ChangeColor
+      objectReference: {fileID: 0}
+    - target: {fileID: 610459197891751589, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 610459197891751589, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 610459197972241456, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
         type: 3}
