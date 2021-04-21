@@ -1014,7 +1014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59d042072253d11428147ba0d074fa39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LevelName: ChineseGame
+  LevelName: ChineseLevelSelect
 --- !u!1 &1034718940
 GameObject:
   m_ObjectHideFlags: 0

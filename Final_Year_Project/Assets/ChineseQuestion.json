@@ -1,24 +1,46 @@
 {
     "Items": [
         {
-            "question": "請選擇缺少的字:不絕於__",
+            "question": "LV1.請選擇缺少的字:不絕於__",
 			"correctAns": "耳",
-			"wrongAns": ["眼", "鼻","口"]
+			"wrongAns": ["眼", "鼻","口"],
+			"Level": "1"
         },
 		{
-			"question": "請選擇缺少的字:不露__色",
+			"question": "LV.1請選擇缺少的字:不露__色",
 			"correctAns": "聲",
-			"wrongAns": ["聽", "說", "顏"]
+			"wrongAns": ["聽", "說", "顏"],
+			"Level": "1"
 		},
 		{
-			"question": "請選擇缺少的字:鬼哭__嚎",
+			"question": "LV.1請選擇缺少的字:__世之雄",
+			"correctAns": "一",
+			"wrongAns": ["二", "三", "五"],
+			"Level": "1"
+		},
+		{
+			"question": "LV.2請選擇缺少的字:鬼哭__嚎",
 			"correctAns": "神",
-			"wrongAns": ["人", "豬", "狗"]
+			"wrongAns": ["人", "豬", "狗"],
+			"Level": "2"
 		},
 		{
-			"question": "請選擇缺少的字:鶴鳴__皋",
+			"question": "LV.2請選擇缺少的字:__文錢難倒英雄漢",
+			"correctAns": "一",
+			"wrongAns": ["三", "五", "六"],
+			"Level": "2"
+		},
+		{
+			"question": "LV.3請選擇缺少的字:鶴鳴__皋",
 			"correctAns": "九",
-			"wrongAns": ["五", "七", "八" ]
+			"wrongAns": ["五", "七", "八" ],
+			"Level": "3"
+		},
+		{
+			"question": "LV.3請選擇缺少的字:霸__別姬",
+			"correctAns": "王",
+			"wrongAns": ["黃", "皇", "惶" ],
+			"Level": "3"
 		}
     ]
 }

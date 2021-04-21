@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using MoreMountains.Tools;
 using MoreMountains.CorgiEngine;
+using UnityEngine.SceneManagement;
 
 public class ChineseGenerateQuestion : MonoBehaviour
 {
@@ -17,29 +18,50 @@ public class ChineseGenerateQuestion : MonoBehaviour
     [SerializeField] Text correctorfalsetext;
     [SerializeField] Button backtogame;
     [SerializeField] GameObject myCharacter;
+    [SerializeField] GameObject playerdie;
+    [SerializeField] GameObject PauseButton;
     private Button correctAnsBtn;
     private List<ChineseQuestion> questionsList = new List<ChineseQuestion>();
     private int skippedIndex;
     public GameObject a;
+    public CheckPlayerEnter check = new CheckPlayerEnter();
+    public string level;
+    public int hp;
 
-    public void setObject(GameObject a) {
-        this.a = a;
+    private void Awake()
+    {
+        Debug.Log(SceneManager.GetActiveScene().name);
+
     }
 
-    
+
+    public void setObject(GameObject a)
+    {
+        this.a = a;
+    }
+    public void setHp(int hp)
+    {
+        this.hp = hp;
+    }
 
     public void createQuestion()
     {
+        PauseButton.SetActive(false);
         string json = File.ReadAllText(Application.dataPath + "/ChineseQuestion.json");
         ChineseQuestion[] questions = ChineseJsonHelper.FromJson<ChineseQuestion>(json);
-        foreach (ChineseQuestion q in questions) {
-            questionsList.Add(q);
+        Debug.Log(level);
+        foreach (ChineseQuestion q in questions)
+        {
+            if (q.Level.Equals(level))
+            {
+                questionsList.Add(q);
+            }
         }
         correctAnsBtn = ansBtn[RandomButtonIndex()];
-        Shuffle(questionsList);
         questionTitle.text = questionsList[0].question;
         for (int i = 0; i < ansBtn.Length; i++)
         {
+
             Button btn = ansBtn[i];
             Text text = btn.GetComponentInChildren<Text>();
             if (GameObject.ReferenceEquals(btn, correctAnsBtn))
@@ -79,13 +101,20 @@ public class ChineseGenerateQuestion : MonoBehaviour
         }
     }
 
-    void BackToGame() {
+    void BackToGame()
+    {
         a.SetActive(false);
         questionView.SetActive(false);
+        Health returnhp = myCharacter.GetComponent<Health>();
         myCharacter.SetActive(true);
+        Debug.Log(hp);
+        returnhp.SetHealth(hp, myCharacter);
+        CheckPlayerDie aaa = playerdie.GetComponent<CheckPlayerDie>();
+        aaa.playing = true;
+        PauseButton.SetActive(true);
     }
 
-    void CheckAnswer(Button btn) 
+    void CheckAnswer(Button btn)
     {
         if (btn == correctAnsBtn)
         {
@@ -95,17 +124,18 @@ public class ChineseGenerateQuestion : MonoBehaviour
             CorgiEnginePointsEvent.Trigger(PointsMethods.Add, 10);
 
         }
-        else 
+        else
         {
             correctFalse.SetActive(true);
             correctorfalsetext.text = "Oh No It Is False!";
             scoretext.text = "Score -10";
             CorgiEnginePointsEvent.Trigger(PointsMethods.Add, -10);
         }
-        
+
     }
 
-    public void ChangeActive() {
+    public void ChangeActive()
+    {
         correctFalse.SetActive(false);
     }
 
@@ -122,7 +152,7 @@ public class ChineseGenerateQuestion : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
 }
