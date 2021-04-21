@@ -9,5 +9,6 @@ public class ChineseQuestion
     public string question;
     public string correctAns;
     public string[] wrongAns;
+    public string Level;
 
 }

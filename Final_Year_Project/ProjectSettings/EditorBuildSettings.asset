@@ -69,15 +69,45 @@ EditorBuildSettings:
     path: Assets/Scenes/HappyBird/Bird_Low_LevelSelect.unity
     guid: a7be14afc3465094bad644f80fe11f30
   - enabled: 1
+    path: Assets/Scenes/ChineseGame/ChineseGameL2Double.unity
+    guid: 3ea890cd9ffc01341a27797748f007c9
+  - enabled: 1
     path: Assets/Scenes/HappyBird/Bird_Low_LV1.unity
     guid: 4ed117fcf3a60ba49b7d54f7a18ae841
+  - enabled: 1
+    path: Assets/Scenes/ChineseGame/ChineseGameL2.unity
+    guid: 1b48359fdd6514c4e965235e9b744a5e
+  - enabled: 1
+    path: Assets/Scenes/ChineseGame/ChineseLevelSelect.unity
+    guid: 42f7a78eeaa2d4c45b765f2754355650
+  - enabled: 1
+    path: Assets/Scenes/ChineseGame/ChineseGameL2Fly.unity
+    guid: bc47062a0cbb83741bff15b6de825972
   - enabled: 1
     path: Assets/Scenes/HappyBird/Bird_Low_LV2.unity
     guid: 7950e572109bd8848808372b1eb962f0
   - enabled: 1
+    path: Assets/Scenes/ChineseGame/ChineseGameL1Fly.unity
+    guid: 7f1f9f3827c207849ae43daadb0acad9
+  - enabled: 1
+    path: Assets/Scenes/ChineseGame/ChineseGameL1.unity
+    guid: 8efb0f667502d9c4aaf35462ec08fdb9
+  - enabled: 1
     path: Assets/Scenes/HappyBird/Bird_Low_LV3.unity
     guid: 33b82a9b525f95542b430fea32942489
   - enabled: 1
+    path: Assets/Scenes/ChineseGame/ChineseGameL1Double.unity
+    guid: c4ebed97938ebf34090c97688104b73e
+  - enabled: 1
+    path: Assets/Scenes/ChineseGame/ChineseGameL3.unity
+    guid: d8abad09eddc100459cde1cf106ddbdc
+  - enabled: 1
     path: Assets/Scenes/HappyBird/Quiz2/MathQuiz.unity
     guid: e5c63a521c6071f4c979cb9a769b7bb6
+  - enabled: 1
+    path: Assets/Scenes/ChineseGame/ChineseGameL3Double.unity
+    guid: b4cf6bec574a83648b6f8914cf349225
+  - enabled: 1
+    path: Assets/Scenes/ChineseGame/ChineseGameL3Fly.unity
+    guid: 1295d0f959376d94e9e375872e44445c
   m_configObjects: {}
