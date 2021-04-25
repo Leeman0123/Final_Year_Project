@@ -47,7 +47,8 @@ public class ChineseGenerateQuestion : MonoBehaviour
     public void createQuestion()
     {
         PauseButton.SetActive(false);
-        string json = File.ReadAllText(Application.dataPath + "/ChineseQuestion.json");
+
+        string json = File.ReadAllText(Application.persistentDataPath + "/ChineseQuestion.json");
         ChineseQuestion[] questions = ChineseJsonHelper.FromJson<ChineseQuestion>(json);
         Debug.Log(level);
         foreach (ChineseQuestion q in questions)
@@ -57,6 +58,7 @@ public class ChineseGenerateQuestion : MonoBehaviour
                 questionsList.Add(q);
             }
         }
+        Shuffle(questionsList);
         correctAnsBtn = ansBtn[RandomButtonIndex()];
         questionTitle.text = questionsList[0].question;
         for (int i = 0; i < ansBtn.Length; i++)
