@@ -9,9 +9,12 @@ using Firebase.Database;
 using System;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using Firebase.Storage;
 
 public class ChineseGameLevelControl : MonoBehaviour
 {
+    private static readonly string finalReferenceUrl = "gs://finalyearproject-cc646.appspot.com/";
+    private static readonly string _animalsMcQuiz = "AnimalsMc/";
     private CheckAuthentication script;
     private DatabaseReference reference;
     [SerializeField] GameObject CheckAuth;
@@ -64,13 +67,14 @@ public class ChineseGameLevelControl : MonoBehaviour
         Debug.Log(Levelname);
         CharacterSelectPage.SetActive(true);
     }
-    public void GetCharacter(int character)
+    public async void GetCharacter(int character)
     {
         MoreMountains.CorgiEngine.LevelSelector level = GameObject.Find("LevelSelector").GetComponent<MoreMountains.CorgiEngine.LevelSelector>();
+        await DownloadChineseQuestion();
         switch (character)
         {
             case 1:
-
+                
                 level.LevelName = Levelname;
                 level.GoToLevel();
                 break;
@@ -141,6 +145,27 @@ public class ChineseGameLevelControl : MonoBehaviour
         {
             return false;
         }
+        return true;
+    }
+
+    public static async Task<bool> DownloadChineseQuestion()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "ChineseQuestion.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + _animalsMcQuiz + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
         return true;
     }
 }
