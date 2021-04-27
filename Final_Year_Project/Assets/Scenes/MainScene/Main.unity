@@ -5215,6 +5215,7 @@ MonoBehaviour:
   P2ScrollView: {fileID: 0}
   P3ScrollView: {fileID: 0}
   p1VocabAnimals: {fileID: 1440852554}
+  p1VocabVehicles: {fileID: 1860940575}
   storeBtn: {fileID: 1706951592}
   storePanel: {fileID: 1963818497}
 --- !u!4 &863699447
@@ -9818,7 +9819,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 208, y: -350}
+  m_AnchoredPosition: {x: -827.61, y: 31}
   m_SizeDelta: {x: 241.2294, y: 131.9602}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1706951591

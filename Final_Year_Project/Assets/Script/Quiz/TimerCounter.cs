@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TimerCounter : MonoBehaviour
@@ -68,8 +69,15 @@ public class TimerCounter : MonoBehaviour
                 if (barColorArea.fillAmount <= 0)
                 {
                     ResetTimer();
-                    GenerateRandomMcQuestion.instance.questions.Pop();
-                    GenerateRandomMcQuestion.instance.GenerateRandomQuestion();
+                    if (SceneManager.GetActiveScene().name == "Animals1") {
+                        GenerateRandomMcQuestionAnimalsOne.instance.questions.Pop();
+                        GenerateRandomMcQuestionAnimalsOne.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Vehicle1")
+                    {
+                        GenerateRandomMcQuestionVehicleOne.instance.questions.Pop();
+                        GenerateRandomMcQuestionVehicleOne.instance.GenerateRandomQuestion();
+                    }
                 }
             }
         }

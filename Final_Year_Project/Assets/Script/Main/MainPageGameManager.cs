@@ -35,6 +35,7 @@ public class MainPageGameManager : MonoBehaviour
     public GameObject P3ScrollView;
     [Header("P1 English Btn")]
     public Button p1VocabAnimals;
+    public Button p1VocabVehicles;
     [Header("Store")]
     [SerializeField] Button storeBtn;
     [SerializeField] GameObject storePanel;
@@ -53,6 +54,15 @@ public class MainPageGameManager : MonoBehaviour
                 RedirectToEngMCAnimalsL1();
             }
         });
+        p1VocabVehicles.onClick.AddListener(async () =>
+        {
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadVehicleP1QuizConisDetails();
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadVehicleP1Quiz();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToEngMCVehicleL1();
+            }
+        });
     }
 
     void RedirectToEngMCAnimalsL1()
@@ -64,6 +74,17 @@ public class MainPageGameManager : MonoBehaviour
         c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
         DontDestroyOnLoad(createNewGameObject);
         GeneralScript.RedirectPageWithT("Animals1", "Redirecting to the Vocab - Animals(P1)", "Canvas");
+    }
+
+    void RedirectToEngMCVehicleL1()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "VocabularyVehicleCoins1.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Vehicle1", "Redirecting to the Vocab - Vehicle(P1)", "Canvas");
     }
 
     void ShowEngSelect()

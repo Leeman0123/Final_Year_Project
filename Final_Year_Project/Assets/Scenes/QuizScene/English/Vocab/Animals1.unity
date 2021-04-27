@@ -356,6 +356,84 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 84625523}
   m_CullTransparentMesh: 0
+--- !u!1 &121040106
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 121040107}
+  - component: {fileID: 121040109}
+  - component: {fileID: 121040108}
+  m_Layer: 5
+  m_Name: MessageDescription
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &121040107
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121040106}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 873967837}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 23.982, y: -128}
+  m_SizeDelta: {x: 1468.0266, y: 174.36285}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &121040108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121040106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 0.18396229, b: 0.79305, a: 1}
+  m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: beb91e7db3acb794eb9fb370f0898d6e, type: 3}
+    m_FontSize: 64
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 79
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &121040109
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 121040106}
+  m_CullTransparentMesh: 0
 --- !u!1 &279025031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1995,6 +2073,7 @@ RectTransform:
   - {fileID: 503922018}
   - {fileID: 1523037679}
   - {fileID: 790874283}
+  - {fileID: 121040107}
   m_Father: {fileID: 1109893392}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2180,6 +2259,7 @@ MonoBehaviour:
   socreText: {fileID: 1066507500}
   finishedPanel: {fileID: 789114465}
   messagePanel: {fileID: 873967836}
+  messagePanelDescription: {fileID: 121040108}
   messagePanelOkBtn: {fileID: 1523037680}
   messagePanelCloseBtn: {fileID: 790874284}
   scoreText: {fileID: 1742249868}
@@ -3174,8 +3254,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -187}
-  m_SizeDelta: {x: 160, y: 30}
+  m_AnchoredPosition: {x: 27.4, y: -187}
+  m_SizeDelta: {x: 1752.1333, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1407399448
 MonoBehaviour:
@@ -3206,7 +3286,7 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 1
+    m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: All quiz's attemp chance used. This result will not save
@@ -3485,7 +3565,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -53, y: -170}
+  m_AnchoredPosition: {x: -31, y: -356}
   m_SizeDelta: {x: 317.1067, y: 117.20151}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1523037680

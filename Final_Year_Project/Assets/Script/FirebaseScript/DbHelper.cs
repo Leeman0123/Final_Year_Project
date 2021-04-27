@@ -226,4 +226,97 @@ public class DbHelper : MonoBehaviour
         }
         return true;
     }
+
+    public static async Task<bool> AddNewEngVocaVehiclebOneResult(string uid, int correctCount, int questionsTotal, int timeCount, int available)
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        EnglishQuizVocabVehicleOne eqvao = new EnglishQuizVocabVehicleOne();
+        eqvao.uid = uid;
+        eqvao.correctCount = correctCount;
+        eqvao.questionsTotal = questionsTotal;
+        eqvao.timeCount = timeCount;
+        eqvao.attemptLeft = available;
+        string json = JsonUtility.ToJson(eqvao);
+        var task = reference.Child("EnglishQuiz").Child("PrimaryOne").Child("EnglishQuizVocabVehicleOne").Child(uid).SetRawJsonValueAsync(json);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<EnglishQuizVocabVehicleOne> GetEngVocabVehicleOneResultById(string uid)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference("EnglishQuiz")
+                    .Child("PrimaryOne")
+                    .Child("EnglishQuizVocabVehicleOne")
+                    .Child(uid)
+                    .GetValueAsync();
+        await task;
+        if (task.Exception != null)
+        {
+            return null;
+        }
+        DataSnapshot data = task.Result;
+        if (data.Child("uid").Value == null)
+        {
+            return null;
+        }
+        EnglishQuizVocabVehicleOne eqvao = new EnglishQuizVocabVehicleOne();
+        eqvao.uid = data.Child("uid").Value.ToString();
+        eqvao.correctCount = Convert.ToInt32(data.Child("correctCount").Value);
+        eqvao.questionsTotal = Convert.ToInt32(data.Child("questionsTotal").Value);
+        eqvao.timeCount = Convert.ToInt32(data.Child("timeCount").Value);
+        eqvao.attemptLeft = Convert.ToInt32(data.Child("attemptLeft").Value);
+        return eqvao;
+    }
+
+    public static async Task<bool> UpdateVehicleOneQuizCorrectCount(string userId, int correctCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryOne")
+            .Child("EnglishQuizVocabVehicleOne")
+            .Child(userId)
+            .Child("correctCount").SetValueAsync(correctCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static async Task<bool> UpdateVehicleOneQuizAttempt(string userId, int attemptCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryOne")
+            .Child("EnglishQuizVocabVehicleOne")
+            .Child(userId)
+            .Child("attemptLeft").SetValueAsync(attemptCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> UpdateVehiceOneQuizTimes(string userId, int timesCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryOne")
+            .Child("EnglishQuizVocabVehicleOne")
+            .Child(userId)
+            .Child("timeCount").SetValueAsync(timesCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
 }
