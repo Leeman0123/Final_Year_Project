@@ -828,7 +828,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Final Stage
+  m_Text: 'Final Stage
+
+    Grade 5 - 6'
 --- !u!222 &430853646
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1632,7 +1634,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Past Participle
 
-    Level 2'
+    Grade 3 - 4'
 --- !u!222 &1483946792
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1778,7 +1780,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Past Participle
 
-    Level 1'
+    Grade 1 - 2'
 --- !u!222 &1609703602
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1910,7 +1912,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Past Tense
 
-    Level 2'
+    Grade 3 - 4'
 --- !u!222 &1631631523
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1988,7 +1990,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Past Tense \nLevel 1"
+  m_Text: "Past Tense \nGrade 1- 2"
 --- !u!222 &2043791203
 CanvasRenderer:
   m_ObjectHideFlags: 0
