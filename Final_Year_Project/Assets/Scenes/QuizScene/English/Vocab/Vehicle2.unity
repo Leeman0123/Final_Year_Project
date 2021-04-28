@@ -1945,7 +1945,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 8a01875ae6d1ec94ea3018f1effa0b8d, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 59
     m_Alignment: 4
@@ -2152,7 +2152,7 @@ MonoBehaviour:
   barColorArea: {fileID: 1348463610}
   minutesTimer: {fileID: 1855917160}
   secondsTimer: {fileID: 1603771992}
-  time: 30
+  time: 20
   pausePanel: {fileID: 1773926778}
   continueBtn: {fileID: 12664381}
   pauseBtn: {fileID: 1923241762}
@@ -2166,10 +2166,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 892681867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28bfb2cfe528efe4086c79f04d86f56a, type: 3}
+  m_Script: {fileID: 11500000, guid: 0420fd9713924334c80165a8557bde9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mcQuestionPath: VocabularyVehicle.json
+  mcQuestionPath: VocabularyVehicle2.json
   answerBtn:
   - {fileID: 1100297468}
   - {fileID: 279025034}
@@ -2827,7 +2827,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 8a01875ae6d1ec94ea3018f1effa0b8d, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 50
     m_Alignment: 4
@@ -4153,7 +4153,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 8a01875ae6d1ec94ea3018f1effa0b8d, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 300
     m_Alignment: 4
@@ -5011,7 +5011,7 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 8a01875ae6d1ec94ea3018f1effa0b8d, type: 3}
     m_FontSize: 50
     m_FontStyle: 0
-    m_BestFit: 0
+    m_BestFit: 1
     m_MinSize: 3
     m_MaxSize: 50
     m_Alignment: 4

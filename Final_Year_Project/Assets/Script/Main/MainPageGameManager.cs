@@ -36,6 +36,9 @@ public class MainPageGameManager : MonoBehaviour
     [Header("P1 English Btn")]
     public Button p1VocabAnimals;
     public Button p1VocabVehicles;
+    [Header("P2 English Btn")]
+    public Button p2VocabVehicles;
+    public Button p2VocabAnimals;
     [Header("Store")]
     [SerializeField] Button storeBtn;
     [SerializeField] GameObject storePanel;
@@ -45,6 +48,7 @@ public class MainPageGameManager : MonoBehaviour
         InitializeFirebase();
         backBtnEng.onClick.AddListener(() => ShowEngSelect());
         engP1.onClick.AddListener(() => ShowP1Eng());
+        engP2.onClick.AddListener(() => ShowP2Eng());
         storeBtn.onClick.AddListener(() => ShowStorePanel());
         p1VocabAnimals.onClick.AddListener(async() =>
         {
@@ -61,6 +65,15 @@ public class MainPageGameManager : MonoBehaviour
             if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
             {
                 RedirectToEngMCVehicleL1();
+            }
+        });
+        p2VocabVehicles.onClick.AddListener(async () =>
+        {
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadVehicleP2QuizConisDetails();
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadVehicleP2Quiz();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToEngMCVehicleL2();
             }
         });
     }
@@ -87,12 +100,23 @@ public class MainPageGameManager : MonoBehaviour
         GeneralScript.RedirectPageWithT("Vehicle1", "Redirecting to the Vocab - Vehicle(P1)", "Canvas");
     }
 
+    void RedirectToEngMCVehicleL2()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "VocabularyVehicleCoins2.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Vehicle2", "Redirecting to the Vocab - Vehicle(P2)", "Canvas");
+    }
+
     void ShowEngSelect()
     {
         backBtnEng.gameObject.SetActive(false);
         engSelectLevelScrollView.gameObject.SetActive(true);
         P1ScrollView.SetActive(false);
-        //P2ScrollView.SetActive(false);
+        P2ScrollView.SetActive(false);
         //P3ScrollView.SetActive(false);
     }
 
@@ -101,6 +125,13 @@ public class MainPageGameManager : MonoBehaviour
         backBtnEng.gameObject.SetActive(true);
         engSelectLevelScrollView.gameObject.SetActive(false);
         P1ScrollView.SetActive(true);
+    }
+
+    void ShowP2Eng()
+    {
+        backBtnEng.gameObject.SetActive(true);
+        engSelectLevelScrollView.gameObject.SetActive(false);
+        P2ScrollView.SetActive(true);
     }
 
     void ShowStorePanel()

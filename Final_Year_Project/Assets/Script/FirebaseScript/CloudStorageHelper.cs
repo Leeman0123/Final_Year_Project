@@ -94,6 +94,48 @@ public class CloudStorageHelper : MonoBehaviour
         return true;
     }
 
+    public static async Task<bool> DownloadVehicleP2Quiz()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "VocabularyVehicle2.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + _vehicleMcQuiz + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel("Extra files");
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadVehicleP2QuizConisDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "VocabularyVehicleCoins2.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + _vehicleMcQuiz + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
     private static void DisplayDownloadState(DownloadState downloadState)
     {
             Debug.Log(String.Format("Downloading {0}: {1} out of {2}", downloadState.Reference.Name,

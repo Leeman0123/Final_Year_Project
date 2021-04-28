@@ -16,6 +16,7 @@ public class TimerCounter : MonoBehaviour
     public Text secondsTimer;
     [Header("Timer control")]
     public float time;
+    private float constTime;
     private float maxBarValue;
     [Header("Pause UI")]
     public GameObject pausePanel;
@@ -41,6 +42,7 @@ public class TimerCounter : MonoBehaviour
             GeneralScript.RedirectPageWithT("Main", "Redirecting to main page...", "Canvas");
         });
         maxBarValue = time;
+        constTime = time;
     }
 
     void Update()
@@ -78,6 +80,11 @@ public class TimerCounter : MonoBehaviour
                         GenerateRandomMcQuestionVehicleOne.instance.questions.Pop();
                         GenerateRandomMcQuestionVehicleOne.instance.GenerateRandomQuestion();
                     }
+                    else if (SceneManager.GetActiveScene().name == "Vehicle2")
+                    {
+                        GenerateRandomMcQuestionVehicleTwo.instance.questions.Pop();
+                        GenerateRandomMcQuestionVehicleTwo.instance.GenerateRandomQuestion();
+                    }
                 }
             }
         }
@@ -85,7 +92,7 @@ public class TimerCounter : MonoBehaviour
 
     public void ResetTimer()
     {
-        time = 30f;
+        time = constTime;
     }
 
     public void AddTime(float seconds) {

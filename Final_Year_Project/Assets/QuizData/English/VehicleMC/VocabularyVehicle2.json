@@ -1,0 +1,64 @@
+{
+    "Items": [
+        {
+            "question": "Which vocabulary represent to 小型轎車?",
+			"correctAns": "subcompact car",
+			"wrongAns": ["car", "super car","touring car"]
+        },
+		{
+			"question": "Which vocabulary represent to 觀光汽車?",
+			"correctAns": "sightseeing car ",
+			"wrongAns": ["tour car ", "tour bus", "looking car"]
+		},
+		{
+			"question": "Which vocabulary represent to 微型轎車?",
+			"correctAns": "baby car",
+			"wrongAns": ["small car", "micro car ", "road car "]
+		},
+		{
+			"question": "Which vocabulary represent to 拖車?",
+			"correctAns": "tow truck",
+			"wrongAns": ["tow train", "tow bus", "pull car" ]
+		},
+		{
+			"question": "Which vocabulary represent to 多用途車?",
+			"correctAns": "general purpose car",
+			"wrongAns": ["multiple car", "functional car", "posh car", "Bus"]
+		},
+		{
+			"question": "Which vocabulary represent to 太陽能汽車?",
+			"correctAns": "Solar car",
+			"wrongAns": ["Wind car", "Energy car", "sun car", "water car"]
+		},
+		{
+			"question": "Which vocabulary represent to 改裝汽車?",
+			"correctAns": "remoulded car",
+			"wrongAns": ["change car", "model car", "Compact Car", "SUV"]
+		},
+		{
+			"question": "Which vocabulary represent to 三廂轎車?",
+			"correctAns": "Sedan",
+			"wrongAns": ["Solo", "Solar", "Sona", "Triple-seat car"]
+		},
+		{
+			"question": "Which vocabulary represent to 警車?",
+			"correctAns": "Police car",
+			"wrongAns": ["Fire car", "Ambulance", "alert car", "mail car"]
+		},
+		{
+			"question": "Which vocabulary represent to 郵車?",
+			"correctAns": "mail car",
+			"wrongAns": ["package car", "office car", "racing car", "trailer"]
+		},
+		{
+			"question": "Which vocabulary represent to 腳踏車?",
+			"correctAns": "bicycle",
+			"wrongAns": ["moped", "bike", "motorcycle", "racer"]
+		},
+		{
+			"question": "Which vocabulary represent to 獨木舟?",
+			"correctAns": "canoe",
+			"wrongAns": ["ferry", "sailboat", "boat", "merchant ship"]
+		}
+    ]
+}

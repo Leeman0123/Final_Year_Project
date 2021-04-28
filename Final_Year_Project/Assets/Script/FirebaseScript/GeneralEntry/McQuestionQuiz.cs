@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class EnglishQuizVocabAnimalsOne
+public class McQuestionQuiz
 {
     public string uid;
     public int correctCount;

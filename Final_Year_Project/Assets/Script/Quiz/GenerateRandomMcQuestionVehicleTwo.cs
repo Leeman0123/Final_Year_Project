@@ -8,7 +8,7 @@ using UnityEngine.UI;
 using Firebase.Auth;
 using System.Threading;
 
-public class GenerateRandomMcQuestionVehicleOne : MonoBehaviour
+public class GenerateRandomMcQuestionVehicleTwo : MonoBehaviour
 {
     public string mcQuestionPath;
     public Stack<EnglishSpellingQuestion> questions;
@@ -45,7 +45,7 @@ public class GenerateRandomMcQuestionVehicleOne : MonoBehaviour
     public Text attemptText;
 
 
-    public static GenerateRandomMcQuestionVehicleOne instance;
+    public static GenerateRandomMcQuestionVehicleTwo instance;
     private FirebaseAuth auth;
 
     void Start()
@@ -124,7 +124,7 @@ public class GenerateRandomMcQuestionVehicleOne : MonoBehaviour
     {
         string userId = auth.CurrentUser.UserId;
         TimerCounter timerCounter = GameObject.Find("GameManager").GetComponent<TimerCounter>();
-        McQuestionQuiz currentResult = await DbHelper.GetEngVocabVehicleOneResultById(userId);
+        McQuestionQuiz currentResult = await DbHelper.GetEngVocabVehicleTwoResultById(userId);
         Students student = await DbHelper.GetStudentById(userId);
         int studentCoins = student.coins;
         timeUsedText.text = $"Time used:{timerCounter.GetTimeCountString()}";
@@ -137,8 +137,8 @@ public class GenerateRandomMcQuestionVehicleOne : MonoBehaviour
         if (currentResult == null)
         {
             coinsGainText.text = $"Coins: +{canGetCoins}";
-            attemptText.text = "The quiz result will be saved, and you have 2 more times to gain coins";
-            bool success = await DbHelper.AddNewEngVocaVehiclebOneResult(userId, correctCount, totalQuestion, myTime, canAttemptTimes);
+            attemptText.text = $"The quiz result will be saved, and you have {(canAttemptTimes-1)} more times to gain coins";
+            bool success = await DbHelper.AddNewEngVocaVehiclebTwoResult(userId, correctCount, totalQuestion, myTime, (canAttemptTimes-1));
             int newstudentCoins = studentCoins + canGetCoins;
             bool updateCoinSuccess = await DbHelper.UpdateStudentCoins(userId, newstudentCoins);
             if (!success || !updateCoinSuccess)
@@ -161,9 +161,9 @@ public class GenerateRandomMcQuestionVehicleOne : MonoBehaviour
                     coinsGainText.text = $"Coins: +{refreshCoins}";
                     attemptText.text = $"The quiz result will be saved, and you have {currentResultAttemptLeft} times chance";
                     bool updateCoinSuccess = await DbHelper.UpdateStudentCoins(userId, newCoins);
-                    bool updateCorrectCountSuccess = await DbHelper.UpdateVehicleOneQuizCorrectCount(userId, correctCount);
-                    bool updateTimesSuccess = await DbHelper.UpdateVehiceOneQuizTimes(userId, myTime);
-                    bool updateAttempTimesSuccess = await DbHelper.UpdateVehicleOneQuizAttempt(userId, newAttempt);
+                    bool updateCorrectCountSuccess = await DbHelper.UpdateVehicleTwoQuizCorrectCount(userId, correctCount);
+                    bool updateTimesSuccess = await DbHelper.UpdateVehiceTwoQuizTimes(userId, myTime);
+                    bool updateAttempTimesSuccess = await DbHelper.UpdateVehicleTwoQuizAttempt(userId, newAttempt);
                     if (updateCoinSuccess 
                         && updateCorrectCountSuccess
                         && updateTimesSuccess
@@ -176,7 +176,7 @@ public class GenerateRandomMcQuestionVehicleOne : MonoBehaviour
                     int newAttempt = currentResultAttemptLeft - 1;
                     coinsGainText.text = "Coins: +0";
                     attemptText.text = $"The quiz result will be saved, and you have {currentResultAttemptLeft} times chance";
-                    bool updateAttempTimesSuccess = await DbHelper.UpdateVehicleOneQuizAttempt(userId, newAttempt);
+                    bool updateAttempTimesSuccess = await DbHelper.UpdateVehicleTwoQuizAttempt(userId, newAttempt);
                     if (updateAttempTimesSuccess)
                     {
                         StartCoroutine(DelayForRedirectPanel(5));
@@ -253,7 +253,7 @@ public class GenerateRandomMcQuestionVehicleOne : MonoBehaviour
         finishedPanel.SetActive(true);
         timerCounter.StopTimer();
         string userId = auth.CurrentUser.UserId;
-        McQuestionQuiz currentResult = await DbHelper.GetEngVocabVehicleOneResultById(userId);
+        McQuestionQuiz currentResult = await DbHelper.GetEngVocabVehicleTwoResultById(userId);
         if (correctCount == totalQuestion)
         {
             awesome.SetActive(true);
@@ -277,8 +277,7 @@ public class GenerateRandomMcQuestionVehicleOne : MonoBehaviour
             {
                 newRecordText.text = "You did better than your last quiz!!";
             }
-            else
-            {
+            else {
                 newRecordText.text = "You did worse than your last quiz!!";
             }
         }

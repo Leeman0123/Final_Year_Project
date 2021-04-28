@@ -60,6 +60,8 @@ public class DbHelper : MonoBehaviour
         {
             teacher = new Teachers();
             DataSnapshot teacherData = task.Result;
+            if (!teacherData.Exists)
+                return null;
             teacher.SetEmail(teacherData.Child("email").Value.ToString());
             teacher.SetName(teacherData.Child("name").Value.ToString());
             teacher.SetUid(teacherData.Child("uid").Value.ToString());
@@ -83,6 +85,8 @@ public class DbHelper : MonoBehaviour
         {
             student = new Students();
             DataSnapshot studentData = task.Result;
+            if (!studentData.Exists)
+                return null;
             student.SetCoins(Convert.ToInt32(studentData.Child("coins").Value));
             student.SetEmail(studentData.Child("email").Value.ToString());
             student.SetName(studentData.Child("name").Value.ToString());
@@ -113,10 +117,14 @@ public class DbHelper : MonoBehaviour
             DataSnapshot teacherSnapshot = teacherTask.Result;
             foreach(DataSnapshot snapshot in studentSnapshot.Children)
             {
+                if (!studentSnapshot.Exists)
+                    break;
                 emailList.Add(snapshot.Child("email").Value.ToString());
             }
             foreach(DataSnapshot snapshot in teacherSnapshot.Children)
             {
+                if (!teacherSnapshot.Exists)
+                    break;
                 emailList.Add(snapshot.Child("email").Value.ToString());
             }
             return emailList;
@@ -126,7 +134,7 @@ public class DbHelper : MonoBehaviour
     public static async Task<bool> AddNewEngVocabOneResult(string uid, int correctCount, int questionsTotal, int timeCount, int available)
     {
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-        EnglishQuizVocabAnimalsOne eqvao = new EnglishQuizVocabAnimalsOne();
+        McQuestionQuiz eqvao = new McQuestionQuiz();
         eqvao.uid = uid;
         eqvao.correctCount = correctCount;
         eqvao.questionsTotal = questionsTotal;
@@ -142,7 +150,7 @@ public class DbHelper : MonoBehaviour
         return true;
     }
 
-    public static async Task<EnglishQuizVocabAnimalsOne> GetEngVocabAnimOneResultById(string uid)
+    public static async Task<McQuestionQuiz> GetEngVocabAnimOneResultById(string uid)
     {
         var task = FirebaseDatabase.DefaultInstance
                     .GetReference("EnglishQuiz")
@@ -156,10 +164,10 @@ public class DbHelper : MonoBehaviour
             return null;
         }
         DataSnapshot data = task.Result;
-        if (data.Child("uid").Value == null) {
+        if (!data.Exists) {
             return null;
         }
-        EnglishQuizVocabAnimalsOne eqvao = new EnglishQuizVocabAnimalsOne();
+        McQuestionQuiz eqvao = new McQuestionQuiz();
         eqvao.uid = data.Child("uid").Value.ToString();
         eqvao.correctCount = Convert.ToInt32(data.Child("correctCount").Value);
         eqvao.questionsTotal = Convert.ToInt32(data.Child("questionsTotal").Value);
@@ -230,7 +238,7 @@ public class DbHelper : MonoBehaviour
     public static async Task<bool> AddNewEngVocaVehiclebOneResult(string uid, int correctCount, int questionsTotal, int timeCount, int available)
     {
         DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
-        EnglishQuizVocabVehicleOne eqvao = new EnglishQuizVocabVehicleOne();
+        McQuestionQuiz eqvao = new McQuestionQuiz();
         eqvao.uid = uid;
         eqvao.correctCount = correctCount;
         eqvao.questionsTotal = questionsTotal;
@@ -246,7 +254,7 @@ public class DbHelper : MonoBehaviour
         return true;
     }
 
-    public static async Task<EnglishQuizVocabVehicleOne> GetEngVocabVehicleOneResultById(string uid)
+    public static async Task<McQuestionQuiz> GetEngVocabVehicleOneResultById(string uid)
     {
         var task = FirebaseDatabase.DefaultInstance
                     .GetReference("EnglishQuiz")
@@ -260,11 +268,11 @@ public class DbHelper : MonoBehaviour
             return null;
         }
         DataSnapshot data = task.Result;
-        if (data.Child("uid").Value == null)
+        if (!data.Exists)
         {
             return null;
         }
-        EnglishQuizVocabVehicleOne eqvao = new EnglishQuizVocabVehicleOne();
+        McQuestionQuiz eqvao = new McQuestionQuiz();
         eqvao.uid = data.Child("uid").Value.ToString();
         eqvao.correctCount = Convert.ToInt32(data.Child("correctCount").Value);
         eqvao.questionsTotal = Convert.ToInt32(data.Child("questionsTotal").Value);
@@ -310,6 +318,99 @@ public class DbHelper : MonoBehaviour
             .GetReference("EnglishQuiz")
             .Child("PrimaryOne")
             .Child("EnglishQuizVocabVehicleOne")
+            .Child(userId)
+            .Child("timeCount").SetValueAsync(timesCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> AddNewEngVocaVehiclebTwoResult(string uid, int correctCount, int questionsTotal, int timeCount, int available)
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = uid;
+        eqvao.correctCount = correctCount;
+        eqvao.questionsTotal = questionsTotal;
+        eqvao.timeCount = timeCount;
+        eqvao.attemptLeft = available;
+        string json = JsonUtility.ToJson(eqvao);
+        var task = reference.Child("EnglishQuiz").Child("PrimaryTwo").Child("EnglishQuizVocabVehicleTwo").Child(uid).SetRawJsonValueAsync(json);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<McQuestionQuiz> GetEngVocabVehicleTwoResultById(string uid)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference("EnglishQuiz")
+                    .Child("PrimaryTwo")
+                    .Child("EnglishQuizVocabVehicleTwo")
+                    .Child(uid)
+                    .GetValueAsync();
+        await task;
+        if (task.Exception != null)
+        {
+            return null;
+        }
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return null;
+        }
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = data.Child("uid").Value.ToString();
+        eqvao.correctCount = Convert.ToInt32(data.Child("correctCount").Value);
+        eqvao.questionsTotal = Convert.ToInt32(data.Child("questionsTotal").Value);
+        eqvao.timeCount = Convert.ToInt32(data.Child("timeCount").Value);
+        eqvao.attemptLeft = Convert.ToInt32(data.Child("attemptLeft").Value);
+        return eqvao;
+    }
+
+    public static async Task<bool> UpdateVehicleTwoQuizCorrectCount(string userId, int correctCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryTwo")
+            .Child("EnglishQuizVocabVehicleTwo")
+            .Child(userId)
+            .Child("correctCount").SetValueAsync(correctCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static async Task<bool> UpdateVehicleTwoQuizAttempt(string userId, int attemptCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryTwo")
+            .Child("EnglishQuizVocabVehicleTwo")
+            .Child(userId)
+            .Child("attemptLeft").SetValueAsync(attemptCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> UpdateVehiceTwoQuizTimes(string userId, int timesCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryTwo")
+            .Child("EnglishQuizVocabVehicleTwo")
             .Child(userId)
             .Child("timeCount").SetValueAsync(timesCount);
         await task;

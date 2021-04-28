@@ -124,7 +124,7 @@ public class GenerateRandomMcQuestionAnimalsOne : MonoBehaviour
     {
         string userId = auth.CurrentUser.UserId;
         TimerCounter timerCounter = GameObject.Find("GameManager").GetComponent<TimerCounter>();
-        EnglishQuizVocabAnimalsOne currentResult = await DbHelper.GetEngVocabAnimOneResultById(userId);
+        McQuestionQuiz currentResult = await DbHelper.GetEngVocabAnimOneResultById(userId);
         Students student = await DbHelper.GetStudentById(userId);
         int studentCoins = student.coins;
         timeUsedText.text = $"Time used:{timerCounter.GetTimeCountString()}";
@@ -253,7 +253,7 @@ public class GenerateRandomMcQuestionAnimalsOne : MonoBehaviour
         finishedPanel.SetActive(true);
         timerCounter.StopTimer();
         string userId = auth.CurrentUser.UserId;
-        EnglishQuizVocabAnimalsOne currentResult = await DbHelper.GetEngVocabAnimOneResultById(userId);
+        McQuestionQuiz currentResult = await DbHelper.GetEngVocabAnimOneResultById(userId);
         if (correctCount == totalQuestion)
         {
             awesome.SetActive(true);
@@ -276,6 +276,10 @@ public class GenerateRandomMcQuestionAnimalsOne : MonoBehaviour
             if (correctCount > currentResult.correctCount)
             {
                 newRecordText.text = "You did better than your last quiz!!";
+            }
+            else
+            {
+                newRecordText.text = "You did worse than your last quiz!!";
             }
         }
     }

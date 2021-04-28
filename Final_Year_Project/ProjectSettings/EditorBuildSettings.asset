@@ -110,4 +110,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuizScene/English/Vocab/Vehicle1.unity
     guid: 1869fabd39156fb4f9939a546079da0c
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/English/Vocab/Vehicle2.unity
+    guid: 7577749362f193b4487edf8049d9700a
   m_configObjects: {}
