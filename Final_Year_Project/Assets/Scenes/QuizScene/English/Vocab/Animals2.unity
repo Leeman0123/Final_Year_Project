@@ -1442,7 +1442,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Vehicle Vocabulary (Primary 2)
+  m_Text: Animals Vocabulary (Primary 2)
 --- !u!222 &767077427
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2166,10 +2166,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 892681867}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0420fd9713924334c80165a8557bde9d, type: 3}
+  m_Script: {fileID: 11500000, guid: cf215edf4fb3b434782149b9cfd7f03a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mcQuestionPath: VocabularyVehicle2.json
+  mcQuestionPath: VocabularyAnimals2.json
   answerBtn:
   - {fileID: 1100297468}
   - {fileID: 279025034}

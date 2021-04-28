@@ -76,7 +76,18 @@ public class MainPageGameManager : MonoBehaviour
                 RedirectToEngMCVehicleL2();
             }
         });
+        p2VocabAnimals.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadAnimalsP2Quiz();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadAnimalsP2QuizConisDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToEngMCAnimalsL2();
+            }
+        });
     }
+
+
 
     void RedirectToEngMCAnimalsL1()
     {
@@ -109,6 +120,17 @@ public class MainPageGameManager : MonoBehaviour
         c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
         DontDestroyOnLoad(createNewGameObject);
         GeneralScript.RedirectPageWithT("Vehicle2", "Redirecting to the Vocab - Vehicle(P2)", "Canvas");
+    }
+
+    void RedirectToEngMCAnimalsL2()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "VocabularyAnimalsCoins2.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Animals2", "Redirecting to the Vocab - Animals(P2)", "Canvas");
     }
 
     void ShowEngSelect()

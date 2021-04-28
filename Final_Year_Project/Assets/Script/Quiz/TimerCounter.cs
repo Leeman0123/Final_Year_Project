@@ -71,7 +71,8 @@ public class TimerCounter : MonoBehaviour
                 if (barColorArea.fillAmount <= 0)
                 {
                     ResetTimer();
-                    if (SceneManager.GetActiveScene().name == "Animals1") {
+                    if (SceneManager.GetActiveScene().name == "Animals1")
+                    {
                         GenerateRandomMcQuestionAnimalsOne.instance.questions.Pop();
                         GenerateRandomMcQuestionAnimalsOne.instance.GenerateRandomQuestion();
                     }
@@ -84,6 +85,10 @@ public class TimerCounter : MonoBehaviour
                     {
                         GenerateRandomMcQuestionVehicleTwo.instance.questions.Pop();
                         GenerateRandomMcQuestionVehicleTwo.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Animals2") {
+                        GenerateRandomMcQuestionAnimalsTwo.instance.questions.Pop();
+                        GenerateRandomMcQuestionAnimalsTwo.instance.GenerateRandomQuestion();
                     }
                 }
             }

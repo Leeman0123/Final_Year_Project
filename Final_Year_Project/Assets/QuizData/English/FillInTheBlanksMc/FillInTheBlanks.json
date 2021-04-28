@@ -1,0 +1,64 @@
+{
+    "Items": [
+        {
+            "question": "Jessica 1._________ (be) a very nice girl.",
+            "chinese": "是",
+			"correctAns": "is",
+			"wrongAns": ["am", "are","aren't"]
+        },
+		{
+			"question": "She always 2._________ (help) other people.",
+			"chinese": "幫助",
+			"correctAns": "helps",
+			"wrongAns": ["helped", "helping", "help"]
+		},
+		{
+			"question": "At home, she often 3._________ (wash) the dishes for her mum?",
+			"chinese": "洗",
+			"correctAns": "washes",
+			"wrongAns": ["wash", "washed", "washing"]
+		},
+		{
+			"question": "and 4._________ (teach) her younger brother to dohishomework.",
+			"chinese": "教導",
+			"correctAns": "teaches",
+			"wrongAns": ["teach", "taught", "teaching" ]
+		},
+		{
+			"question": "Yesterday, when Jessica 5._________ (cross) the road.",
+			"chinese": "橫過",
+			"correctAns": "crossed",
+			"wrongAns": ["cross", "crossing", "crosses"]
+		},
+		{
+			"question": "The old woman 6._________ (walk) very slowly across the road.",
+			"chinese": "行",
+			"correctAns": "walks",
+			"wrongAns": ["walk", "walking", "was walking"]
+		},
+		{
+			"question": "7. (tidy up / room) _________________________",
+			"chinese": "XX",
+			"correctAns": "I can tidy up my (the) room.",
+			"wrongAns": ["I can room my tidy", "I cannot tidy up", "The room is tidy up"]
+		},
+		{
+			"question": "8.(feed / dog) ________________________________",
+			"chinese": "XX",
+			"correctAns": "I can feed the dog",
+			"wrongAns": ["The dog feed me", "Dog is feed", "Feed dog me"]
+		},
+		{
+			"question": "9.(sweep / floor) _______________________",
+			"chinese": "XX",
+			"correctAns": "I can sweep the floor.",
+			"wrongAns": ["The floor sweep me", "The floor is sweep", "Can sweep the floor"]
+		},
+		{
+			"question": "10. (clean / windows) _________________",
+			"chinese": "XX",
+			"correctAns": "I can clean the windows.",
+			"wrongAns": ["I'm clean the windows", "Windows is cleaning", "Windows clean me"]
+		},
+    ]
+}

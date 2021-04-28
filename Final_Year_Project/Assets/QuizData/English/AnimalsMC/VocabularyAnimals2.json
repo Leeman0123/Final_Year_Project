@@ -1,0 +1,76 @@
+{
+    "Items": [
+        {
+            "question": "Which vocabulary represent to 烏賊?",
+            "chinese": "烏賊",
+			"correctAns": "cuttlefish",
+			"wrongAns": ["tuna", "octopus","gecko"]
+        },
+		{
+			"question": "Which vocabulary represent to 蜥蜴?",
+			"chinese": "蜥蜴",
+			"correctAns": "lizard",
+			"wrongAns": ["gecko", "chameleon", "cuttlefish"]
+		},
+		{
+			"question": "Which vocabulary represent to 三文魚?",
+			"chinese": "三文魚",
+			"correctAns": "salmon",
+			"wrongAns": ["toad", "cobra", "snake"]
+		},
+		{
+			"question": "Which vocabulary represent to 金魚?",
+			"chinese": "金魚",
+			"correctAns": "goldfish",
+			"wrongAns": ["goldenfish", "oyster", "jerryfish" ]
+		},
+		{
+			"question": "Which vocabulary represent to 蜈蚣?",
+			"chinese": "蜈蚣",
+			"correctAns": "centipede",
+			"wrongAns": ["cockroach", "ant", "ng gon", "Cub"]
+		},
+		{
+			"question": "Which vocabulary represent to 蒼蠅?",
+			"chinese": "蒼蠅",
+			"correctAns": "fly",
+			"wrongAns": ["fries", "bee", "fai", "pullet"]
+		},
+		{
+			"question": "Which vocabulary represent to 蚊子?",
+			"chinese": "蚊子",
+			"correctAns": "mosquito",
+			"wrongAns": ["fly", "duck", "butterfly", "flamingo"]
+		},
+		{
+			"question": "Which vocabulary represent to 青蛙?",
+			"chinese": "青蛙",
+			"correctAns": "frog",
+			"wrongAns": ["kit", "cub", "pup", "fingerling"]
+		},
+		{
+			"question": "Which vocabulary represent to 毛毛蟲?",
+			"chinese": "毛毛蟲",
+			"correctAns": "caterpillar",
+			"wrongAns": ["warm", "scallop", "fledgling", "peachick"]
+		},
+		{
+			"question": "Which vocabulary represent to 螃蟹?",
+			"chinese": "螃蟹",
+			"correctAns": "crab",
+			"wrongAns": ["shrimp", "kitten", "pinkie", "rabbit"]
+		},
+		{
+			"question": "Which vocabulary represent to 蟾蜍?",
+			"chinese": "蟾蜍",
+			"correctAns": "toad",
+			"wrongAns": ["spiderling", "cosset", "tadpole", "poult"]
+		},
+		{
+			"question": "Which vocabulary represent to 臭鼬?",
+			"chinese": "臭鼬",
+			"correctAns": "skunk",
+			"wrongAns": ["gibbon", "calf", "pup", "hatchling"]
+		}
+    ]
+}
