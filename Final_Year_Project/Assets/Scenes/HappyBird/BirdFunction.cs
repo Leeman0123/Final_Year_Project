@@ -174,6 +174,7 @@ public class BirdFunction : MonoBehaviour
         //RestartButton.SetActive(true);
         QuitButton.SetActive(true);
         Debug.Log("Game Over");
+        //Emeny.instance.ResetEnemiesAlive();
     }
 
     public void GameWin()
@@ -195,15 +196,12 @@ public class BirdFunction : MonoBehaviour
         {
             AddCoin = (Enemies * (life + 1));
         }
+        //Emeny.instance.ResetEnemiesAlive();
         Debug.Log(Coins);
         GameWinTitle.text = string.Format("Congratulations, You have passed this level !!!.\n Coin +  {0}", AddCoin);
-
         Coins += AddCoin;
-
         reference.Child("students").Child(userID).Child("coins").SetValueAsync(Coins);
-
         NextLevel();
-
     }
 
     public void AddEnemies()
