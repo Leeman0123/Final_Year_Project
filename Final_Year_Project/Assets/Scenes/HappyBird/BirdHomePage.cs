@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using Firebase.Storage;
+using System.Threading.Tasks;
+using UnityEngine;
 
 using UnityEngine.SceneManagement;
 
@@ -18,7 +20,21 @@ public class BirdHomePage : MonoBehaviour {
         LevelPanel.SetActive(true);
         StartBtn.SetActive(false);
         QuitBtn.SetActive(false);
+        
     }
+
+    public static async Task<bool> DonwloadJson()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "Math.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl("gs://finalyearproject-cc646.appspot.com/"
+            + "Math/" + jsonFileName);
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        await task;
+        return true;
+    }
+
 
     public void Back()
 
@@ -27,9 +43,10 @@ public class BirdHomePage : MonoBehaviour {
         StartBtn.SetActive(true);
         QuitBtn.SetActive(true);
     }
-    public void Low()
+    public async void Low()
 
     {
+        await DonwloadJson();
         SceneManager.LoadScene("Bird_Low_LevelSelect");
     }
     public void BackPage()

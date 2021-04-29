@@ -28,20 +28,9 @@ public class BirdLowLevelSelect : MonoBehaviour {
         reference = FirebaseDatabase.DefaultInstance.RootReference;
         userID = script.GetUserId();
 
-
         StartCoroutine(GetPlayerCoins());
         StartCoroutine(GetBirdLevel());
         StartCoroutine(GetItemAmount());
-
-        //reference.Child("students").Child(userID).Child("BirdLevel").SetValueAsync(1);
-
-        //levelReached = PlayerPrefs.GetInt("BirdLowLevel", 1);
-        //Coins = PlayerPrefs.GetInt("BirdCoin", 15);
-
-        /*for (int i = 0; i < levelbuttons.Length; i++) {
-            if (i + 1 > levelReached)
-                levelbuttons[i].interactable = false;
-        }*/
     }
     private void Update()
     {
@@ -61,10 +50,6 @@ public class BirdLowLevelSelect : MonoBehaviour {
             Dictionary<string, object> results = (Dictionary<string, object>)getTask.Result.Value;
             Coins = int.Parse(results["coins"].ToString());
             Debug.Log("Coins = " + Coins);
-            //levelReached = int.Parse(results["BirdLevel"].ToString());
-            //string coins = results["coins"].ToString();
-            //Debug.Log(coins);
-            //SetPlayerCoins(Coins, (int)(Score * 0.05));
         }
     }
 
@@ -85,10 +70,6 @@ public class BirdLowLevelSelect : MonoBehaviour {
                 if (i + 1 > levelReached)
                     levelbuttons[i].interactable = false;
             }
-
-            //string coins = results["coins"].ToString();
-            //Debug.Log(coins);
-            //SetPlayerCoins(Coins, (int)(Score * 0.05));
         }
     }
 
@@ -116,7 +97,6 @@ public class BirdLowLevelSelect : MonoBehaviour {
 
             reference.Child("students").Child(userID).Child("coins").SetValueAsync(Coins);
 
-            //PlayerPrefs.SetInt("BirdCoin", NewCoin);
             SceneManager.LoadScene(levelName);
         }
         else
@@ -128,13 +108,13 @@ public class BirdLowLevelSelect : MonoBehaviour {
     {
         SceneManager.LoadScene("MathQuiz");
     }
-    public void BackMenu()
 
+    public void BackMenu()
     {
         NotEnoughCoinPanel.SetActive(false);
     }
-    public void BackHome()
 
+    public void BackHome()
     {
         SceneManager.LoadScene("Bird_HomePage");
     }

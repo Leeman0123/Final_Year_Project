@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Firebase.Database;
+using System.Threading.Tasks;
 using System.IO;
+using System;
 
 public class MathFinishedHandler : MonoBehaviour
 {
@@ -21,6 +23,7 @@ public class MathFinishedHandler : MonoBehaviour
     int Coin;
     int Coins;
     int NewCoin;
+    bool finished = false;
     [SerializeField] GameObject CheckAuth;
 
     private string userID;
@@ -65,10 +68,10 @@ public class MathFinishedHandler : MonoBehaviour
         userID = script.GetUserId();
         StartCoroutine(GetPlayerCoins());
 
-        btn.onClick.AddListener(() =>
+        btn.onClick.AddListener(async() =>
         {
 
-
+            finished = true;
             /*string userId = GameObject.Find("CheckAuth").GetComponent<CheckAuthentication>().GetUserId();
             if (SceneManager.GetActiveScene().name.Equals("Animals1"))
             {
@@ -120,20 +123,29 @@ public class MathFinishedHandler : MonoBehaviour
             Image.text = string.Format("+ {0}", correct);
 
             //Coins = Coins + correct;
-            reference.Child("students").Child(userID).Child("coins").SetValueAsync(NewCoin);
-            //PlayerPrefs.SetInt("BirdCoin", NewCoin);
-            SceneManager.LoadScene("Bird_Low_LevelSelect");
+            bool success = await DbHelper.UpdateStudentCoins(userID, NewCoin);
+            if (success)
+            {
+                SceneManager.LoadSceneAsync("Bird_Low_LevelSelect");
+            }
+            else {
+                GeneralScript.ShowErrorMessagePanel("Canvas", "firebase error");
+            }
+           
         });
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!finished)
+        {
+            MathGenerateQuestion gq = MathGenerateQuestion.instance;
+            correct = gq.GetCorrect();
+            scoreText.text = string.Format("Score: {0}/10", correct);
+            Image.text = string.Format("+ {0}", correct);
+        }
 
-        MathGenerateQuestion gq = MathGenerateQuestion.instance;
-        correct = gq.GetCorrect();
-        scoreText.text = string.Format("Score: {0}/10", correct);
-        Image.text = string.Format("+ {0}", correct);
 
     }
 
