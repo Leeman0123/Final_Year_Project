@@ -178,6 +178,90 @@ public class CloudStorageHelper : MonoBehaviour
         return true;
     }
 
+    public static async Task<bool> DownloadP3EngCompleteSenCoinsDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "FillInTheBlanksCoins.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P3EnglishMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel("Extra files");
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP3EngCompleteSenQuizDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "FillInTheBlanks.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P3EnglishMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP3EngPrepositionCoinsDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "PrepositionCoins.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P3EnglishMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel("Extra files");
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP3EngPrepositionQuizDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "Preposition.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P3EnglishMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
     private static void DisplayDownloadState(DownloadState downloadState)
     {
             Debug.Log(String.Format("Downloading {0}: {1} out of {2}", downloadState.Reference.Name,

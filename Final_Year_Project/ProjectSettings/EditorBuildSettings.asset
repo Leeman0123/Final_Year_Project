@@ -116,4 +116,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuizScene/English/Vocab/Animals2.unity
     guid: 589b9496596c34449a279e6f625eee57
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/English/Vocab/CompleteSentences.unity
+    guid: 3ee01a31855405d40bdd96918d33c1a4
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/English/Vocab/Preposition.unity
+    guid: a43efadd6de2b83439e1639e2f773bf9
   m_configObjects: {}

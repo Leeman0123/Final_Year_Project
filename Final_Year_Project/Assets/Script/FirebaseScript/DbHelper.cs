@@ -513,4 +513,190 @@ public class DbHelper : MonoBehaviour
         }
         return true;
     }
+
+    public static async Task<bool> AddNewEngP3CompleteSentencesResult(string uid, int correctCount, int questionsTotal, int timeCount, int available)
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = uid;
+        eqvao.correctCount = correctCount;
+        eqvao.questionsTotal = questionsTotal;
+        eqvao.timeCount = timeCount;
+        eqvao.attemptLeft = available;
+        string json = JsonUtility.ToJson(eqvao);
+        var task = reference.Child("EnglishQuiz").Child("PrimaryThree").Child("EnglishQuizCompleteSentences").Child(uid).SetRawJsonValueAsync(json);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<McQuestionQuiz> GetEngP3CompleteSentencesResultById(string uid)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference("EnglishQuiz")
+                    .Child("PrimaryThree")
+                    .Child("EnglishQuizCompleteSentences")
+                    .Child(uid)
+                    .GetValueAsync();
+        await task;
+        if (task.Exception != null)
+        {
+            return null;
+        }
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return null;
+        }
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = data.Child("uid").Value.ToString();
+        eqvao.correctCount = Convert.ToInt32(data.Child("correctCount").Value);
+        eqvao.questionsTotal = Convert.ToInt32(data.Child("questionsTotal").Value);
+        eqvao.timeCount = Convert.ToInt32(data.Child("timeCount").Value);
+        eqvao.attemptLeft = Convert.ToInt32(data.Child("attemptLeft").Value);
+        return eqvao;
+    }
+
+    public static async Task<bool> UpdateEngP3CompleteSentencesCorrectCount(string userId, int correctCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryThree")
+            .Child("EnglishQuizCompleteSentences")
+            .Child(userId)
+            .Child("correctCount").SetValueAsync(correctCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static async Task<bool> UpdateEngP3CompleteSentencesAttempt(string userId, int attemptCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryThree")
+            .Child("EnglishQuizCompleteSentences")
+            .Child(userId)
+            .Child("attemptLeft").SetValueAsync(attemptCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> UpdateEngP3CompleteSentencesTimes(string userId, int timesCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryThree")
+            .Child("EnglishQuizCompleteSentences")
+            .Child(userId)
+            .Child("timeCount").SetValueAsync(timesCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> AddNewEngP3PrepositionResult(string uid, int correctCount, int questionsTotal, int timeCount, int available)
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = uid;
+        eqvao.correctCount = correctCount;
+        eqvao.questionsTotal = questionsTotal;
+        eqvao.timeCount = timeCount;
+        eqvao.attemptLeft = available;
+        string json = JsonUtility.ToJson(eqvao);
+        var task = reference.Child("EnglishQuiz").Child("PrimaryThree").Child("EnglishQuizPreposition").Child(uid).SetRawJsonValueAsync(json);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<McQuestionQuiz> GetEngP3PrepositionResultById(string uid)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference("EnglishQuiz")
+                    .Child("PrimaryThree")
+                    .Child("EnglishQuizPreposition")
+                    .Child(uid)
+                    .GetValueAsync();
+        await task;
+        if (task.Exception != null)
+        {
+            return null;
+        }
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return null;
+        }
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = data.Child("uid").Value.ToString();
+        eqvao.correctCount = Convert.ToInt32(data.Child("correctCount").Value);
+        eqvao.questionsTotal = Convert.ToInt32(data.Child("questionsTotal").Value);
+        eqvao.timeCount = Convert.ToInt32(data.Child("timeCount").Value);
+        eqvao.attemptLeft = Convert.ToInt32(data.Child("attemptLeft").Value);
+        return eqvao;
+    }
+
+    public static async Task<bool> UpdateEngP3PrepositionCorrectCount(string userId, int correctCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryThree")
+            .Child("EnglishQuizPreposition")
+            .Child(userId)
+            .Child("correctCount").SetValueAsync(correctCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static async Task<bool> UpdateEngP3PrepositionAttempt(string userId, int attemptCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryThree")
+            .Child("EnglishQuizPreposition")
+            .Child(userId)
+            .Child("attemptLeft").SetValueAsync(attemptCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> UpdateEngP3PrepositionTimes(string userId, int timesCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishQuiz")
+            .Child("PrimaryThree")
+            .Child("EnglishQuizPreposition")
+            .Child(userId)
+            .Child("timeCount").SetValueAsync(timesCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
 }

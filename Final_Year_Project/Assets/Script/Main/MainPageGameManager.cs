@@ -39,6 +39,9 @@ public class MainPageGameManager : MonoBehaviour
     [Header("P2 English Btn")]
     public Button p2VocabVehicles;
     public Button p2VocabAnimals;
+    [Header("P3 English Btn")]
+    public Button p3CompleteCentences;
+    public Button p3Preposition;
     [Header("Store")]
     [SerializeField] Button storeBtn;
     [SerializeField] GameObject storePanel;
@@ -49,6 +52,7 @@ public class MainPageGameManager : MonoBehaviour
         backBtnEng.onClick.AddListener(() => ShowEngSelect());
         engP1.onClick.AddListener(() => ShowP1Eng());
         engP2.onClick.AddListener(() => ShowP2Eng());
+        engP3.onClick.AddListener(() => ShowP3Eng());
         storeBtn.onClick.AddListener(() => ShowStorePanel());
         p1VocabAnimals.onClick.AddListener(async() =>
         {
@@ -83,6 +87,24 @@ public class MainPageGameManager : MonoBehaviour
             if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
             {
                 RedirectToEngMCAnimalsL2();
+            }
+        });
+        p3CompleteCentences.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP3EngCompleteSenQuizDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP3EngCompleteSenCoinsDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToEngQuizCompleteSentencesL3();
+            }
+        });
+        p3Preposition.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP3EngPrepositionQuizDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP3EngPrepositionCoinsDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToEngQuizPrepositionL3();
             }
         });
     }
@@ -133,13 +155,35 @@ public class MainPageGameManager : MonoBehaviour
         GeneralScript.RedirectPageWithT("Animals2", "Redirecting to the Vocab - Animals(P2)", "Canvas");
     }
 
+    void RedirectToEngQuizCompleteSentencesL3()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "FillInTheBlanksCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("CompleteSentences", "Redirecting to the Quiz - Complete Sentences(P3)", "Canvas");
+    }
+
+    void RedirectToEngQuizPrepositionL3()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "PrepositionCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Preposition", "Redirecting to the Quiz - Complete Sentences(P3)", "Canvas");
+    }
+
     void ShowEngSelect()
     {
         backBtnEng.gameObject.SetActive(false);
         engSelectLevelScrollView.gameObject.SetActive(true);
         P1ScrollView.SetActive(false);
         P2ScrollView.SetActive(false);
-        //P3ScrollView.SetActive(false);
+        P3ScrollView.SetActive(false);
     }
 
     void ShowP1Eng()
@@ -154,6 +198,13 @@ public class MainPageGameManager : MonoBehaviour
         backBtnEng.gameObject.SetActive(true);
         engSelectLevelScrollView.gameObject.SetActive(false);
         P2ScrollView.SetActive(true);
+    }
+
+    void ShowP3Eng()
+    {
+        backBtnEng.gameObject.SetActive(true);
+        engSelectLevelScrollView.gameObject.SetActive(false);
+        P3ScrollView.SetActive(true);
     }
 
     void ShowStorePanel()

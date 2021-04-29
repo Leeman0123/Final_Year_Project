@@ -1,0 +1,64 @@
+{
+    "Items": [
+        {
+            "question": "Last Saturday, I joined the Flag-Selling Day. I woke up early __ the morning",
+            "chinese": "是",
+			"correctAns": "in",
+			"wrongAns": ["on", "from","near"]
+        },
+		{
+			"question": "_____ I had finished breakfast, I went to Tuen Mun Estate Centre",
+			"chinese": "幫助",
+			"correctAns": "After",
+			"wrongAns": ["near", "from", "at"]
+		},
+		{
+			"question": "I went to Tuen Mun Estate Centre __ foot.",
+			"chinese": "洗",
+			"correctAns": "on",
+			"wrongAns": ["in", "front", "by"]
+		},
+		{
+			"question": "The centre is my home.",
+			"chinese": "教導",
+			"correctAns": "near",
+			"wrongAns": ["in", "on", "from" ]
+		},
+		{
+			"question": "I collected some flags and a money bag _____ the staff of the centre.",
+			"chinese": "橫過",
+			"correctAns": "from",
+			"wrongAns": ["with", "by", "to"]
+		},
+		{
+			"question": "At first, there were few people _____ the street since it was still early.",
+			"chinese": "行",
+			"correctAns": "in",
+			"wrongAns": ["by", "on", "into"]
+		},
+		{
+			"question": "Most _____ them were very nice. ",
+			"chinese": "XX",
+			"correctAns": "of",
+			"wrongAns": ["by", "with", "to"]
+		},
+		{
+			"question": "They put some coins _____ my money bag and I gave them a flag. ",
+			"chinese": "XX",
+			"correctAns": "into",
+			"wrongAns": ["to", "in", "from"]
+		},
+		{
+			"question": "I stood in the street _____ three hours.",
+			"chinese": "XX",
+			"correctAns": "for",
+			"wrongAns": ["to", "with", "in"]
+		},
+		{
+			"question": "I felt very happy because the money would be given to people _____ need.",
+			"chinese": "XX",
+			"correctAns": "in",
+			"wrongAns": ["to", "by", "from"]
+		}
+    ]
+}

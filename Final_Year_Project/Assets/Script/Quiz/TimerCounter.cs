@@ -90,6 +90,18 @@ public class TimerCounter : MonoBehaviour
                         GenerateRandomMcQuestionAnimalsTwo.instance.questions.Pop();
                         GenerateRandomMcQuestionAnimalsTwo.instance.GenerateRandomQuestion();
                     }
+
+                    else if (SceneManager.GetActiveScene().name == "CompleteSentences")
+                    {
+                        GenerateRandomMcQuestionComSentences.instance.questions.Pop();
+                        GenerateRandomMcQuestionComSentences.instance.GenerateRandomQuestion();
+                    }
+
+                    else if (SceneManager.GetActiveScene().name == "Preposition")
+                    {
+                        GenerateRandomMcQuestionPreposition.instance.questions.Pop();
+                        GenerateRandomMcQuestionPreposition.instance.GenerateRandomQuestion();
+                    }
                 }
             }
         }
