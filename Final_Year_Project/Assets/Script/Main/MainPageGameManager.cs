@@ -33,6 +33,24 @@ public class MainPageGameManager : MonoBehaviour
     public GameObject P1ScrollView;
     public GameObject P2ScrollView;
     public GameObject P3ScrollView;
+    [Header("ScrollView Maths")]
+    public Button backBtnMaths;
+    public Button mathsP1;
+    public Button mathsP2;
+    public Button mathsP3;
+    public GameObject mathsSelectLevelScrollView;
+    public GameObject P1ScrollViewMaths;
+    public GameObject P2ScrollViewMaths;
+    public GameObject P3ScrollViewMaths;
+    [Header("ScrollView Chinese")]
+    public Button backBtnChinese;
+    public Button chineseP1;
+    public Button chineseP2;
+    public Button chineseP3;
+    public GameObject chineseSelectLevelScrollView;
+    public GameObject P1ScrollViewChinese;
+    public GameObject P2ScrollViewChinese;
+    public GameObject P3ScrollViewChinese;
     [Header("P1 English Btn")]
     public Button p1VocabAnimals;
     public Button p1VocabVehicles;
@@ -42,6 +60,17 @@ public class MainPageGameManager : MonoBehaviour
     [Header("P3 English Btn")]
     public Button p3CompleteCentences;
     public Button p3Preposition;
+    [Header("P1 Maths Btn")]
+    public Button p1Add;
+    public Button p1Sub;
+    [Header("P2 Maths Btn")]
+    public Button p2AddSub;
+    public Button p2MuDiv;
+    [Header("P3 Maths Btn")]
+    public Button p3Arith;
+    public Button p3Decimal;
+
+
     [Header("Store")]
     [SerializeField] Button storeBtn;
     [SerializeField] GameObject storePanel;
@@ -50,9 +79,18 @@ public class MainPageGameManager : MonoBehaviour
     {
         InitializeFirebase();
         backBtnEng.onClick.AddListener(() => ShowEngSelect());
+        backBtnMaths.onClick.AddListener(() => ShowMathsSelect());
+        //backBtnChinese.onClick.AddListener(() => ShowChineseSelect());
         engP1.onClick.AddListener(() => ShowP1Eng());
         engP2.onClick.AddListener(() => ShowP2Eng());
         engP3.onClick.AddListener(() => ShowP3Eng());
+        mathsP1.onClick.AddListener(() => ShowP1Maths());
+        mathsP2.onClick.AddListener(() => ShowP2Maths());
+        mathsP3.onClick.AddListener(() => ShowP3Maths());
+        /*chineseP1.onClick.AddListener(() => ShowP1Chinese());
+        chineseP2.onClick.AddListener(() => ShowP2Chinese());
+        chineseP3.onClick.AddListener(() => ShowP3Chinese());
+        */
         storeBtn.onClick.AddListener(() => ShowStorePanel());
         p1VocabAnimals.onClick.AddListener(async() =>
         {
@@ -107,9 +145,127 @@ public class MainPageGameManager : MonoBehaviour
                 RedirectToEngQuizPrepositionL3();
             }
         });
+        p1Add.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP1MathsAdditionCoinsDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP1MathsAdditionQuizDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToMathQuizAddL1();
+            }
+        });
+        p1Sub.onClick.AddListener(async () =>
+        {
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP1MathsSubtractCoinsDetails();
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP1MathsSubtractQuizDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToMathQuizSubL1();
+            }
+        });
+        p2AddSub.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP2MathsSubAddQuizDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP2MathsSubAddCoinsDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToMathQuizAddSubL2();
+            }
+        });
+        p2MuDiv.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP2MathsMuDivQuizDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP2MathsMuDivCoinsDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToMathQuizMuDivL2();
+            }
+        });
+        p3Arith.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP3MathsArithmeticQuizDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP3MathsArithmeticCoinsDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToMathArithL3();
+            }
+        });
+        p3Decimal.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP3MathsDecimalQuizDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP3MathsDecimalCoinsDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToMathDecimalsL3();
+            }
+        });
     }
 
+    private void RedirectToMathDecimalsL3()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "DecimalCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Decimal", "Redirecting to the Maths - Decimal(P3)", "Canvas");
+    }
 
+    private void RedirectToMathArithL3()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "ArithmeticCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Arithmetic", "Redirecting to the Maths - Arithmetic(P3)", "Canvas");
+    }
+
+    private void RedirectToMathQuizMuDivL2()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "MuDivCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("MuDiv", "Redirecting to the Maths - Multiply&Division(P2)", "Canvas");
+    }
+
+    private void RedirectToMathQuizAddSubL2()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "SubAdditCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("SubAdd", "Redirecting to the Maths - Subtract&Addition(P2)", "Canvas");
+    }
+
+    private void RedirectToMathQuizSubL1()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "SubtractCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Subtract", "Redirecting to the Maths - Subtract(P1)", "Canvas");
+    }
+
+    private void RedirectToMathQuizAddL1()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "AdditionCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Addition", "Redirecting to the Maths - Addition(P1)", "Canvas");
+    }
 
     void RedirectToEngMCAnimalsL1()
     {
@@ -186,6 +342,24 @@ public class MainPageGameManager : MonoBehaviour
         P3ScrollView.SetActive(false);
     }
 
+    void ShowMathsSelect()
+    {
+        backBtnMaths.gameObject.SetActive(false);
+        mathsSelectLevelScrollView.gameObject.SetActive(true);
+        P1ScrollViewMaths.SetActive(false);
+        P2ScrollViewMaths.SetActive(false);
+        P3ScrollViewMaths.SetActive(false);
+    }
+
+    void ShowChineseSelect()
+    {
+        backBtnMaths.gameObject.SetActive(false);
+        mathsSelectLevelScrollView.gameObject.SetActive(true);
+        P1ScrollViewChinese.SetActive(false);
+        P2ScrollViewChinese.SetActive(false);
+        P3ScrollViewChinese.SetActive(false);
+    }
+
     void ShowP1Eng()
     {
         backBtnEng.gameObject.SetActive(true);
@@ -205,6 +379,48 @@ public class MainPageGameManager : MonoBehaviour
         backBtnEng.gameObject.SetActive(true);
         engSelectLevelScrollView.gameObject.SetActive(false);
         P3ScrollView.SetActive(true);
+    }
+
+    void ShowP1Maths()
+    {
+        backBtnMaths.gameObject.SetActive(true);
+        mathsSelectLevelScrollView.gameObject.SetActive(false);
+        P1ScrollViewMaths.SetActive(true);
+    }
+
+    void ShowP2Maths()
+    {
+        backBtnMaths.gameObject.SetActive(true);
+        mathsSelectLevelScrollView.gameObject.SetActive(false);
+        P2ScrollViewMaths.SetActive(true);
+    }
+
+    void ShowP3Maths()
+    {
+        backBtnMaths.gameObject.SetActive(true);
+        mathsSelectLevelScrollView.gameObject.SetActive(false);
+        P3ScrollViewMaths.SetActive(true);
+    }
+
+    void ShowP1Chinese()
+    {
+        backBtnChinese.gameObject.SetActive(true);
+        chineseSelectLevelScrollView.gameObject.SetActive(false);
+        P1ScrollViewChinese.SetActive(true);
+    }
+
+    void ShowP2Chinese()
+    {
+        backBtnChinese.gameObject.SetActive(true);
+        chineseSelectLevelScrollView.gameObject.SetActive(false);
+        P2ScrollViewChinese.SetActive(true);
+    }
+
+    void ShowP3Chinese()
+    {
+        backBtnChinese.gameObject.SetActive(true);
+        chineseSelectLevelScrollView.gameObject.SetActive(false);
+        P3ScrollViewChinese.SetActive(true);
     }
 
     void ShowStorePanel()

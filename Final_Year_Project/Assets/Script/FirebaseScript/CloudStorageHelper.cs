@@ -262,6 +262,258 @@ public class CloudStorageHelper : MonoBehaviour
         return true;
     }
 
+    public static async Task<bool> DownloadP1MathsAdditionCoinsDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "AdditionCoins.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P1MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel("Extra files");
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP1MathsAdditionQuizDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "Addition.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P1MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP1MathsSubtractCoinsDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "SubtractCoins.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P1MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel("Extra files");
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP1MathsSubtractQuizDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "Subtract.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P1MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP2MathsMuDivCoinsDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "MuDivCoins.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P2MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel("Extra files");
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP2MathsMuDivQuizDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "MuDiv.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P2MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP2MathsSubAddCoinsDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "SubAdditCoins.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P2MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel("Extra files");
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP2MathsSubAddQuizDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "SubAddit.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P2MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP3MathsArithmeticCoinsDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "ArithmeticCoins.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P3MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel("Extra files");
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP3MathsArithmeticQuizDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "Arithmetic.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P3MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP3MathsDecimalCoinsDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "DecimalCoins.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P3MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel("Extra files");
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
+    public static async Task<bool> DownloadP3MathsDecimalQuizDetails()
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = "Decimal.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + "P3MathMc/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
     private static void DisplayDownloadState(DownloadState downloadState)
     {
             Debug.Log(String.Format("Downloading {0}: {1} out of {2}", downloadState.Reference.Name,
