@@ -38,6 +38,7 @@ public class Bird : MonoBehaviour
         isPressed = false;
         rb.isKinematic = false;
         StartCoroutine(Relesase());
+        BirdFunction.instance.Minuslife();
     }
     IEnumerator Relesase()
     {
@@ -51,7 +52,7 @@ public class Bird : MonoBehaviour
         if (nextbird != null)
         {
             nextbird.SetActive(true);
-            BirdFunction.instance.Minuslife();
+            
             Debug.Log("RespawnBird");
         }
         else

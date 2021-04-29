@@ -17,7 +17,7 @@ public class Emeny : MonoBehaviour
     }
     public void Awake()
     {
-        
+        EnemiesAlive = 0;
     }
 
     public void OnCollisionEnter2D(Collision2D colUInfo)
@@ -43,6 +43,11 @@ public class Emeny : MonoBehaviour
             BirdFunction.instance.GameWin();
             
         }
+    }
+
+    public void ResetEnemiesAlive()
+    {
+        EnemiesAlive = 0;
     }
 
     IEnumerator Wait()
