@@ -1299,6 +1299,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 610459197654009721, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -411.41782
+      objectReference: {fileID: 0}
     - target: {fileID: 610459197668945077, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
         type: 3}
       propertyPath: m_Text
@@ -1306,7 +1311,7 @@ PrefabInstance:
 
         Past Participle
 
-        Level 4'
+        Grade 3 - 4'
       objectReference: {fileID: 0}
     - target: {fileID: 610459197891751588, guid: bf2bbf9b96a56234ab165356a8ddf3fb,
         type: 3}
@@ -1816,5 +1821,6 @@ MonoBehaviour:
   BulletTime: 0
   bulletForce: 20
   itemenable: 0
+  shootAudio: {fileID: 8300000, guid: 8c9db0a12f0f95446941903cce0093dc, type: 3}
   maxSwipeTime: 0.2
   minSwipeDistance: 0.2
