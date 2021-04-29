@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class Emeny : MonoBehaviour
 {
+    public AudioClip dead;
+    AudioSource deading;
     public float health = 4f;
     public static int EnemiesAlive = 0;
 
@@ -13,7 +15,7 @@ public class Emeny : MonoBehaviour
     {
         EnemiesAlive++;
         Debug.Log(EnemiesAlive);
-
+        deading = GetComponent<AudioSource>();
     }
     public void Awake()
     {
@@ -37,6 +39,8 @@ public class Emeny : MonoBehaviour
         //Destroy(gameObject);
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<PolygonCollider2D>().enabled = false;
+        deading.clip = dead;
+        deading.Play();
         if (EnemiesAlive <=0)
         {
             //StartCoroutine(Wait());
