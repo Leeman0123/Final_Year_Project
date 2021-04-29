@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class MathGenerateQuestion : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Button btn;
+    private Button btn;
     private Button correctAnsBtn;
     private List<MathQuestion> questionsList = new List<MathQuestion>();
     private int skippedIndex;
@@ -30,7 +30,7 @@ public class MathGenerateQuestion : MonoBehaviour
         {
             instance = this;
         }
-        string json = File.ReadAllText(Application.dataPath + jsonPath);
+        string json = File.ReadAllText(Application.persistentDataPath + "/Math.json");
         MathQuestion[] questions = JsonHelper.FromJson<MathQuestion>(json);
         foreach (MathQuestion q in questions) {
             questionsList.Add(q);

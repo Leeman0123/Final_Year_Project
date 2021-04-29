@@ -5126,7 +5126,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32106ce0233d59145bd9a05fbcd72b3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  btn: {fileID: 0}
   ansBtn:
   - {fileID: 1100297468}
   - {fileID: 279025034}
