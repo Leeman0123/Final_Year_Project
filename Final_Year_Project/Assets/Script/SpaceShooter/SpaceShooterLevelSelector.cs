@@ -37,6 +37,7 @@ public class SpaceShooterLevelSelector : MonoBehaviour {
     }
 
     public void BackToMain() {
+        Screen.orientation = ScreenOrientation.Landscape;
         SceneManager.LoadScene("Main");
     }
 
