@@ -2926,7 +2926,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Invincible
+  m_Text: "Invincible(\u7121\u6575)"
 --- !u!1 &610459197749591275
 GameObject:
   m_ObjectHideFlags: 0

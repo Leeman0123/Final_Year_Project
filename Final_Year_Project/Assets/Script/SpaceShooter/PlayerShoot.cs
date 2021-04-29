@@ -11,6 +11,9 @@ public class PlayerShoot : MonoBehaviour
     public float BulletTime;
     public float bulletForce = 10f;
     public bool itemenable;
+    [Header("Audio")]
+    public AudioClip shootAudio;
+    AudioSource playaudio;
 
     [Header("SwipeControl")]
     public float maxSwipeTime;
@@ -27,6 +30,7 @@ public class PlayerShoot : MonoBehaviour
     void Start()
     {
         itemenable = true;
+        playaudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -71,6 +75,8 @@ public class PlayerShoot : MonoBehaviour
     }
 
     private void Shoot() {
+        playaudio.clip = shootAudio;
+        playaudio.Play();
         if (itemenable)
             NormalShoot();
         else
