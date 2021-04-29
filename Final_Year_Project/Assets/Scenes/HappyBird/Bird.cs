@@ -6,6 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class Bird : MonoBehaviour
 {
+    public AudioClip shootbird;
+    AudioSource shootingbird;
     public Rigidbody2D rb;
     public Rigidbody2D hook;
     public float releaseTime = .15f;
@@ -15,6 +17,7 @@ public class Bird : MonoBehaviour
 
     void Start()
     {
+        shootingbird = GetComponent<AudioSource>();
     }
     void Update()
     {
@@ -38,6 +41,8 @@ public class Bird : MonoBehaviour
         isPressed = false;
         rb.isKinematic = false;
         StartCoroutine(Relesase());
+        shootingbird.clip = shootbird;
+        shootingbird.Play();
         BirdFunction.instance.Minuslife();
     }
     IEnumerator Relesase()
