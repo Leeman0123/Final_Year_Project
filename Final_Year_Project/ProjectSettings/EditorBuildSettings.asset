@@ -122,4 +122,16 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuizScene/English/Vocab/Preposition.unity
     guid: a43efadd6de2b83439e1639e2f773bf9
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Maths/Addition.unity
+    guid: de72f1c674a942e46a257b7e39776c06
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Maths/Subtract.unity
+    guid: 03ffcf0ab285b1543b2fcf8e1e164411
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Maths/MuDiv.unity
+    guid: 232739025c06fe04ebb0bc8d0a3986c8
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Maths/SubAdd.unity
+    guid: b10d3e16aba1ad44abc3af26770a75d1
   m_configObjects: {}

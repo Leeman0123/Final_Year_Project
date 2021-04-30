@@ -102,6 +102,26 @@ public class TimerCounter : MonoBehaviour
                         GenerateRandomMcQuestionPreposition.instance.questions.Pop();
                         GenerateRandomMcQuestionPreposition.instance.GenerateRandomQuestion();
                     }
+                    else if (SceneManager.GetActiveScene().name == "Addition")
+                    {
+                        GenerateRandomMcQuestionMathsAddition.instance.questions.Pop();
+                        GenerateRandomMcQuestionMathsAddition.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Subtract")
+                    {
+                        GenerateRandomMcQuestionMathsSubtract.instance.questions.Pop();
+                        GenerateRandomMcQuestionMathsSubtract.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "MuDiv")
+                    {
+                        GenerateRandomMcQuestionMathsMuDiv.instance.questions.Pop();
+                        GenerateRandomMcQuestionMathsMuDiv.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "SubAdd")
+                    {
+                        GenerateRandomMcQuestionMathsSubAdd.instance.questions.Pop();
+                        GenerateRandomMcQuestionMathsSubAdd.instance.GenerateRandomQuestion();
+                    }
                 }
             }
         }
