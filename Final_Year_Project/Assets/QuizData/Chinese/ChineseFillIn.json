@@ -1,0 +1,64 @@
+{
+    "Items": [
+        {
+            "question": "每天上學前要__書包，以確保帶齊課本。",
+            "chinese": "是",
+			"correctAns": "檢查",
+			"wrongAns": ["調查", "搜查","搜索"]
+        },
+		{
+			"question": "媽媽一邊幫哥哥__行李，一邊吩咐他獨自在外要多注意身體。",
+			"chinese": "幫助",
+			"correctAns": "整理",
+			"wrongAns": ["安裝", "收集", "檢查"]
+		},
+		{
+			"question": "我很想念出外公幹的爸爸，希望他早日__。",
+			"chinese": "洗",
+			"correctAns": "回家",
+			"wrongAns": ["回歸", "回復", "康復"]
+		},
+		{
+			"question": "我隨阿姨到泰國遊玩, __了一個愉快的假期。",
+			"chinese": "教導",
+			"correctAns": "度過",
+			"wrongAns": ["開始", "生活", "居住" ]
+		},
+		{
+			"question": "爺爺退休後在家種花、養鳥，日子過得很__。",
+			"chinese": "橫過",
+			"correctAns": "悠閒",
+			"wrongAns": ["安心", "舒服", "爛透"]
+		},
+		{
+			"question": "媽媽要我__養病，等康復後再好好補習功課。",
+			"chinese": "行",
+			"correctAns": "安心",
+			"wrongAns": ["堅持", "放棄", "不要"]
+		},
+		{
+			"question": "老師誇秀玲的牡丹圖畫面__，線條流暢明快。",
+			"chinese": "XX",
+			"correctAns": "絢麗",
+			"wrongAns": ["美麗", "酆麗", "雅麗"]
+		},
+		{
+			"question": "子君性格活潑，看見路邊的小貓便立即學牠__地叫起來。",
+			"chinese": "XX",
+			"correctAns": "喵喵喵",
+			"wrongAns": ["滴答滴答", "汪汪汪", "沙沙沙"]
+		},
+		{
+			"question": "剛開始上台朗誦時我很緊張，但很快就__下來了。",
+			"chinese": "XX",
+			"correctAns": "鎮定",
+			"wrongAns": ["安心", "舒服", "放鬆"]
+		},
+		{
+			"question": " ____，雨姑娘彈起了鋼琴，小花、小草跳起了歡快的舞蹈。",
+			"chinese": "XX",
+			"correctAns": "沙沙沙",
+			"wrongAns": ["滴答滴答", "啪啪啪", "的的的"]
+		}
+    ]
+}

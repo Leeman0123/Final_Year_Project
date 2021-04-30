@@ -1,0 +1,64 @@
+{
+    "Items": [
+        {
+            "question": "在「牢騷」、「狐疑」、「經綸」、「珠璣」之前，可以加上哪兩個字，使成完整的成語？",
+            "chinese": "是",
+			"correctAns": "滿腹",
+			"wrongAns": ["滿腔", "滿目","滿有"]
+        },
+		{
+			"question": "「卑___屈膝」中應填上哪個字？",
+			"chinese": "幫助",
+			"correctAns": "躬",
+			"wrongAns": ["工", "恭", "弓"]
+		},
+		{
+			"question": "「慢藏___盜」中應填上哪個字？",
+			"chinese": "洗",
+			"correctAns": "誨",
+			"wrongAns": ["海", "侮", "悔"]
+		},
+		{
+			"question": "「響___行雲」中應填上哪個字？",
+			"chinese": "教導",
+			"correctAns": "遏",
+			"wrongAns": ["過", "徹", "澈" ]
+		},
+		{
+			"question": "「曾參殺人」指的是：",
+			"chinese": "橫過",
+			"correctAns": "人言可畏",
+			"wrongAns": ["暴政難逃", "世風日下", "斬草除根"]
+		},
+		{
+			"question": "「舉案齊眉」與下列哪一項意義相近？",
+			"chinese": "行",
+			"correctAns": "相敬如賓",
+			"wrongAns": ["百年到老", "鍛煉身體", "搬運雜物"]
+		},
+		{
+			"question": "下列各詞中有一  / 兩個是對的，那一/ 兩個是",
+			"chinese": "XX",
+			"correctAns": "趨之若鶩",
+			"wrongAns": ["鶼鰈情深", "琴瑟和諧", "珠聯璧合"]
+		},
+		{
+			"question": "下列各詞中有一項的性質不同，那是:",
+			"chinese": "XX",
+			"correctAns": "流水落花",
+			"wrongAns": ["高山流水", "陽春白雪", "陽阿薤露"]
+		},
+		{
+			"question": "下列各詞中有哪一項是對的？",
+			"chinese": "XX",
+			"correctAns": "見獵心喜",
+			"wrongAns": ["見獵深喜", "見臘心喜", "見臘深喜"]
+		},
+		{
+			"question": "由於港深過境人數急劇上升，為了紓緩羅湖口岸的壓力，興建由上水至落馬洲的鐵路支線已是",
+			"chinese": "XX",
+			"correctAns": "荊釵布裙",
+			"wrongAns": ["荊筐布裙", "荊棘布裙", "荊杖布裙"]
+		}
+    ]
+}

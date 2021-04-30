@@ -1,0 +1,64 @@
+{
+    "Items": [
+        {
+            "question": "通的部首是?",
+            "chinese": "是",
+			"correctAns": "辵",
+			"wrongAns": ["刀", "手","虫"]
+        },
+		{
+			"question": "劉的部首是?",
+			"chinese": "幫助",
+			"correctAns": "整理",
+			"wrongAns": ["刀", "戶", "犬"]
+		},
+		{
+			"question": "扇的部首是?",
+			"chinese": "洗",
+			"correctAns": "戶",
+			"wrongAns": ["鳥", "口", "弓"]
+		},
+		{
+			"question": "犯的部首是?",
+			"chinese": "教導",
+			"correctAns": "度過",
+			"wrongAns": ["犬", "彳", "彐" ]
+		},
+		{
+			"question": "蜜的部首是?",
+			"chinese": "橫過",
+			"correctAns": "虫",
+			"wrongAns": ["心", "戈", "戶"]
+		},
+		{
+			"question": "雪的部首是?",
+			"chinese": "行",
+			"correctAns": "安心",
+			"wrongAns": ["雨", "日", "女"]
+		},
+		{
+			"question": "趍的部首是?",
+			"chinese": "XX",
+			"correctAns": "走",
+			"wrongAns": ["田", "竹", "土"]
+		},
+		{
+			"question": "馣的部首是?",
+			"chinese": "XX",
+			"correctAns": "香",
+			"wrongAns": ["禾", "日", "田"]
+		},
+		{
+			"question": "韻的部首是?",
+			"chinese": "XX",
+			"correctAns": "音",
+			"wrongAns": ["示", "車", "曰"]
+		},
+		{
+			"question": "窗的部首是?",
+			"chinese": "XX",
+			"correctAns": "穴",
+			"wrongAns": ["用", "彳", "彡"]
+		}
+    ]
+}

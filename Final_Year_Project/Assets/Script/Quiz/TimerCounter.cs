@@ -132,6 +132,36 @@ public class TimerCounter : MonoBehaviour
                         GenerateRandomMcQuestionMathsArith.instance.questions.Pop();
                         GenerateRandomMcQuestionMathsArith.instance.GenerateRandomQuestion();
                     }
+                    else if (SceneManager.GetActiveScene().name == "ChineseFillIn")
+                    {
+                        GenerateRandomMcQuestionChineseFillIn.instance.questions.Pop();
+                        GenerateRandomMcQuestionChineseFillIn.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "ChineseUnit")
+                    {
+                        GenerateRandomMcQuestionChineseUnit.instance.questions.Pop();
+                        GenerateRandomMcQuestionChineseUnit.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "ChineseFillInAdv")
+                    {
+                        GenerateRandomMcQuestionChineseFillInAdv.instance.questions.Pop();
+                        GenerateRandomMcQuestionChineseFillInAdv.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "ChineseHead")
+                    {
+                        GenerateRandomMcQuestionChineseHead.instance.questions.Pop();
+                        GenerateRandomMcQuestionChineseHead.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Idiom")
+                    {
+                        GenerateRandomMcQuestionChineseIdiom.instance.questions.Pop();
+                        GenerateRandomMcQuestionChineseIdiom.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Idiom2")
+                    {
+                        GenerateRandomMcQuestionChineseIdiom2.instance.questions.Pop();
+                        GenerateRandomMcQuestionChineseIdiom2.instance.GenerateRandomQuestion();
+                    }
                 }
             }
         }

@@ -69,6 +69,15 @@ public class MainPageGameManager : MonoBehaviour
     [Header("P3 Maths Btn")]
     public Button p3Arith;
     public Button p3Decimal;
+    [Header("P1 Chinese Btn")]
+    public Button p1FillIn;
+    public Button p1Unit;
+    [Header("P2 Chinese Btn")]
+    public Button p2FillInAdvanced;
+    public Button p2Head;
+    [Header("P3 Chinese Btn")]
+    public Button p3Idiom1;
+    public Button p3Idiom2;
 
 
     [Header("Store")]
@@ -80,17 +89,16 @@ public class MainPageGameManager : MonoBehaviour
         InitializeFirebase();
         backBtnEng.onClick.AddListener(() => ShowEngSelect());
         backBtnMaths.onClick.AddListener(() => ShowMathsSelect());
-        //backBtnChinese.onClick.AddListener(() => ShowChineseSelect());
+        backBtnChinese.onClick.AddListener(() => ShowChineseSelect());
         engP1.onClick.AddListener(() => ShowP1Eng());
         engP2.onClick.AddListener(() => ShowP2Eng());
         engP3.onClick.AddListener(() => ShowP3Eng());
         mathsP1.onClick.AddListener(() => ShowP1Maths());
         mathsP2.onClick.AddListener(() => ShowP2Maths());
         mathsP3.onClick.AddListener(() => ShowP3Maths());
-        /*chineseP1.onClick.AddListener(() => ShowP1Chinese());
+        chineseP1.onClick.AddListener(() => ShowP1Chinese());
         chineseP2.onClick.AddListener(() => ShowP2Chinese());
         chineseP3.onClick.AddListener(() => ShowP3Chinese());
-        */
         storeBtn.onClick.AddListener(() => ShowStorePanel());
         p1VocabAnimals.onClick.AddListener(async() =>
         {
@@ -199,6 +207,126 @@ public class MainPageGameManager : MonoBehaviour
                 RedirectToMathDecimalsL3();
             }
         });
+        p1FillIn.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP1ChineseFillInCoinsDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP1ChineseFillInQuizDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToChineseFillInL1();
+            }
+        });
+        p1Unit.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP1ChineseUnitCoinsDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP1ChineseUnitQuizDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToChineseUnitL1();
+            }
+        });
+        p2FillInAdvanced.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP2ChineseFillInAdvancedCoinsDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP2ChineseFillInAdvancedQuizDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToChineseFillInAdvL2();
+            }
+        });
+        p2Head.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP2ChineseHeadCoinsDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP2ChineseHeadQuizDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToChineseHeadL2();
+            }
+        });
+        p3Idiom1.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP3ChineseIdiomCoinsDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP3ChineseIdiomQuizDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToChineseIdiomL3();
+            }
+        });
+        p3Idiom2.onClick.AddListener(async () =>
+        {
+            bool downQuizDetailsSuccess = await CloudStorageHelper.DownloadP3ChineseIdiom2CoinsDetails();
+            bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadP3ChineseIdiom2QuizDetails();
+            if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
+            {
+                RedirectToChineseIdiom2L3();
+            }
+        });
+    }
+
+    private void RedirectToChineseIdiom2L3()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "ChineseIdiom2Coins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Idiom2", "Redirecting to the Chinese - Idiom2(P3)", "Canvas");
+    }
+
+    private void RedirectToChineseIdiomL3()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "ChineseIdiomCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("Idiom", "Redirecting to the Chinese - Idiom(P3)", "Canvas");
+    }
+
+    private void RedirectToChineseHeadL2()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "ChineseHeadCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("ChineseHead", "Redirecting to the Chinese - radical(P2)", "Canvas");
+    }
+
+    private void RedirectToChineseFillInAdvL2()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "ChineseFillInAdvancedCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("ChineseFillInAdv", "Redirecting to the Chinese - Fill In Advanced(P2)", "Canvas");
+    }
+
+    private void RedirectToChineseUnitL1()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "ChineseUnitCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("ChineseUnit", "Redirecting to the Chinese - Unit (P1)", "Canvas");
+    }
+
+    private void RedirectToChineseFillInL1()
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + "ChineseFillInCoins.json");
+        Coins coin = JsonUtility.FromJson<Coins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("CoinsLevel");
+        CoinsLevel c = createNewGameObject.AddComponent<CoinsLevel>();
+        c.InitializeValue(coin.coins, coin.attempt, coin.refreshRankCoins, coin.description);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("ChineseFillIn", "Redirecting to the Chinese - Fill In (P1)", "Canvas");
     }
 
     private void RedirectToMathDecimalsL3()
@@ -354,7 +482,7 @@ public class MainPageGameManager : MonoBehaviour
     void ShowChineseSelect()
     {
         backBtnMaths.gameObject.SetActive(false);
-        mathsSelectLevelScrollView.gameObject.SetActive(true);
+        chineseSelectLevelScrollView.gameObject.SetActive(true);
         P1ScrollViewChinese.SetActive(false);
         P2ScrollViewChinese.SetActive(false);
         P3ScrollViewChinese.SetActive(false);

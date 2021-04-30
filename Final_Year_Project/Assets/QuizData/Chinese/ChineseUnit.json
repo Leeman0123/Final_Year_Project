@@ -1,0 +1,64 @@
+{
+    "Items": [
+        {
+            "question": "打開這__門，你就會看到這房間裏面有很多鏡子",
+            "chinese": "是",
+			"correctAns": "扇",
+			"wrongAns": ["朵", "個","把"]
+        },
+		{
+			"question": "他拿起一__故事書，津津有味地看起來。",
+			"chinese": "幫助",
+			"correctAns": "本",
+			"wrongAns": ["頁", "疊", "個"]
+		},
+		{
+			"question": "浴室裏整齊地掛着幾__白毛巾。",
+			"chinese": "洗",
+			"correctAns": "條",
+			"wrongAns": ["張", "口", "個"]
+		},
+		{
+			"question": "高高的山崗上，聳立着一__海鷗形狀的紀念碑。",
+			"chinese": "教導",
+			"correctAns": "座",
+			"wrongAns": ["石", "塊", "個" ]
+		},
+		{
+			"question": "小猴子頑皮地抓起一__梳子，梳起身上的毛來。",
+			"chinese": "橫過",
+			"correctAns": "把",
+			"wrongAns": ["巴", "個", "朵"]
+		},
+		{
+			"question": "姐姐，你的鉛筆可以借給我用一下__？",
+			"chinese": "行",
+			"correctAns": "嗎",
+			"wrongAns": ["呢", "啊", "阿"]
+		},
+		{
+			"question": "為什麼一年只有春夏秋冬四個季節__？",
+			"chinese": "XX",
+			"correctAns": "呢",
+			"wrongAns": ["呀", "嗎", "啊"]
+		},
+		{
+			"question": "不如你也過來和我們一起玩捉迷藏__! ",
+			"chinese": "XX",
+			"correctAns": "吧",
+			"wrongAns": ["的", "了", "啊"]
+		},
+		{
+			"question": "這份禮物是我和姐姐一起挑選，送給媽媽__。",
+			"chinese": "XX",
+			"correctAns": "的",
+			"wrongAns": ["呀", "呢", "吧"]
+		},
+		{
+			"question": "你為什麼不說話__？我們都想聽聽你的意見。",
+			"chinese": "XX",
+			"correctAns": "呀",
+			"wrongAns": ["嗎", "了", "的"]
+		}
+    ]
+}

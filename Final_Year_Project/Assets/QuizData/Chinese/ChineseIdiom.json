@@ -1,0 +1,64 @@
+{
+    "Items": [
+        {
+            "question": "下列各項中，哪一項的意義跟其他的相距較遠？",
+            "chinese": "是",
+			"correctAns": "錦衣玉食",
+			"wrongAns": ["衣衫襤褸", "牛衣對泣","鶉衣百結"]
+        },
+		{
+			"question": "「牛衣對泣」指的是甚麼人的關係？",
+			"chinese": "幫助",
+			"correctAns": "夫婦",
+			"wrongAns": ["父子", "兄弟", "朋友"]
+		},
+		{
+			"question": "「椿萱並茂」跟甚麼有關係？",
+			"chinese": "洗",
+			"correctAns": "父母",
+			"wrongAns": ["父子", "母子", "子女"]
+		},
+		{
+			"question": "「鼓盆之戚」指的是：",
+			"chinese": "教導",
+			"correctAns": "喪妻",
+			"wrongAns": ["喪母", "喪夫", "喪父" ]
+		},
+		{
+			"question": "「夢熊有兆」跟甚麼有關：",
+			"chinese": "橫過",
+			"correctAns": "兒子",
+			"wrongAns": ["功名", "君主", "女兒"]
+		},
+		{
+			"question": "「南柯一夢」與「黃粱一夢」都跟甚麼有關？",
+			"chinese": "行",
+			"correctAns": "功名富貴",
+			"wrongAns": ["衣物糧食", "遠遊他方", "居所建設"]
+		},
+		{
+			"question": "下列各項哪一項的意義是明顯不同的？",
+			"chinese": "XX",
+			"correctAns": "妾婦之道",
+			"wrongAns": ["鶼鰈情深", "琴瑟和諧", "珠聯璧合"]
+		},
+		{
+			"question": "「汝南月旦」、「皮裏陽秋」兩成語都跟甚麼有關：",
+			"chinese": "XX",
+			"correctAns": "批評",
+			"wrongAns": ["景色", "季節", "性格"]
+		},
+		{
+			"question": "「魯魚亥豕」指的是",
+			"chinese": "XX",
+			"correctAns": "文字",
+			"wrongAns": ["地域", "食物", "時間"]
+		},
+		{
+			"question": " 「程門立雪」指的是：",
+			"chinese": "XX",
+			"correctAns": "尊師",
+			"wrongAns": ["天氣", "建築", "受罰"]
+		}
+    ]
+}

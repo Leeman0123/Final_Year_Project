@@ -140,4 +140,22 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuizScene/Maths/Arithmetic.unity
     guid: 2db827360ddfa1444838a9d4ab536741
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Chinese/ChineseFillIn.unity
+    guid: 55d782c5bdc201f4c9d8d7847101172f
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Chinese/ChineseUnit.unity
+    guid: 4500de913c4c95e48be83886d4cb79f7
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Chinese/ChineseFillInAdv.unity
+    guid: 2dd2b0b2e55266648ab08c7820a0ce37
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Chinese/ChineseHead.unity
+    guid: 4ba1eb7880014c04ab29d74f927eb73e
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Chinese/Idiom.unity
+    guid: aee6041007c4c2d46b05777213fc19e8
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Chinese/Idiom2.unity
+    guid: 098376c764d73ae4db106c443a9bdb0c
   m_configObjects: {}
