@@ -134,4 +134,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/QuizScene/Maths/SubAdd.unity
     guid: b10d3e16aba1ad44abc3af26770a75d1
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Maths/Decimal.unity
+    guid: 4dc51e76cf2bd11499c64b8e5fdb093e
+  - enabled: 1
+    path: Assets/Scenes/QuizScene/Maths/Arithmetic.unity
+    guid: 2db827360ddfa1444838a9d4ab536741
   m_configObjects: {}

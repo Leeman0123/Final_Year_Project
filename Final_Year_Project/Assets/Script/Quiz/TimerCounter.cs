@@ -122,6 +122,16 @@ public class TimerCounter : MonoBehaviour
                         GenerateRandomMcQuestionMathsSubAdd.instance.questions.Pop();
                         GenerateRandomMcQuestionMathsSubAdd.instance.GenerateRandomQuestion();
                     }
+                    else if (SceneManager.GetActiveScene().name == "Decimal")
+                    {
+                        GenerateRandomMcQuestionMathsDecimal.instance.questions.Pop();
+                        GenerateRandomMcQuestionMathsDecimal.instance.GenerateRandomQuestion();
+                    }
+                    else if (SceneManager.GetActiveScene().name == "Arithmetic")
+                    {
+                        GenerateRandomMcQuestionMathsArith.instance.questions.Pop();
+                        GenerateRandomMcQuestionMathsArith.instance.GenerateRandomQuestion();
+                    }
                 }
             }
         }

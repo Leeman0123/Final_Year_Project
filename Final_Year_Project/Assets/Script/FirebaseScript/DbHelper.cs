@@ -1071,4 +1071,190 @@ public class DbHelper : MonoBehaviour
         }
         return true;
     }
+
+    public static async Task<bool> AddNewMathsP3DecimalResult(string uid, int correctCount, int questionsTotal, int timeCount, int available)
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = uid;
+        eqvao.correctCount = correctCount;
+        eqvao.questionsTotal = questionsTotal;
+        eqvao.timeCount = timeCount;
+        eqvao.attemptLeft = available;
+        string json = JsonUtility.ToJson(eqvao);
+        var task = reference.Child("MathsQuiz").Child("PrimaryThree").Child("MathsQuizDecimal").Child(uid).SetRawJsonValueAsync(json);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<McQuestionQuiz> GetMathsP3DecimalResultById(string uid)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference("MathsQuiz")
+                    .Child("PrimaryThree")
+                    .Child("MathsQuizDecimal")
+                    .Child(uid)
+                    .GetValueAsync();
+        await task;
+        if (task.Exception != null)
+        {
+            return null;
+        }
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return null;
+        }
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = data.Child("uid").Value.ToString();
+        eqvao.correctCount = Convert.ToInt32(data.Child("correctCount").Value);
+        eqvao.questionsTotal = Convert.ToInt32(data.Child("questionsTotal").Value);
+        eqvao.timeCount = Convert.ToInt32(data.Child("timeCount").Value);
+        eqvao.attemptLeft = Convert.ToInt32(data.Child("attemptLeft").Value);
+        return eqvao;
+    }
+
+    public static async Task<bool> UpdateMathsP3DecimalCorrectCount(string userId, int correctCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("MathsQuiz")
+            .Child("PrimaryThree")
+            .Child("MathsQuizDecimal")
+            .Child(userId)
+            .Child("correctCount").SetValueAsync(correctCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static async Task<bool> UpdateMathsP3DecimalAttempt(string userId, int attemptCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("MathsQuiz")
+            .Child("PrimaryThree")
+            .Child("MathsQuizDecimal")
+            .Child(userId)
+            .Child("attemptLeft").SetValueAsync(attemptCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> UpdateMathsP3DecimalTimes(string userId, int timesCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("MathsQuiz")
+            .Child("PrimaryThree")
+            .Child("MathsQuizDecimal")
+            .Child(userId)
+            .Child("timeCount").SetValueAsync(timesCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> AddNewMathsP3ArithResult(string uid, int correctCount, int questionsTotal, int timeCount, int available)
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = uid;
+        eqvao.correctCount = correctCount;
+        eqvao.questionsTotal = questionsTotal;
+        eqvao.timeCount = timeCount;
+        eqvao.attemptLeft = available;
+        string json = JsonUtility.ToJson(eqvao);
+        var task = reference.Child("MathsQuiz").Child("PrimaryThree").Child("MathsQuizArith").Child(uid).SetRawJsonValueAsync(json);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<McQuestionQuiz> GetMathsP3ArithResultById(string uid)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference("MathsQuiz")
+                    .Child("PrimaryThree")
+                    .Child("MathsQuizArith")
+                    .Child(uid)
+                    .GetValueAsync();
+        await task;
+        if (task.Exception != null)
+        {
+            return null;
+        }
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return null;
+        }
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = data.Child("uid").Value.ToString();
+        eqvao.correctCount = Convert.ToInt32(data.Child("correctCount").Value);
+        eqvao.questionsTotal = Convert.ToInt32(data.Child("questionsTotal").Value);
+        eqvao.timeCount = Convert.ToInt32(data.Child("timeCount").Value);
+        eqvao.attemptLeft = Convert.ToInt32(data.Child("attemptLeft").Value);
+        return eqvao;
+    }
+
+    public static async Task<bool> UpdateMathsP3ArithCorrectCount(string userId, int correctCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("MathsQuiz")
+            .Child("PrimaryThree")
+            .Child("MathsQuizArith")
+            .Child(userId)
+            .Child("correctCount").SetValueAsync(correctCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+    public static async Task<bool> UpdateMathsP3ArithAttempt(string userId, int attemptCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("MathsQuiz")
+            .Child("PrimaryThree")
+            .Child("MathsQuizArith")
+            .Child(userId)
+            .Child("attemptLeft").SetValueAsync(attemptCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> UpdateMathsP3ArithTimes(string userId, int timesCount)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+            .GetReference("MathsQuiz")
+            .Child("PrimaryThree")
+            .Child("MathsQuizArith")
+            .Child(userId)
+            .Child("timeCount").SetValueAsync(timesCount);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
 }
