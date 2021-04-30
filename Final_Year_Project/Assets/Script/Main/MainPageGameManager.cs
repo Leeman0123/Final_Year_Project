@@ -78,7 +78,14 @@ public class MainPageGameManager : MonoBehaviour
     [Header("P3 Chinese Btn")]
     public Button p3Idiom1;
     public Button p3Idiom2;
-
+    [Header("Setting Button")]
+    public Button settingBtn;
+    public GameObject settingPanel;
+    public Button resetPassword;
+    public Button freeUpSpaceBtn;
+    public InputField emailInputField;
+    public Button submitEmail;
+    public GameObject emailResetPanel;
 
     [Header("Store")]
     [SerializeField] Button storeBtn;
@@ -100,6 +107,15 @@ public class MainPageGameManager : MonoBehaviour
         chineseP2.onClick.AddListener(() => ShowP2Chinese());
         chineseP3.onClick.AddListener(() => ShowP3Chinese());
         storeBtn.onClick.AddListener(() => ShowStorePanel());
+        settingBtn.onClick.AddListener(() =>
+        {
+            settingPanel.SetActive(true);
+        });
+        freeUpSpaceBtn.onClick.AddListener(() =>
+        {
+            settingPanel.SetActive(false);
+            StartCoroutine(GeneralScript.FreeUpStorage());
+        });
         p1VocabAnimals.onClick.AddListener(async() =>
         {
             bool downCoinsDetailsSuccess = await CloudStorageHelper.DownloadAnimalsP1QuizConisDetails();
@@ -259,6 +275,30 @@ public class MainPageGameManager : MonoBehaviour
             if (downCoinsDetailsSuccess && downQuizDetailsSuccess)
             {
                 RedirectToChineseIdiom2L3();
+            }
+        });
+        resetPassword.onClick.AddListener(() =>
+        {
+            settingPanel.SetActive(false);
+            emailResetPanel.SetActive(true);
+        });
+        submitEmail.onClick.AddListener(async() =>
+        {
+            Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
+            string currentEmail = auth.CurrentUser.Email;
+            if (emailInputField.text == currentEmail)
+            {
+                var task = auth.SendPasswordResetEmailAsync(currentEmail);
+                await task;
+                if (task.IsFaulted)
+                {
+                    GeneralScript.ShowMessagePanel("Canvas", "Cannot connect to Firebase");
+                    return;
+                }
+                GeneralScript.ShowMessagePanel("Canvas", "Reset email sent. Please check your email");
+            }
+            else {
+                GeneralScript.ShowMessagePanel("Canvas", "Your email is not match to your account.");
             }
         });
     }
