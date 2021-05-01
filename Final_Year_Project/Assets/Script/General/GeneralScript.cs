@@ -106,6 +106,22 @@ public class GeneralScript : MonoBehaviour
         panelScript.SetSaveMessage(fileName);
     }
 
+    public static void DisplayUploadQuestionStateForDownloadPanel()
+    {
+        string myMessage = string.Format("Uploading {0}", "quiz question");
+        ProgessBarForDownloadPanel panelScript = GameObject.Find("ProgressBarDownPanelWithText").GetComponent<ProgessBarForDownloadPanel>();
+        panelScript.SetMessageText(myMessage);
+        panelScript.SetSaveMessage("quiz question");
+    }
+
+    public static void DisplayUploadQuestionDetailsStateForDownloadPanel()
+    {
+        string myMessage = string.Format("Uploading {0}", "quiz details");
+        ProgessBarForDownloadPanel panelScript = GameObject.Find("ProgressBarDownPanelWithText").GetComponent<ProgessBarForDownloadPanel>();
+        panelScript.SetMessageText(myMessage);
+        panelScript.SetSaveMessage("quiz question");
+    }
+
 
 
     public static IEnumerator FreeUpStorage()

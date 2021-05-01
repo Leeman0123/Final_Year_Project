@@ -1840,4 +1840,42 @@ public class DbHelper : MonoBehaviour
         return list.OrderByDescending(o => o.correctCount)
             .OrderBy(o => o.timeCount).ToList();
     }
+
+    public static async Task<bool> AddNewExtraQuiz(string type, string quizName, string enable, string uid) 
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        ExtraQuizEntry eq = new ExtraQuizEntry();
+        eq.uid = uid;
+        eq.enable = enable;
+        string json = JsonUtility.ToJson(eq);
+        var task = reference.Child(type).Child(quizName).SetRawJsonValueAsync(json);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<ExtraQuizEntry> GetExtraQuizByName(string type, string quizName)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference(type)
+                    .Child(quizName)
+                    .GetValueAsync();
+        await task;
+        if (task.Exception != null)
+        {
+            return null;
+        }
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return null;
+        }
+        ExtraQuizEntry eqvao = new ExtraQuizEntry();
+        eqvao.enable = data.Child("enable").Value.ToString();
+        eqvao.uid = data.Child("uid").Value.ToString();
+        return eqvao;
+    }
 }

@@ -766,6 +766,36 @@ public class CloudStorageHelper : MonoBehaviour
         return true;
     }
 
+    public static async Task<bool> UploadFileWithName(string folderName, string name, int type)
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + $"{folderName}/" + name);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        GeneralScript.DestroyDownloadPanel();
+        var task = httpsReference.PutFileAsync(Application.persistentDataPath + "/" + name);
+        if (type == 0)
+        {
+            GameObject myObj = GeneralScript.ShowMessagePanelWithTextLoading("Canvas", "uploading question data");
+            await task;
+            GameObject.Destroy(myObj);
+        }
+        else if (type == 1)
+        {
+            GameObject myObj = GeneralScript.ShowMessagePanelWithTextLoading("Canvas", "uploading question details");
+            await task;
+            GameObject.Destroy(myObj);
+        }
+        
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Upload data: " + name + " failed.");
+            return false;
+        }
+        await Task.Delay(1000);
+        return true;
+    }
+
     private static void DisplayDownloadState(DownloadState downloadState)
     {
             Debug.Log(String.Format("Downloading {0}: {1} out of {2}", downloadState.Reference.Name,
