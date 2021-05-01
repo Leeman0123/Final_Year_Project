@@ -5,6 +5,7 @@ using UnityEngine;
 using Firebase;
 using Firebase.Database;
 using System.Threading.Tasks;
+using System.Linq;
 
 public class DbHelper : MonoBehaviour
 {
@@ -1814,5 +1815,29 @@ public class DbHelper : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public static async Task<List<McQuestionQuiz>> GetQuizRank(string testName, string quizSubject, string primaryLevel)
+    {
+        List<McQuestionQuiz> list = new List<McQuestionQuiz>();
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference(quizSubject)
+                    .Child(primaryLevel)
+                    .Child(testName)
+                    .GetValueAsync();
+        await task;
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return null;
+        }
+        foreach (var snapshot in data.Children)
+        {
+            string json = snapshot.GetRawJsonValue();
+            McQuestionQuiz quiz = JsonUtility.FromJson<McQuestionQuiz>(json);
+            list.Add(quiz);
+        }
+        return list.OrderByDescending(o => o.correctCount)
+            .OrderBy(o => o.timeCount).ToList();
     }
 }

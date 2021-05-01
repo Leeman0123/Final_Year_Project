@@ -2184,7 +2184,7 @@ MonoBehaviour:
   messagePanelDescription: {fileID: 1593852719}
   messagePanelOkBtn: {fileID: 1523037680}
   messagePanelCloseBtn: {fileID: 790874284}
-  scoreText: {fileID: 1066507500}
+  scoreText: {fileID: 1742249868}
   amazing: {fileID: 481251577}
   good: {fileID: 1220923126}
   awesome: {fileID: 1523355392}

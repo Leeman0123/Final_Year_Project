@@ -191,9 +191,9 @@ public class TimerCounter : MonoBehaviour
     }
 
     public int GetSeconds() {
-        int timeCountToMinutes = Mathf.FloorToInt(timeCount / 60);
-        int timeCountToSeconds = Mathf.FloorToInt(timeCount - timeCountToMinutes * 60f);
-        return timeCountToSeconds;
+        //int timeCountToMinutes = Mathf.FloorToInt(timeCount / 60);
+        //int timeCountToSeconds = Mathf.FloorToInt(timeCount - timeCountToMinutes * 60f);
+        return Mathf.FloorToInt(timeCount);
     }
 
     public void ReduceTimeAvailabe(float seconds) {
