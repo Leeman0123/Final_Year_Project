@@ -1847,6 +1847,7 @@ public class DbHelper : MonoBehaviour
         ExtraQuizEntry eq = new ExtraQuizEntry();
         eq.uid = uid;
         eq.enable = enable;
+        eq.quizName = quizName;
         string json = JsonUtility.ToJson(eq);
         var task = reference.Child(type).Child(quizName).SetRawJsonValueAsync(json);
         await task;
@@ -1877,5 +1878,61 @@ public class DbHelper : MonoBehaviour
         eqvao.enable = data.Child("enable").Value.ToString();
         eqvao.uid = data.Child("uid").Value.ToString();
         return eqvao;
+    }
+
+
+    public static async Task<String> GetExtraQuizUploaderById(string uid)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference("teachers")
+                    .Child(uid)
+                    .GetValueAsync();
+        await task;
+        if (task.Exception != null)
+        {
+            return null;
+        }
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return null;
+        }
+        string teacherName = data.Child("name").Value.ToString();
+        return teacherName;
+    }
+
+    public static async Task<bool> UpdateQuizStatus(string type, string quizName, string status)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference(type)
+                    .Child(quizName)
+                    .Child("enable").SetValueAsync(status);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<string> GetQuizStatus(string type, string quizName)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference(type)
+                    .Child(quizName)
+                    .GetValueAsync();
+        await task;
+        await task;
+        if (task.Exception != null)
+        {
+            return null;
+        }
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return null;
+        }
+        string teacherName = data.Child("enable").Value.ToString();
+        return teacherName;
     }
 }

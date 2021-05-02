@@ -8,4 +8,5 @@ public class ExtraQuizEntry
 {
     public string uid;
     public string enable;
+    public string quizName;
 }
