@@ -1981,30 +1981,43 @@ public class DbHelper : MonoBehaviour
         return eqvao;
     }
 
-    public static async void GetExtraQuizResultRank(string quizSubject, string quizName)
+
+    public static async Task<List<McQuestionQuiz>> GetExtraQuizRank(string quizSubject, string quizName)
     {
+        List<McQuestionQuiz> list = new List<McQuestionQuiz>();
         var task = FirebaseDatabase.DefaultInstance
                     .GetReference(quizSubject)
                     .Child(quizName)
                     .GetValueAsync();
         await task;
+        DataSnapshot data = task.Result;
         if (task.Exception != null)
         {
-            return;
+            return null;
         }
-        DataSnapshot data = task.Result;
         if (!data.Exists)
         {
-            return;
+            return null;
         }
-        else
+        foreach (var datalist in data.Children)
         {
-            foreach (var datalist in data.Children)
+            string studentKeys = datalist.Key;
+            if (studentKeys.Contains("enable") ||
+                studentKeys.Contains("quizName") ||
+                studentKeys.Contains("uid"))
             {
-                Debug.Log("BIGJJ" + datalist.Key);
+                continue;
+            }
+            else
+            {
+                string studentKey = datalist.Key;
+                McQuestionQuiz mc = await GetExtraQuizResult(studentKey, quizSubject, quizName);
+                list.Add(mc);
             }
         }
-
+        return list.OrderByDescending(o => o.correctCount).OrderBy(o => o.timeCount).ToList();
     }
+
+    
 
 }

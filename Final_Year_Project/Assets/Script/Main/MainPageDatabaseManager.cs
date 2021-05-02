@@ -197,9 +197,10 @@ public class MainPageDatabaseManager : MonoBehaviour
                     xdd.name = $"{data.Child("quizName").Value.ToString()}Extra";
                     xdd.transform.Find("Text").GetComponent<Text>().text = $"{data.Child("quizName").Value.ToString()}\n(Extra)"; 
                     xdd.transform.SetParent(ChineseLeaderBoardContent.transform, false);
-                    xdd.GetComponent<Button>().onClick.AddListener(() =>
+                    string xddName = data.Child("quizName").Value.ToString();
+                    Button btn = xdd.GetComponent<Button>();
+                    btn.onClick.AddListener(() =>
                     {
-                        string xddName = data.Child("quizName").Value.ToString();
                         ShowExtraTop10(subjectName, xddName);
                     });
                 }
@@ -210,6 +211,12 @@ public class MainPageDatabaseManager : MonoBehaviour
                     xdd.name = $"{data.Child("quizName").Value.ToString()}Extra";
                     xdd.transform.Find("Text").GetComponent<Text>().text = $"{data.Child("quizName").Value.ToString()}\n(Extra)";
                     xdd.transform.SetParent(ChineseLeaderBoardContent.transform, false);
+                    string xddName = data.Child("quizName").Value.ToString();
+                    Button btn = xdd.GetComponent<Button>();
+                    btn.onClick.AddListener(() =>
+                    {
+                        ShowExtraTop10(subjectName, xddName);
+                    });
                 }
             
                 else if (subjectName == "MathematicsExtra")
@@ -219,6 +226,12 @@ public class MainPageDatabaseManager : MonoBehaviour
                     xdd.name = $"{data.Child("quizName").Value.ToString()}Extra";
                     xdd.transform.Find("Text").GetComponent<Text>().text = $"{data.Child("quizName").Value.ToString()}\n(Extra)";
                     xdd.transform.SetParent(ChineseLeaderBoardContent.transform, false);
+                    string xddName = data.Child("quizName").Value.ToString();
+                    Button btn = xdd.GetComponent<Button>();
+                    btn.onClick.AddListener(() =>
+                    {
+                        ShowExtraTop10(subjectName, xddName);
+                    });
                 }
             }
 
@@ -262,7 +275,88 @@ public class MainPageDatabaseManager : MonoBehaviour
 
     async void ShowExtraTop10(string subject, string name)
     {
-        DbHelper.GetExtraQuizResultRank(subject, name);
+        List<McQuestionQuiz> rankList = await DbHelper.GetExtraQuizRank(subject, name);
+        HideAllLeaderBoard();
+        top10.SetActive(true);
+        backBtnLeaderBoard.gameObject.SetActive(true);
+        foreach (Transform child in top10ScrollView.transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+        top10ScrollView.SetActive(true);
+        for (int i = 0; i <= rankList.Count - 1; i++)
+        {
+            Students student = await DbHelper.GetStudentById(rankList[i].uid);
+            if (i == 0)
+            {
+                var loadedObject = Resources.Load("General/Rank1Panel");
+                GameObject rankRow = GameObject.Instantiate(loadedObject) as GameObject;
+                Text accuracy = rankRow.transform.Find("Accuracy").gameObject.GetComponent<Text>();
+                Text timeUsed = rankRow.transform.Find("TimeUsed").gameObject.GetComponent<Text>();
+                Text nameb = rankRow.transform.Find("Name").gameObject.GetComponent<Text>();
+                nameb.text = student.name;
+                TimeSpan time = TimeSpan.FromSeconds(rankList[i].timeCount);
+                DateTime dateTime = DateTime.Today.Add(time);
+                int mmss = Convert.ToInt32(rankList[i].correctCount / (float)rankList[i].questionsTotal * 100);
+
+                accuracy.text = $"{mmss.ToString()}%";
+                timeUsed.text = dateTime.ToString("mm:ss");
+                rankRow.transform.SetParent(top10ScrollView.transform, false);
+
+            }
+            else if (i == 1)
+            {
+                var loadedObject = Resources.Load("General/Rank2Panel");
+                GameObject rankRow = GameObject.Instantiate(loadedObject) as GameObject;
+                Text accuracy = rankRow.transform.Find("Accuracy").gameObject.GetComponent<Text>();
+                Text timeUsed = rankRow.transform.Find("TimeUsed").gameObject.GetComponent<Text>();
+                Text nameb = rankRow.transform.Find("Name").gameObject.GetComponent<Text>();
+                nameb.text = student.name;
+                TimeSpan time = TimeSpan.FromSeconds(rankList[i].timeCount);
+                DateTime dateTime = DateTime.Today.Add(time);
+                int mmss = Convert.ToInt32(rankList[i].correctCount / (float)rankList[i].questionsTotal * 100);
+
+                accuracy.text = $"{mmss.ToString()}%";
+                timeUsed.text = dateTime.ToString("mm:ss");
+                rankRow.transform.SetParent(top10ScrollView.transform, false);
+
+            }
+            else if (i == 2)
+            {
+                var loadedObject = Resources.Load("General/Rank3Panel");
+                GameObject rankRow = GameObject.Instantiate(loadedObject) as GameObject;
+                Text accuracy = rankRow.transform.Find("Accuracy").gameObject.GetComponent<Text>();
+                Text timeUsed = rankRow.transform.Find("TimeUsed").gameObject.GetComponent<Text>();
+                Text nameb = rankRow.transform.Find("Name").gameObject.GetComponent<Text>();
+                nameb.text = student.name;
+                TimeSpan time = TimeSpan.FromSeconds(rankList[i].timeCount);
+                DateTime dateTime = DateTime.Today.Add(time);
+                int mmss = Convert.ToInt32(rankList[i].correctCount / (float)rankList[i].questionsTotal * 100);
+
+                accuracy.text = $"{mmss.ToString()}%";
+                timeUsed.text = dateTime.ToString("mm:ss");
+                rankRow.transform.SetParent(top10ScrollView.transform, false);
+
+            }
+            else
+            {
+                var loadedObject = Resources.Load("General/NormalLeaderBoardPanel");
+                GameObject rankRow = GameObject.Instantiate(loadedObject) as GameObject;
+                Text rankText = rankRow.transform.Find("RankText").gameObject.GetComponent<Text>();
+                rankText.text = $"{(i + 1).ToString()}.";
+                Text accuracy = rankRow.transform.Find("Accuracy").gameObject.GetComponent<Text>();
+                Text timeUsed = rankRow.transform.Find("TimeUsed").gameObject.GetComponent<Text>();
+                Text nameb = rankRow.transform.Find("Name").gameObject.GetComponent<Text>();
+                nameb.text = student.name;
+                TimeSpan time = TimeSpan.FromSeconds(rankList[i].timeCount);
+                DateTime dateTime = DateTime.Today.Add(time);
+                int mmss = Convert.ToInt32(rankList[i].correctCount / (float)rankList[i].questionsTotal * 100);
+
+                accuracy.text = $"{mmss.ToString()}%";
+                timeUsed.text = dateTime.ToString("mm:ss");
+                rankRow.transform.SetParent(top10ScrollView.transform, false);
+            }
+        }
     }
 
     async void ShowChineseTop10(string testName, int subject, int primary)
