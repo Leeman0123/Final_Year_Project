@@ -766,6 +766,46 @@ public class CloudStorageHelper : MonoBehaviour
         return true;
     }
 
+    public static async Task<bool> DownloadExtraQuizDetails(string type, string quizName)
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = $"{quizName}.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + $"{type}/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<bool> DownloadExtraQuizCoinsDetails(string type, string quizName)
+    {
+        FirebaseStorage storage = FirebaseStorage.DefaultInstance;
+        string jsonFileName = $"{quizName}Coins.json";
+        StorageReference httpsReference = storage.GetReferenceFromUrl(finalReferenceUrl
+            + $"{type}/" + jsonFileName);
+        GeneralScript.ShowDownloadPanel("Canvas", "Connecting to the server...");
+        Debug.Log(Application.persistentDataPath + "/" + jsonFileName);
+        var task = httpsReference.GetFileAsync(Application.persistentDataPath + "/" + jsonFileName);
+        GeneralScript.DisplayDownloadStateForDownloadPanel(jsonFileName);
+        await task;
+        GeneralScript.DestroyDownloadPanel();
+        if (task.Exception != null)
+        {
+            GeneralScript.ShowErrorMessagePanel("Canvas", "Download data: " + jsonFileName + " failed.");
+            return false;
+        }
+        return true;
+    }
+
     public static async Task<bool> UploadFileWithName(string folderName, string name, int type)
     {
         FirebaseStorage storage = FirebaseStorage.DefaultInstance;

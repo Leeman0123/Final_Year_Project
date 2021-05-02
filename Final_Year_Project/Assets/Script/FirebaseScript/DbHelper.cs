@@ -1935,4 +1935,76 @@ public class DbHelper : MonoBehaviour
         string teacherName = data.Child("enable").Value.ToString();
         return teacherName;
     }
+
+    public static async Task<bool> AddNewExtraQuizResult(string uid, int correctCount, int questionsTotal, int timeCount, int available, string quizSubject, string quizName)
+    {
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = uid;
+        eqvao.correctCount = correctCount;
+        eqvao.questionsTotal = questionsTotal;
+        eqvao.timeCount = timeCount;
+        eqvao.attemptLeft = available;
+        string json = JsonUtility.ToJson(eqvao);
+        var task = reference.Child(quizSubject).Child(quizName).Child(uid).SetRawJsonValueAsync(json);
+        await task;
+        if (task.Exception != null)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static async Task<McQuestionQuiz> GetExtraQuizResult(string uid, string quizSubject, string quizName)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference(quizSubject)
+                    .Child(quizName)
+                    .Child(uid)
+                    .GetValueAsync();
+        await task;
+        if (task.Exception != null)
+        {
+            return null;
+        }
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return null;
+        }
+        McQuestionQuiz eqvao = new McQuestionQuiz();
+        eqvao.uid = data.Child("uid").Value.ToString();
+        eqvao.correctCount = Convert.ToInt32(data.Child("correctCount").Value);
+        eqvao.questionsTotal = Convert.ToInt32(data.Child("questionsTotal").Value);
+        eqvao.timeCount = Convert.ToInt32(data.Child("timeCount").Value);
+        eqvao.attemptLeft = Convert.ToInt32(data.Child("attemptLeft").Value);
+        return eqvao;
+    }
+
+    public static async void GetExtraQuizResultRank(string quizSubject, string quizName)
+    {
+        var task = FirebaseDatabase.DefaultInstance
+                    .GetReference(quizSubject)
+                    .Child(quizName)
+                    .GetValueAsync();
+        await task;
+        if (task.Exception != null)
+        {
+            return;
+        }
+        DataSnapshot data = task.Result;
+        if (!data.Exists)
+        {
+            return;
+        }
+        else
+        {
+            foreach (var datalist in data.Children)
+            {
+                Debug.Log("BIGJJ" + datalist.Key);
+            }
+        }
+
+    }
+
 }

@@ -29,28 +29,37 @@ public class MainPageGameManager : MonoBehaviour
     public Button engP1;
     public Button engP2;
     public Button engP3;
+    public Button englishExtra;
     public GameObject engSelectLevelScrollView;
     public GameObject P1ScrollView;
     public GameObject P2ScrollView;
     public GameObject P3ScrollView;
+    public GameObject englishExtraScrollView;
+    public GameObject englishExtraScrollViewContent;
     [Header("ScrollView Maths")]
     public Button backBtnMaths;
     public Button mathsP1;
     public Button mathsP2;
     public Button mathsP3;
+    public Button mathsExtra;
     public GameObject mathsSelectLevelScrollView;
     public GameObject P1ScrollViewMaths;
     public GameObject P2ScrollViewMaths;
     public GameObject P3ScrollViewMaths;
+    public GameObject mathsExtraScrollView;
+    public GameObject mathsExtraScrollViewContent;
     [Header("ScrollView Chinese")]
     public Button backBtnChinese;
     public Button chineseP1;
     public Button chineseP2;
     public Button chineseP3;
+    public Button chineseExtra;
     public GameObject chineseSelectLevelScrollView;
     public GameObject P1ScrollViewChinese;
     public GameObject P2ScrollViewChinese;
     public GameObject P3ScrollViewChinese;
+    public GameObject chineseExtraScrollView;
+    public GameObject chineseExtraScrollViewContent;
     [Header("P1 English Btn")]
     public Button p1VocabAnimals;
     public Button p1VocabVehicles;
@@ -107,6 +116,9 @@ public class MainPageGameManager : MonoBehaviour
         chineseP2.onClick.AddListener(() => ShowP2Chinese());
         chineseP3.onClick.AddListener(() => ShowP3Chinese());
         storeBtn.onClick.AddListener(() => ShowStorePanel());
+        mathsExtra.onClick.AddListener(() => ShowMathsExtra());
+        chineseExtra.onClick.AddListener(() => ShowChineseExtra());
+        englishExtra.onClick.AddListener(() => ShowEnglishExtra());
         settingBtn.onClick.AddListener(() =>
         {
             settingPanel.SetActive(true);
@@ -301,6 +313,149 @@ public class MainPageGameManager : MonoBehaviour
                 GeneralScript.ShowMessagePanel("Canvas", "Your email is not match to your account.");
             }
         });
+        AddExtraExerciseListener();
+    }
+
+    private void AddExtraExerciseListener()
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("ChineseExtra")
+            .ValueChanged += HandledDatabaseValueChanged;
+        FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishExtra")
+            .ValueChanged += HandledDatabaseValueChanged;
+        FirebaseDatabase.DefaultInstance
+            .GetReference("MathematicsExtra")
+            .ValueChanged += HandledDatabaseValueChanged;
+    }
+
+    private void HandledDatabaseValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        if (e.DatabaseError != null)
+        {
+            Debug.LogError(e.DatabaseError);
+            return;
+        }
+        else
+        {
+            DataSnapshot dataList = e.Snapshot;
+            string subjectName = dataList.Key;
+            if (subjectName == "ChineseExtra")
+            {
+                ClearRowsInTableChineseExtra();
+            }
+            else if (subjectName == "EnglishExtra")
+            {
+                ClearRowsInTableEnglishExtra();
+            }
+            else if (subjectName == "MathematicsExtra")
+            {
+                ClearRowsInTableMathsExtra();
+            }
+            foreach (DataSnapshot data in dataList.Children)
+            {
+                if (subjectName == "ChineseExtra")
+                {
+                    if (data.Child("enable").Value.ToString() == "true") {
+                        var loadedObject = Resources.Load("Main/QuizButtonChinese");
+                        GameObject panel = GameObject.Instantiate(loadedObject) as GameObject;
+                        Text quizName = panel.transform.Find("Text").gameObject.GetComponent<Text>();
+                        quizName.text = data.Child("quizName").Value.ToString() + "\n(Extra)";
+                        string xxx = data.Child("quizName").Value.ToString();
+                        panel.GetComponent<Button>().onClick.AddListener(async () =>
+                        {
+                            await CloudStorageHelper.DownloadExtraQuizDetails("ChineseExtra", xxx);
+                            await CloudStorageHelper.DownloadExtraQuizCoinsDetails("ChineseExtra", xxx);
+                            RedirectToExtraQuiz($"{xxx}Coins.json");
+                        });
+                        panel.transform.SetParent(chineseExtraScrollViewContent.transform, false);
+                    }
+                    
+                }
+                else if (subjectName == "EnglishExtra")
+                {
+                    var loadedObject = Resources.Load("Main/QuizButtonEnglish");
+                    GameObject panel = GameObject.Instantiate(loadedObject) as GameObject;
+                    Text quizName = panel.transform.Find("Text").gameObject.GetComponent<Text>();
+                    quizName.text = data.Child("quizName").Value.ToString() + "\n(Extra)";
+                    string xxx = data.Child("quizName").Value.ToString();
+                    panel.GetComponent<Button>().onClick.AddListener(async () =>
+                    {
+                        await CloudStorageHelper.DownloadExtraQuizDetails("EnglishExtra", xxx);
+                        await CloudStorageHelper.DownloadExtraQuizCoinsDetails("EnglishExtra", xxx);
+                        RedirectToExtraQuiz($"{xxx}Coins.json");
+                    });
+                    panel.transform.SetParent(englishExtraScrollViewContent.transform, false);
+
+
+                }
+                else if (subjectName == "MathematicsExtra")
+                {
+                    var loadedObject = Resources.Load("Main/QuizButtonMaths");
+                    GameObject panel = GameObject.Instantiate(loadedObject) as GameObject;
+                    Text quizName = panel.transform.Find("Text").gameObject.GetComponent<Text>();
+                    quizName.text = data.Child("quizName").Value.ToString() + "\n(Extra)";
+                    string xxx = data.Child("quizName").Value.ToString();
+                    panel.GetComponent<Button>().onClick.AddListener(async () =>
+                    {
+                        await CloudStorageHelper.DownloadExtraQuizDetails("MathematicsExtra", xxx);
+                        await CloudStorageHelper.DownloadExtraQuizCoinsDetails("MathematicsExtra", xxx);
+                        RedirectToExtraQuiz($"{xxx}Coins.json");
+                    });
+                    panel.transform.SetParent(mathsExtraScrollViewContent.transform, false);
+                }
+            }
+        }
+    }
+
+    private void ClearRowsInTableChineseExtra()
+    {
+        int tableRowCount = chineseExtraScrollViewContent.transform.childCount;
+        for (int i = 0; i < tableRowCount; i++)
+        {
+            GameObject.Destroy(chineseExtraScrollViewContent
+                .transform
+                .GetChild(i)
+                .gameObject);
+            Debug.Log(string.Format("Deleted table row {0}", i));
+        }
+    }
+
+    private void RedirectToExtraQuiz(string json)
+    {
+        string coinsJson = File.ReadAllText(Application.persistentDataPath + "/" + json);
+        ExtraCoins coin = JsonUtility.FromJson<ExtraCoins>(coinsJson);
+        GameObject createNewGameObject = new GameObject("ExtraCoinsLevel");
+        ExtraCoinsLevel c = createNewGameObject.AddComponent<ExtraCoinsLevel>();
+        c.InitializeValue(coin.coinsGain, coin.quizDuration, coin.quizName, coin.quizSubject);
+        DontDestroyOnLoad(createNewGameObject);
+        GeneralScript.RedirectPageWithT("ExtraQuiz", "Redirecting to the Extra Quiz", "Canvas");
+    }
+
+    private void ClearRowsInTableEnglishExtra()
+    {
+        int tableRowCount = englishExtraScrollViewContent.transform.childCount;
+        for (int i = 0; i < tableRowCount; i++)
+        {
+            GameObject.Destroy(chineseExtraScrollViewContent
+                .transform
+                .GetChild(i)
+                .gameObject);
+            Debug.Log(string.Format("Deleted table row {0}", i));
+        }
+    }
+
+    private void ClearRowsInTableMathsExtra()
+    {
+        int tableRowCount = mathsExtraScrollViewContent.transform.childCount;
+        for (int i = 0; i < tableRowCount; i++)
+        {
+            GameObject.Destroy(mathsExtraScrollViewContent
+                .transform
+                .GetChild(i)
+                .gameObject);
+            Debug.Log(string.Format("Deleted table row {0}", i));
+        }
     }
 
     private void RedirectToChineseIdiom2L3()
@@ -508,6 +663,7 @@ public class MainPageGameManager : MonoBehaviour
         P1ScrollView.SetActive(false);
         P2ScrollView.SetActive(false);
         P3ScrollView.SetActive(false);
+        englishExtraScrollView.SetActive(false);
     }
 
     void ShowMathsSelect()
@@ -517,6 +673,7 @@ public class MainPageGameManager : MonoBehaviour
         P1ScrollViewMaths.SetActive(false);
         P2ScrollViewMaths.SetActive(false);
         P3ScrollViewMaths.SetActive(false);
+        mathsExtraScrollView.SetActive(false);
     }
 
     void ShowChineseSelect()
@@ -526,6 +683,28 @@ public class MainPageGameManager : MonoBehaviour
         P1ScrollViewChinese.SetActive(false);
         P2ScrollViewChinese.SetActive(false);
         P3ScrollViewChinese.SetActive(false);
+        chineseExtraScrollView.SetActive(false);
+    }
+
+    void ShowChineseExtra()
+    {
+        backBtnChinese.gameObject.SetActive(true);
+        chineseSelectLevelScrollView.gameObject.SetActive(false);
+        chineseExtraScrollView.SetActive(true);
+    }
+
+    void ShowEnglishExtra()
+    {
+        backBtnEng.gameObject.SetActive(true);
+        engSelectLevelScrollView.gameObject.SetActive(false);
+        englishExtraScrollView.SetActive(true);
+    }
+
+    void ShowMathsExtra()
+    {
+        backBtnMaths.gameObject.SetActive(true);
+        mathsSelectLevelScrollView.gameObject.SetActive(false);
+        mathsExtraScrollView.SetActive(true);
     }
 
     void ShowP1Eng()

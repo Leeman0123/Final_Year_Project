@@ -303,7 +303,7 @@ public class CreateQuiz : MonoBehaviour
         Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
         string userid = auth.CurrentUser.UserId;
         _jsonQuestion = JsonHelper.ToJson(qjList.ToArray(), false);
-        System.IO.File.WriteAllText(Application.persistentDataPath + $"/{_savedQuizName}.json", _quizSetting);
+        System.IO.File.WriteAllText(Application.persistentDataPath + $"/{_savedQuizName}.json", _jsonQuestion);
         await DbHelper.AddNewExtraQuiz(_subjectOptions, _savedQuizName, "true", userid);
         await CloudStorageHelper.UploadFileWithName(_subjectOptions, $"{_savedQuizName}.json", 0);
         await CloudStorageHelper.UploadFileWithName(_subjectOptions, $"{_savedQuizName}Coins.json", 1);

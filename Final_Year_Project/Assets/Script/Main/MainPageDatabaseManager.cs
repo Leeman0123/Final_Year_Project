@@ -13,6 +13,9 @@ public class MainPageDatabaseManager : MonoBehaviour
     public GameObject EnglishLeaderBoard;
     public GameObject MathematicsLeaderBoard;
     public GameObject LeaderBoardSubjectSelect;
+    public GameObject ChineseLeaderBoardContent;
+    public GameObject EnglishLeaderBoardContent;
+    public GameObject MathematicsLeaderBoardContent;
     public Button leaderBoardBtn;
     public Button backBtnLeaderBoard;
     public Button chineseBtnL;
@@ -128,6 +131,98 @@ public class MainPageDatabaseManager : MonoBehaviour
         {
             ShowChineseTop10("MathsQuizDecimal", 3, 3);
         });
+        AddChineseExtraQuizListener();
+    }
+
+    void AddChineseExtraQuizListener()
+    {
+        FirebaseDatabase.DefaultInstance
+            .GetReference("ChineseExtra")
+            .ValueChanged += HandledDatabaseValueChanged;
+        FirebaseDatabase.DefaultInstance
+            .GetReference("EnglishExtra")
+            .ValueChanged += HandledDatabaseValueChanged;
+        FirebaseDatabase.DefaultInstance
+            .GetReference("MathematicsExtra")
+            .ValueChanged += HandledDatabaseValueChanged;
+    }
+
+    private void HandledDatabaseValueChanged(object sender, ValueChangedEventArgs e)
+    {
+        if (e.DatabaseError != null)
+        {
+            Debug.LogError(e.DatabaseError);
+            return;
+        }
+        else
+        {
+            DataSnapshot dataList = e.Snapshot;
+            string subjectName = dataList.Key;
+            if (subjectName == "ChineseExtra")
+            {
+                foreach (Transform eachChild in ChineseLeaderBoardContent.transform)
+                {
+                    if (eachChild.name.Contains("Extra"))
+                    {
+                        GameObject.Destroy(eachChild);
+                    }
+                }
+            }
+            else if (subjectName == "EnglishExtra")
+            {
+                foreach (Transform eachChild in EnglishLeaderBoardContent.transform)
+                {
+                    if (eachChild.name.Contains("Extra"))
+                    {
+                        GameObject.Destroy(eachChild);
+                    }
+                }
+            }
+            else if (subjectName == "MathematicsExtra")
+            {
+                foreach (Transform eachChild in MathematicsLeaderBoardContent.transform)
+                {
+                    if (eachChild.name.Contains("Extra"))
+                    {
+                        GameObject.Destroy(eachChild);
+                    }
+                }
+            }
+            foreach (DataSnapshot data in dataList.Children)
+            {
+                if (subjectName == "ChineseExtra")
+                {
+                    var loadedObjectDDD = Resources.Load("Main/QuizButtonMaths");
+                    GameObject xdd = GameObject.Instantiate(loadedObjectDDD) as GameObject;
+                    xdd.name = $"{data.Child("quizName").Value.ToString()}Extra";
+                    xdd.transform.Find("Text").GetComponent<Text>().text = $"{data.Child("quizName").Value.ToString()}\n(Extra)"; 
+                    xdd.transform.SetParent(ChineseLeaderBoardContent.transform, false);
+                    xdd.GetComponent<Button>().onClick.AddListener(() =>
+                    {
+                        string xddName = data.Child("quizName").Value.ToString();
+                        ShowExtraTop10(subjectName, xddName);
+                    });
+                }
+                else if (subjectName == "EnglishExtra")
+                {
+                    var loadedObjectDDD = Resources.Load("Main/QuizButtonMaths");
+                    GameObject xdd = GameObject.Instantiate(loadedObjectDDD) as GameObject;
+                    xdd.name = $"{data.Child("quizName").Value.ToString()}Extra";
+                    xdd.transform.Find("Text").GetComponent<Text>().text = $"{data.Child("quizName").Value.ToString()}\n(Extra)";
+                    xdd.transform.SetParent(ChineseLeaderBoardContent.transform, false);
+                }
+            
+                else if (subjectName == "MathematicsExtra")
+                {
+                    var loadedObjectDDD = Resources.Load("Main/QuizButtonMaths");
+                    GameObject xdd = GameObject.Instantiate(loadedObjectDDD) as GameObject;
+                    xdd.name = $"{data.Child("quizName").Value.ToString()}Extra";
+                    xdd.transform.Find("Text").GetComponent<Text>().text = $"{data.Child("quizName").Value.ToString()}\n(Extra)";
+                    xdd.transform.SetParent(ChineseLeaderBoardContent.transform, false);
+                }
+            }
+
+        }
     }
 
     void ShowChinese()
@@ -163,6 +258,11 @@ public class MainPageDatabaseManager : MonoBehaviour
         EnglishLeaderBoard.SetActive(false);
         MathematicsLeaderBoard.SetActive(false);
         top10.SetActive(false);
+    }
+
+    async void ShowExtraTop10(string subject, string name)
+    {
+        DbHelper.GetExtraQuizResultRank(subject, name);
     }
 
     async void ShowChineseTop10(string testName, int subject, int primary)
